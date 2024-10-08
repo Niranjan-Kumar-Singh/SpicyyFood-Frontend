@@ -1,5 +1,6 @@
 /* src/styles/Header.css */
 
+/* General Navbar Styles */
 .navbar {
   background-color: #ffffff; /* White background for navbar */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -26,6 +27,7 @@
   color: #0d6efd; /* Brand color on hover */
 }
 
+/* Hamburger Icon Styles */
 .navbar-toggler {
   border: none; /* Remove border */
 }
@@ -72,38 +74,152 @@
   top: 0;
 }
 
-/* Notification badge */
-.nav-link[href="#notifications"] {
-  position: relative; /* Positioning for notification badge */
-}
-
-.nav-link[href="#notifications"]::after {
-  content: ''; 
-  position: absolute;
-  top: 5px;    /* Adjust this value (smaller for closer) */
-  right: 3px;  /* Adjust this value (smaller for closer) */
-  width: 8px; 
-  height: 8px;
-  background-color: #dc3545;
-  border-radius: 50%; 
-}
-
+/* Search Icon Button */
 .search-icon-btn {
   border: none !important;
   background: none !important;
   padding: 0;
   cursor: pointer; /* Makes the button appear clickable */
-}
-
-.search-icon-btn svg {
-  color: #6c757d; /* Initial color of the icon */
+  color: #6c757d; /* Default icon color */
   transition: color 0.3s ease; /* Smooth color transition */
 }
 
-.search-icon-btn:hover svg {
-  color: #0d6efd !important; /* Change color on hover */
+.search-icon-btn:hover {
+  color: #0d6efd !important; /* Change icon color on hover */
 }
 
+/* Notification Toggle Styles */
+.notification-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.notification-toggle::after {
+  display: none !important;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -10px;  /* Adjust the position */
+  right: -8px; /* Adjust the position */
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 50% !important;
+  background-color: #dc3545;
+  color: #fff;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  20% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  40% {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+  80% {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Notification Menu Styles */
+.notification-menu {
+  width: 320px; /* Increased width for better readability */
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px; /* Softer corners */
+  padding: 0; /* No padding for a cleaner layout */
+  background-color: #ffffff; /* White background for contrast */
+}
+
+.notification-menu .dropdown-menu {
+  padding: 0;
+}
+
+.notification-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  transition: background-color 0.2s ease, transform 0.2s ease; /* Smooth hover transitions */
+  border-bottom: 1px solid #eaeaea; /* Dividers between items */
+}
+
+.notification-menu .dropdown-item:last-child {
+  border-bottom: none; /* Remove divider on the last item */
+}
+
+.notification-menu .dropdown-item:hover {
+  background-color: #f8f9fa; /* Light hover effect */
+}
+
+.notification-menu .dropdown-item.read {
+  background-color: #f5f5f5; /* Lighter background for read notifications */
+  color: #6c757d;
+  font-weight: 400;
+}
+
+.notification-menu .dropdown-item.unread {
+  background-color: #ffffff;
+  font-weight: 600; /* Bolder font for unread items */
+}
+
+/* Notification text and icon styling */
+.notification-menu .dropdown-item .notification-icon {
+  margin-right: 15px; /* Spacing between icon and text */
+  font-size: 18px; /* Icon size */
+  color: #0d6efd; /* Icon color */
+}
+
+.notification-menu .dropdown-item .notification-text {
+  flex-grow: 1; /* Allow text to grow */
+  font-size: 14px;
+  color: #212529; /* Dark text color */
+}
+
+/* Notification timestamp */
+.notification-menu .dropdown-item .notification-time {
+  font-size: 12px; /* Smaller font for timestamps */
+  color: #adb5bd; /* Gray color */
+}
+
+/* Mark all as read button */
+.mark-all-read-btn {
+  font-size: 13px;
+  display: block;
+  padding: 10px 0;
+  text-align: center; /* Center the button */
+  background-color: #f8f9fa;
+  color: #0d6efd;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-top: 1px solid #eaeaea;
+}
+
+.mark-all-read-btn:hover {
+  background-color: #e2e6ea; /* Slight hover effect */
+  text-decoration: none;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -119,5 +235,13 @@
   .navbar .d-flex.mx-auto {
     max-width: 100%;
     margin: 10px 0;
+  }
+
+  .notification-menu {
+    width: 280px; /* Smaller width on mobile */
+  }
+
+  .notification-menu .dropdown-item {
+    padding: 10px 15px; /* Adjust padding for smaller screens */
   }
 }

@@ -26,7 +26,7 @@ import tandooriFriedImage from '../assets/images/Chicken/Tandoori Fried.jpg';
 import rootBeerImage from '../assets/images/Cold drink/Root Beer.jpeg';
 import heroImage from '../assets/images/hero/hero-image.jpg'; // Add a hero image
 import LazyLoad from 'react-lazyload'; // Import LazyLoad
-import './Home.css'; // Import the custom CSS
+import '../styles/Home.css'; // Import the custom CSS
 // import axios from 'axios';
 
 function Home() {

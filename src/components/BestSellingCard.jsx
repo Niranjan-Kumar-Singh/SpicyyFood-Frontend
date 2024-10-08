@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
-import './BestSellingCard.css';
+import '../styles/BestSellingCard.css';
 import { FaShoppingCart } from 'react-icons/fa';
 
 function BestSellingCard({ item }) {
@@ -48,7 +48,7 @@ function BestSellingCard({ item }) {
           {item.description}
         </Card.Text>
         <div className="d-flex justify-content-between align-items-center">
-          <span className="price-tag fw-bolder">${item.price.toFixed(2)}</span>
+          <span className="price-tag fw-bolder">₹{item.price.toFixed(2)}</span>
           <Button variant="primary" size="sm" onClick={handleAddToCart}>
             <FaShoppingCart className="me-1 customIcon" /> Add to Cart
           </Button>

@@ -4,7 +4,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
-import './CategoryCard.css'; // Ensure this import remains
+import '../styles/CategoryCard.css'; // Ensure this import remains
 
 function CategoryCard({ category }) {
   return (

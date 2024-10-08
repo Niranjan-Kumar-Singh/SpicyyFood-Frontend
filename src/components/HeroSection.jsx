@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import './HeroSection.css'; // Import the CSS for styling
+import '../styles/HeroSection.css'; // Import the CSS for styling
 
 function HeroSection() {
   return (
