@@ -1,0 +1,123 @@
+/* src/styles/Header.css */
+
+.navbar {
+  background-color: #ffffff; /* White background for navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.navbar-brand {
+  color: #0d6efd; /* Brand color */
+  font-weight: bold;
+}
+
+.navbar-brand:hover {
+  color: #0a58ca; /* Darker shade on hover */
+}
+
+.nav-link {
+  color: #6c757d; 
+  margin-right: 20px;
+  font-weight: 500;
+  transition: color 0.3s ease; 
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #0d6efd; /* Brand color on hover */
+}
+
+.navbar-toggler {
+  border: none; /* Remove border */
+}
+
+.navbar-toggler-icon {
+  background-color: #0d6efd; /* Custom color for the hamburger icon */
+  width: 24px;
+  height: 2px;
+  display: block;
+  position: relative;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #0d6efd;
+  left: 0;
+  transition: all 0.3s;
+}
+
+.navbar-toggler-icon::before {
+  top: -8px;
+}
+
+.navbar-toggler-icon::after {
+  top: 8px;
+}
+
+/* Toggle animation */
+.navbar-toggler.collapsed .navbar-toggler-icon {
+  background-color: transparent;
+}
+
+.navbar-toggler.collapsed .navbar-toggler-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.navbar-toggler.collapsed .navbar-toggler-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* Notification badge */
+.nav-link[href="#notifications"] {
+  position: relative; /* Positioning for notification badge */
+}
+
+.nav-link[href="#notifications"]::after {
+  content: ''; 
+  position: absolute;
+  top: 5px;    /* Adjust this value (smaller for closer) */
+  right: 3px;  /* Adjust this value (smaller for closer) */
+  width: 8px; 
+  height: 8px;
+  background-color: #dc3545;
+  border-radius: 50%; 
+}
+
+.search-icon-btn {
+  border: none !important;
+  background: none !important;
+  padding: 0;
+  cursor: pointer; /* Makes the button appear clickable */
+}
+
+.search-icon-btn svg {
+  color: #6c757d; /* Initial color of the icon */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.search-icon-btn:hover svg {
+  color: #0d6efd !important; /* Change color on hover */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .nav-link {
+    margin-right: 10px; /* Reduce space between links on mobile */
+  }
+
+  /* Center the search box on mobile */
+  .navbar .d-flex.mx-auto {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+}
