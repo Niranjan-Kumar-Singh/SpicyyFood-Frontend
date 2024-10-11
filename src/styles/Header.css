@@ -6,6 +6,25 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+.navbar-icons {
+  display: flex;
+  align-items: center; /* Align icons vertically in the center */
+  justify-content: space-between; /* Space icons evenly or adjust as needed */
+  flex-direction: row; /* Make sure the icons are aligned horizontally */
+  gap: 15px; /* Add space between each icon */
+}
+
+.navbar-icons .icon {
+  display: flex; /* Keeps the icon aligned with the rest */
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-icons .icon svg {
+  width: 20px;
+  height: 20px;
+}
+
 .navbar-brand {
   color: #0d6efd; /* Brand color */
   font-weight: bold;
@@ -15,16 +34,19 @@
   color: #0a58ca; /* Darker shade on hover */
 }
 
-.nav-link {
-  color: #6c757d; 
-  margin-right: 20px;
-  font-weight: 500;
-  transition: color 0.3s ease; 
-  position: relative;
+.navbar-icons .nav-link,
+.navbar-icons .dropdown {
+  display: flex;
+  align-items: center; /* Ensure icons and text are centered vertically */
 }
 
-.nav-link:hover {
-  color: #0d6efd; /* Brand color on hover */
+.navbar-icons .nav-link {
+  color: #6c757d; /* Default color for the icons */
+  text-decoration: none; /* Remove underline for links */
+}
+
+.navbar-icons .nav-link:hover {
+  color: #0d6efd !important; /* Change color on hover */
 }
 
 /* Hamburger Icon Styles */
@@ -98,10 +120,15 @@
   transition: color 0.3s ease;
 }
 
+.notification-toggle:hover{
+  color: #0d6efd;
+}
+
 .notification-toggle::after {
   display: none !important;
 }
 
+/* Notification Badge */
 .notification-badge {
   position: absolute;
   top: -10px;  /* Adjust the position */
@@ -114,6 +141,7 @@
   animation: pulse 1.5s infinite;
 }
 
+/* Pulse Animation */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -141,40 +169,67 @@
   }
 }
 
+/* Cart Badge */
+.cart-badge {
+  position: absolute;
+  top: -0.5px;  
+  right: -1px; 
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 50% !important;
+  background-color: #28a745;
+  color: #fff;
+}
+
 /* Notification Menu Styles */
 .notification-menu {
   width: 320px; /* Increased width for better readability */
-  max-height: 400px;
+  height: 250px; /* Fixed height as per request */
   overflow-y: auto;
   border: 1px solid #eaeaea;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 12px; /* Softer corners */
-  padding: 0; /* No padding for a cleaner layout */
+  padding: 0 !important;
   background-color: #ffffff; /* White background for contrast */
+  animation: fadeIn 0.3s ease-in-out;
+  position: absolute;
+  top: 100%; /* Position below the toggle button */
+  right: 0;
+  z-index: 1000;
 }
 
-.notification-menu .dropdown-menu {
-  padding: 0;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .notification-menu .dropdown-item {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  transition: background-color 0.2s ease, transform 0.2s ease; /* Smooth hover transitions */
-  border-bottom: 1px solid #eaeaea; /* Dividers between items */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Added shadow transition */
+  border-bottom: 1px solid #eaeaea;
 }
 
 .notification-menu .dropdown-item:last-child {
   border-bottom: none; /* Remove divider on the last item */
 }
 
+/* Notification Menu Hover Effect */
 .notification-menu .dropdown-item:hover {
-  background-color: #f8f9fa; /* Light hover effect */
+  background-color: #f1f3f5 !important;
+  box-shadow: inset 2px 0px 0px #0d6efd; /* Blue accent on hover */
 }
 
+/* Unread Notifications Styling */
 .notification-menu .dropdown-item.read {
-  background-color: #f5f5f5; /* Lighter background for read notifications */
+  background-color: #f5f5f5;
   color: #6c757d;
   font-weight: 400;
 }
@@ -197,10 +252,24 @@
   color: #212529; /* Dark text color */
 }
 
-/* Notification timestamp */
-.notification-menu .dropdown-item .notification-time {
-  font-size: 12px; /* Smaller font for timestamps */
-  color: #adb5bd; /* Gray color */
+/* Custom Scrollbar */
+.notification-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.notification-menu::-webkit-scrollbar-thumb {
+  background-color: #0d6efd; /* Blue scrollbar handle */
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.notification-menu::-webkit-scrollbar-thumb:hover {
+  background-color: #0a58ca; /* Darker blue on hover */
+}
+
+.notification-menu::-webkit-scrollbar-track {
+  background-color: #f1f3f5; /* Light background for scrollbar track */
+  border-radius: 4px;
 }
 
 /* Mark all as read button */
@@ -208,7 +277,7 @@
   font-size: 13px;
   display: block;
   padding: 10px 0;
-  text-align: center; /* Center the button */
+  text-align: center;
   background-color: #f8f9fa;
   color: #0d6efd;
   cursor: pointer;
@@ -221,27 +290,84 @@
   text-decoration: none;
 }
 
-/* Responsive adjustments */
+.username-link {
+  display: flex;
+  align-items: center; /* Align username text and icon vertically */
+}
+
+.username-link span {
+  margin-left: 5px; /* Space between icon and text */
+}
+
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
+  /* Navbar - Full width for small screens */
   .navbar {
-    padding: 10px; /* Adjust padding for smaller screens */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%; /* Ensure it spans the full width */
   }
 
-  .nav-link {
-    margin-right: 10px; /* Reduce space between links on mobile */
+  /* Hide search form on smaller screens */
+  .search-form {
+    display: none !important;
   }
 
-  /* Center the search box on mobile */
-  .navbar .d-flex.mx-auto {
-    max-width: 100%;
-    margin: 10px 0;
+  /* Navbar icons adjustments for smaller screens */
+  .navbar-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px; /* Reduce gap for smaller screens */
   }
 
+  /* Hide text next to the user icon for smaller screens */
+  .username-link span {
+    display: none; /* Hide username text on smaller screens */
+  }
+
+  /* Notification toggle icon and badge adjustments */
+  .notification-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+  }
+
+  /* Adjust the notification badge position */
+  .notification-badge {
+    top: -5px;
+    right: -5px;
+    font-size: 8px; /* Smaller font size for badge */
+  }
+
+  /* Notification dropdown menu adjustments for smaller screens */
   .notification-menu {
-    width: 280px; /* Smaller width on mobile */
+    width: 300px; /* Adjust width for small screens */
+    height: 250px; /* Fixed height */
+    top: 100%; /* Ensure it opens below the icon */
+    right: 0; /* Align with the right side of the icon */
+    transform: translateY(0); /* Ensure no transform shifts */
   }
 
-  .notification-menu .dropdown-item {
-    padding: 10px 15px; /* Adjust padding for smaller screens */
+  .notification-menu .dropdown-item{
+    padding: 10px 10px;
+    font: 0.5em sans-serif;
+  }
+
+  /* Adjust cart badge position */
+  .cart-badge {
+    top: -5px;
+    right: -5px;
+    font-size: 8px; /* Smaller font size for badge */
+  }
+
+  /* Adjust positioning of dropdown menu on mobile */
+  .navbar-nav .dropdown-menu {
+    position: absolute !important;
+    left: -150px !important;
+    right: 0 !important; /* Align dropdown with the icon */
   }
 }
