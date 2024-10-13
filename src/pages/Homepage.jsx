@@ -1,6 +1,7 @@
 // src/pages/Home.jsx
 
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // To detect URL hash changes
 import { Row, Col, Container, Spinner, Button } from 'react-bootstrap';
 import CategoryCard from '../components/CategoryCard';
 import BestSellingCard from '../components/BestSellingCard';
@@ -36,6 +37,8 @@ function Home() {
   const [bestSelling, setBestSelling] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingBestSelling, setLoadingBestSelling] = useState(true);
+
+  const location = useLocation();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -78,6 +81,16 @@ function Home() {
     fetchBestSelling();
   }, []);
 
+  // Scroll to "Categories" section if the URL hash is "#categories"
+  useEffect(() => {
+    if (location.hash === '#categories') {
+      const categorySection = document.getElementById('categories');
+      if (categorySection) {
+        categorySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location.hash]);
+
   return (
     <Container fluid className="pt-4">
       {/* Hero Section */}
@@ -115,7 +128,6 @@ function Home() {
           <Row>
             {categories.map((category) => (
               <Col key={category.id} xs={6} sm={4} md={3} className="mb-4">
-                {/* Encode category name for safe URL handling */}
                 <Link to={`/category/${category.name.toLowerCase().replace(/\s+/g, '')}`}>
                   <CategoryCard category={category} />
                 </Link>

@@ -6,7 +6,7 @@ import { FaShoppingCart, FaBell, FaUserAlt, FaListAlt, FaInfoCircle, FaEnvelope,
 function SidebarContent({ handleClose }) {
   return (
     <Nav className="flex-column sidebar-nav">
-      <Nav.Link as={Link} to="/categories" onClick={handleClose} className="nav-item">
+      <Nav.Link as={Link} to="/#categories" onClick={handleClose} className="nav-item">
         <FaListAlt className="me-2" /> All Categories
       </Nav.Link>
       <Nav.Link as={Link} to="/orders" onClick={handleClose} className="nav-item">

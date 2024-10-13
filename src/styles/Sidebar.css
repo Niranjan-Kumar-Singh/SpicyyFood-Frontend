@@ -1,75 +1,90 @@
+/* Sidebar Header */
 .sidebar-header {
-    background: linear-gradient(45deg, #f39c12, #d35400); /* Gradient background */
-    padding: 20px;
-    text-align: center;
-    color: #fff;
-  }
-  
-  .sidebar-title {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .user-icon {
-    color: #fff;
-  }
-  
-  .sidebar-body {
-    padding: 20px;
-    background-color: #f8f9fa;
-  }
-  
+  background: linear-gradient(45deg, #3498db, #2c3e50); /* Muted cool tones for a professional look */
+  padding: 15px;
+  text-align: center;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle separator line */
+}
+
+.sidebar-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: 800; /* Increased font weight for emphasis */
+}
+
+.user-icon {
+  color: #fff;
+}
+
+/* Sidebar Body */
+.sidebar-body {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Sidebar Navigation Items */
+.sidebar-nav .nav-item {
+  padding: 12px 20px;
+  font-size: 1.1rem; /* Slightly larger font */
+  font-weight: 500; /* Increased font weight */
+  color: #333;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
+
+.sidebar-nav .nav-item:hover {
+  background-color: #ecf0f1;
+  color: #2980b9; /* Accent color on hover */
+  transform: scale(1.03); /* Slight scale effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  font-weight: 600; /* Extra bold font on hover */
+}
+
+.sidebar-nav .nav-item .me-2 {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav .nav-item:hover .me-2 {
+  transform: translateX(-3px); /* Move the icon a little */
+  color: #2980b9; /* Matching hover color */
+}
+
+/* Divider */
+.sidebar-divider {
+  border-bottom: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+/* Logout Link */
+.logout-link {
+  color: #e74c3c;
+  font-weight: 700; /* Increased font weight for the logout link */
+}
+
+.logout-link:hover {
+  color: #c0392b;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(231, 76, 60, 0.2); /* Softer hover effect */
+  cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .sidebar-nav .nav-item {
-    padding: 15px;
-    font-size: 1rem;
-    color: #333;
-    display: flex;
-    align-items: center;
-    transition: all 0.4s ease; /* Transition for multiple effects */
-    border-radius: 12px; /* More rounded corners */
-    margin-bottom: 15px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle initial shadow */
-  }
-  
-  .sidebar-nav .nav-item:hover {
-    background-color: #f1f1f1;
-    color: #000;
-    transform: scale(1.05); /* Scale effect on hover */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Stronger box-shadow on hover */
-    cursor: pointer;
-  }
-  
-  .sidebar-nav .nav-item .me-2 {
-    transition: transform 0.3s ease, color 0.3s ease;
-  }
-  
-  .sidebar-nav .nav-item:hover .me-2 {
-    transform: translateX(-3px); /* Moving the icon */
-    color: #000; /* Change icon color to black on hover */
-  }
-  
-  .sidebar-divider {
-    border-bottom: 1px solid #ddd;
-    margin: 15px 0;
-  }
-  
-  .logout-link {
-    color: red;
-  }
-  
-  .logout-link:hover {
-    color: darkred;
-    transform: scale(1.05); /* Scaling on hover */
-    box-shadow: 0 8px 16px rgba(255, 0, 0, 0.4); /* Stronger hover effect for logout link */
-    cursor: pointer;
+    padding: 10px;
+    font-size: 1rem; /* Slightly smaller font for mobile */
+    font-weight: 500; /* Maintain increased font weight */
   }
 
-  @media (max-width: 768px) {
-    .sidebar-nav .nav-item {
-        padding: 10px;
-    }
+  .sidebar-title {
+    font-size: 1.4rem;
+    font-weight: 600; /* Keep the font weight consistent for the title */
   }
-  
+}

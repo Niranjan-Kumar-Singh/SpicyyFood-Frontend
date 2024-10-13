@@ -9,7 +9,7 @@ function Sidebar({ show, handleClose }) {
     <Offcanvas show={show} onHide={handleClose} placement="start" className="mobile-offcanvas">
       <Offcanvas.Header closeButton className="sidebar-header">
         <Offcanvas.Title className="sidebar-title">
-          <FaUserCircle size={50} className="me-2 user-icon" />
+          <FaUserCircle size={30} className="me-2 user-icon" />
           <span>John Doe</span>
         </Offcanvas.Title>
       </Offcanvas.Header>
