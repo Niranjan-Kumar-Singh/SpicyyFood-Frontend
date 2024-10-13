@@ -1,0 +1,36 @@
+.item-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+}
+
+.item-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item-card .item-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 10px 0;
+}
+
+.item-card .item-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+.item-card button {
+    margin-top: 10px;
+}

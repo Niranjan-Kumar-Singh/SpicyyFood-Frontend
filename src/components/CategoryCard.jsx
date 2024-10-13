@@ -8,7 +8,7 @@ import '../styles/CategoryCard.css'; // Ensure this import remains
 
 function CategoryCard({ category }) {
   return (
-    <Card className="category-card h-100 shadow-sm border-0">
+    <Card className="category-card h-100 shadow-sm border-0" role="button" aria-label={`Category: ${category.name}`}>
       <div className="category-card-img-wrapper">
         <LazyLoad
           height={200}
@@ -21,6 +21,7 @@ function CategoryCard({ category }) {
             src={category.image}
             alt={category.name}
             className="category-card-img"
+            onError={(e) => { e.target.onerror = null; e.target.src = 'path/to/fallback-image.jpg'; }}
           />
         </LazyLoad>
         <div className="category-card-overlay">

@@ -4,6 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Container, Spinner, Button } from 'react-bootstrap';
 import CategoryCard from '../components/CategoryCard';
 import BestSellingCard from '../components/BestSellingCard';
+import heroImage from '../assets/images/hero/hero-image.jpg'; // Add a hero image
+import LazyLoad from 'react-lazyload'; // Import LazyLoad
+import { Link } from 'react-router-dom'; // Import Link for routing
+import '../styles/Homepage.css'; // Import the custom CSS
+
+// Category and best selling item images
 import coffeeImage from '../assets/images/Categories/coffee.jpeg';
 import noodlesImage from '../assets/images/Categories/noodles.jpeg';
 import pizzaImage from '../assets/images/Categories/pizza.jpeg';
@@ -20,14 +26,10 @@ import macaroniImage from '../assets/images/Noodles/Macaroni.jpg';
 import rotiniImage from '../assets/images/Noodles/Rotini.jpeg';
 import hamburgerImage from '../assets/images/Burger/classic hamburger.jpg';
 import kababBurgerImage from '../assets/images/Burger/chicken kabab burger.jpg';
-import frenchVanillaImage from '../assets/images/Ice cream/French Vanilla Bean.jpg';
+import frenchVanillaImage from '../assets/images/IceCream/French Vanilla Bean.jpg';
 import galoutiImage from '../assets/images/Kebabs/Galouti.jpeg';
 import tandooriFriedImage from '../assets/images/Chicken/Tandoori Fried.jpg';
-import rootBeerImage from '../assets/images/Cold drink/Root Beer.jpeg';
-import heroImage from '../assets/images/hero/hero-image.jpg'; // Add a hero image
-import LazyLoad from 'react-lazyload'; // Import LazyLoad
-import '../styles/Homepage.css'; // Import the custom CSS
-// import axios from 'axios';
+import rootBeerImage from '../assets/images/ColdDrink/Root Beer.jpeg';
 
 function Home() {
   const [categories, setCategories] = useState([]);
@@ -36,60 +38,40 @@ function Home() {
   const [loadingBestSelling, setLoadingBestSelling] = useState(true);
 
   useEffect(() => {
-    // Fetch categories from API
     const fetchCategories = async () => {
-      try {
-        // Replace with your actual API endpoint
-        // const response = await axios.get('/api/categories');
-        // setCategories(response.data);
-
-        // Mock data
-        const mockCategories = [
-          { id: 1, name: 'Coffee', image: coffeeImage },
-          { id: 2, name: 'Noodles', image: noodlesImage },
-          { id: 3, name: 'Pizza', image: pizzaImage },
-          { id: 4, name: 'Burger', image: burgerImage },
-          { id: 5, name: 'Chicken', image: chickenImage },
-          { id: 6, name: 'Kebab', image: kebabImage },
-          { id: 7, name: 'Ice Cream', image: iceCreamImage },
-          { id: 8, name: 'Cold Drink', image: coldDrinkImage },
-        ];
-        setCategories(mockCategories);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      } finally {
-        setLoadingCategories(false);
-      }
+      // Mock data for categories
+      const mockCategories = [
+        { id: 1, name: 'Coffee', image: coffeeImage },
+        { id: 2, name: 'Noodles', image: noodlesImage },
+        { id: 3, name: 'Pizza', image: pizzaImage },
+        { id: 4, name: 'Burger', image: burgerImage },
+        { id: 5, name: 'Chicken', image: chickenImage },
+        { id: 6, name: 'Kebab', image: kebabImage },
+        { id: 7, name: 'Ice Cream', image: iceCreamImage },
+        { id: 8, name: 'Cold Drink', image: coldDrinkImage },
+      ];
+      setCategories(mockCategories);
+      setLoadingCategories(false);
     };
 
-    // Fetch best selling items from API
     const fetchBestSelling = async () => {
-      try {
-        // Replace with your actual API endpoint
-        // const response = await axios.get('/api/items/best-selling');
-        // setBestSelling(response.data);
-
-        // Mock data
-        const mockBestSelling = [
-          { id: 101, name: 'Cortado', description: 'Smooth and rich espresso with a dash of steamed milk.', price: 150, image: cortadoImage,isSpecial: true, },
-          { id: 102, name: 'Espresso con Panna', description: 'Bold espresso topped with a dollop of whipped cream.', price: 100, image: espressoImage },
-          { id: 103, name: 'BBQ Chicken Pizza', description: 'Savory BBQ chicken with mozzarella and red onions.', price: 250, image: bbqChickenImage },
-          { id: 104, name: 'Spicy Veggie Pizza', description: 'A fiery mix of vegetables with spicy tomato sauce.', price: 300, image: spicyVeggieImage },
-          { id: 105, name: 'Macaroni', description: 'Creamy macaroni with a blend of cheeses.', price: 50, image: macaroniImage },
-          { id: 106, name: 'Rotini', description: 'Twisted rotini pasta with fresh basil and tomatoes.', price: 60, image: rotiniImage },
-          { id: 107, name: 'Classic Hamburger', description: 'Juicy beef patty with lettuce, tomato, and cheese.', price: 300, image: hamburgerImage },
-          { id: 108, name: 'Chicken Kebab Burger', description: 'Grilled chicken kebab with spicy mayo and fresh veggies.', price: 300, image: kababBurgerImage },
-          { id: 109, name: 'French Vanilla Bean', description: 'Creamy vanilla ice cream with real vanilla beans.', price: 150, image: frenchVanillaImage },
-          { id: 110, name: 'Galouti Kebab', description: 'Tender minced meat kebab infused with aromatic spices.', price: 320, image: galoutiImage },
-          { id: 111, name: 'Tandoori Chicken', description: 'Spiced tandoori chicken grilled to perfection.', price: 260, image: tandooriFriedImage },
-          { id: 112, name: 'Root Beer', description: 'Classic root beer with a nostalgic flavor.', price: 620, image: rootBeerImage },
-        ];
-        setBestSelling(mockBestSelling);
-      } catch (error) {
-        console.error('Error fetching best selling items:', error);
-      } finally {
-        setLoadingBestSelling(false);
-      }
+      // Mock data for best selling items
+      const mockBestSelling = [
+        { id: 101, name: 'Cortado', description: 'Smooth and rich espresso with a dash of steamed milk.', price: 150, image: cortadoImage, isSpecial: true },
+        { id: 102, name: 'Espresso con Panna', description: 'Bold espresso topped with a dollop of whipped cream.', price: 100, image: espressoImage },
+        { id: 103, name: 'BBQ Chicken Pizza', description: 'Savory BBQ chicken with mozzarella and red onions.', price: 250, image: bbqChickenImage },
+        { id: 104, name: 'Spicy Veggie Pizza', description: 'A fiery mix of vegetables with spicy tomato sauce.', price: 300, image: spicyVeggieImage },
+        { id: 105, name: 'Macaroni', description: 'Creamy macaroni with a blend of cheeses.', price: 50, image: macaroniImage },
+        { id: 106, name: 'Rotini', description: 'Twisted rotini pasta with fresh basil and tomatoes.', price: 60, image: rotiniImage },
+        { id: 107, name: 'Classic Hamburger', description: 'Juicy beef patty with lettuce, tomato, and cheese.', price: 300, image: hamburgerImage },
+        { id: 108, name: 'Chicken Kebab Burger', description: 'Grilled chicken kebab with spicy mayo and fresh veggies.', price: 300, image: kababBurgerImage },
+        { id: 109, name: 'French Vanilla Bean', description: 'Creamy vanilla ice cream with real vanilla beans.', price: 150, image: frenchVanillaImage },
+        { id: 110, name: 'Galouti Kebab', description: 'Tender minced meat kebab infused with aromatic spices.', price: 320, image: galoutiImage },
+        { id: 111, name: 'Tandoori Chicken', description: 'Spiced tandoori chicken grilled to perfection.', price: 260, image: tandooriFriedImage },
+        { id: 112, name: 'Root Beer', description: 'Classic root beer with a nostalgic flavor.', price: 620, image: rootBeerImage },
+      ];
+      setBestSelling(mockBestSelling);
+      setLoadingBestSelling(false);
     };
 
     fetchCategories();
@@ -133,7 +115,10 @@ function Home() {
           <Row>
             {categories.map((category) => (
               <Col key={category.id} xs={6} sm={4} md={3} className="mb-4">
-                <CategoryCard category={category} />
+                {/* Encode category name for safe URL handling */}
+                <Link to={`/category/${category.name.toLowerCase().replace(/\s+/g, '')}`}>
+                  <CategoryCard category={category} />
+                </Link>
               </Col>
             ))}
           </Row>
@@ -208,19 +193,19 @@ function Home() {
             },
             {
               id: 2,
-              quote: "Amazing desserts and a cozy atmosphere. Will definitely come back.",
+              quote: "Absolutely loved the ambiance and the food was phenomenal.",
               author: "Jane Smith",
             },
             {
               id: 3,
-              quote: "Quick delivery and the food was piping hot. Great service!",
-              author: "Mike Johnson",
+              quote: "A hidden gem! The desserts are to die for.",
+              author: "Michael Brown",
             },
           ].map((testimonial) => (
-            <Col md={4} className="mb-4" key={testimonial.id}>
-              <div className="p-4 bg-white shadow-sm rounded h-100 testimonial-card">
-                <p className="mb-3">&ldquo;{testimonial.quote}&rdquo;</p>
-                <h6 className="text-end">- {testimonial.author}</h6>
+            <Col key={testimonial.id} xs={12} sm={6} md={4} className="mb-4">
+              <div className="testimonial-card p-3 shadow-sm rounded">
+                <p className="mb-2">“{testimonial.quote}”</p>
+                <small>- {testimonial.author}</small>
               </div>
             </Col>
           ))}

@@ -77,6 +77,17 @@ p {
   filter: invert(100%);
 }
 
+
+.py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+
 /* Responsive Image in Hero Section */
 @media (max-width: 767.98px) {
   .hero-section img {

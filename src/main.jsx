@@ -20,9 +20,20 @@ const initialState = {
   }
 };
 
+// Action Types
+const ADD_ITEM = 'ADD_ITEM';
+
+// Reducer Function
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    // Define your actions here
+    case ADD_ITEM:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          items: [...state.cart.items, action.payload]
+        }
+      };
     default:
       return state;
   }
