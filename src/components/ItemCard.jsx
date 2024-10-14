@@ -17,15 +17,16 @@ function ItemCard({ item, onAddToCart }) {
         }}
       />
       <Card.Body>
-        <Card.Title>{item.name}</Card.Title>
-        <Card.Text className="item-description">{item.description}</Card.Text> {/* New line for description */}
-        <Card.Text className="item-price">₹{item.price.toFixed(2)}</Card.Text> {/* Price display */}
-        <Button variant="primary" onClick={() => onAddToCart(item)}>Add to Cart</Button> {/* Add to Cart button */}
+        <Card.Title className="item-title">{item.name}</Card.Title>
+        <Card.Text className="item-description">{item.description}</Card.Text>
+        <Card.Text className="item-price">₹{item.price.toFixed(2)}</Card.Text>
+        <Button variant="primary" className="add-to-cart-btn" onClick={() => onAddToCart(item)}>
+          Add to Cart
+        </Button>
       </Card.Body>
     </Card>
   );
 }
-
 
 ItemCard.propTypes = {
   item: PropTypes.shape({
