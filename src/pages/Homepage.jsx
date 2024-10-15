@@ -61,17 +61,17 @@ function Home() {
       // Mock data for best selling items
       const mockBestSelling = [
         { id: 101, name: 'Cortado', description: 'Smooth and rich espresso with a dash of steamed milk.', price: 150, image: cortadoImage, isSpecial: true },
-        { id: 102, name: 'Espresso con Panna', description: 'Bold espresso topped with a dollop of whipped cream.', price: 100, image: espressoImage },
-        { id: 103, name: 'BBQ Chicken Pizza', description: 'Savory BBQ chicken with mozzarella and red onions.', price: 250, image: bbqChickenImage },
-        { id: 104, name: 'Spicy Veggie Pizza', description: 'A fiery mix of vegetables with spicy tomato sauce.', price: 300, image: spicyVeggieImage },
-        { id: 105, name: 'Macaroni', description: 'Creamy macaroni with a blend of cheeses.', price: 50, image: macaroniImage },
-        { id: 106, name: 'Rotini', description: 'Twisted rotini pasta with fresh basil and tomatoes.', price: 60, image: rotiniImage },
-        { id: 107, name: 'Classic Hamburger', description: 'Juicy beef patty with lettuce, tomato, and cheese.', price: 300, image: hamburgerImage },
-        { id: 108, name: 'Chicken Kebab Burger', description: 'Grilled chicken kebab with spicy mayo and fresh veggies.', price: 300, image: kababBurgerImage },
-        { id: 109, name: 'French Vanilla Bean', description: 'Creamy vanilla ice cream with real vanilla beans.', price: 150, image: frenchVanillaImage },
-        { id: 110, name: 'Galouti Kebab', description: 'Tender minced meat kebab infused with aromatic spices.', price: 320, image: galoutiImage },
-        { id: 111, name: 'Tandoori Chicken', description: 'Spiced tandoori chicken grilled to perfection.', price: 260, image: tandooriFriedImage },
-        { id: 112, name: 'Root Beer', description: 'Classic root beer with a nostalgic flavor.', price: 620, image: rootBeerImage },
+        { id: 102, name: 'Espresso con Panna', description: 'Bold espresso topped with a dollop of whipped cream.', price: 100, image: espressoImage, isSpecial: true },
+        { id: 103, name: 'BBQ Chicken Pizza', description: 'Savory BBQ chicken with mozzarella and red onions.', price: 250, image: bbqChickenImage, isSpecial: true },
+        { id: 104, name: 'Spicy Veggie Pizza', description: 'A fiery mix of vegetables with spicy tomato sauce.', price: 300, image: spicyVeggieImage, isSpecial: false },
+        { id: 105, name: 'Macaroni', description: 'Creamy macaroni with a blend of cheeses.', price: 50, image: macaroniImage, isSpecial: false },
+        { id: 106, name: 'Rotini', description: 'Twisted rotini pasta with fresh basil and tomatoes.', price: 60, image: rotiniImage, isSpecial: true },
+        { id: 107, name: 'Classic Hamburger', description: 'Juicy beef patty with lettuce, tomato, and cheese.', price: 300, image: hamburgerImage, isSpecial: true },
+        { id: 108, name: 'Chicken Kebab Burger', description: 'Grilled chicken kebab with spicy mayo and fresh veggies.', price: 300, image: kababBurgerImage, isSpecial: true },
+        { id: 109, name: 'French Vanilla Bean', description: 'Creamy vanilla ice cream with real vanilla beans.', price: 150, image: frenchVanillaImage, isSpecial: true },
+        { id: 110, name: 'Galouti Kebab', description: 'Tender minced meat kebab infused with aromatic spices.', price: 320, image: galoutiImage, isSpecial: false },
+        { id: 111, name: 'Tandoori Chicken', description: 'Spiced tandoori chicken grilled to perfection.', price: 260, image: tandooriFriedImage, isSpecial: true },
+        { id: 112, name: 'Root Beer', description: 'Classic root beer with a nostalgic flavor.', price: 620, image: rootBeerImage, isSpecial: false },
       ];
       setBestSelling(mockBestSelling);
       setLoadingBestSelling(false);
@@ -161,34 +161,37 @@ function Home() {
         <Row className="align-items-center">
           <Col md={6} className="mb-4 mb-md-0">
             <img
-              src="/images/why_choose_us.jpg"
+              src={tandooriFriedImage}
               alt="Why Choose Us"
-              className="img-fluid rounded shadow-sm"
-              loading="lazy" // Native lazy loading
+              className="img-fluid rounded shadow-sm why-choose-us-img"
+              loading="lazy"
             />
           </Col>
           <Col md={6}>
-            <p>
-              At our restaurant, we pride ourselves on delivering the finest dishes made from the freshest ingredients. Our commitment to quality and customer satisfaction sets us apart. Whether you're dining in or ordering online, we ensure a delightful culinary experience.
+            <p className="lead">
+              At our restaurant, we focus on offering a unique dining experience with attention to detail, quality, and service.
             </p>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                High-quality ingredients
+                <i className="bi bi-award-fill text-success me-2"></i>
+                Award-winning chefs with decades of experience
               </li>
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                Experienced chefs
+                <i className="bi bi-basket-fill text-success me-2"></i>
+                Locally sourced and fresh ingredients
               </li>
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                Excellent customer service
+                <i className="bi bi-emoji-smile-fill text-success me-2"></i>
+                Friendly and welcoming environment
               </li>
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                Wide variety of dishes
+                <i className="bi bi-clock-fill text-success me-2"></i>
+                Quick service and on-time delivery
               </li>
             </ul>
+            <Button variant="success" size="lg" className="mt-3">
+              Order Now
+            </Button>
           </Col>
         </Row>
       </section>

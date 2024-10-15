@@ -11,6 +11,10 @@
     "host": "vite --host"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/fontawesome-svg-core": "^6.0.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^6.0.0",
     "@reduxjs/toolkit": "^2.2.8",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",

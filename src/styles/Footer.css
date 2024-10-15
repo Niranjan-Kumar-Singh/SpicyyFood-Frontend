@@ -1,17 +1,35 @@
 /* src/styles/Footer.css */
 
 footer {
-    background-color: #1a1a1a; /* Dark background */
-    color: #ffffff; /* White text */
-    text-align: center;
-    padding: 20px 0;
-  }
-  
-  footer a {
-    color: #ff5722; /* Attractive link color */
-  }
-  
-  footer a:hover {
-    text-decoration: underline; /* Underline on hover */
-  }
-  
+  background-color: #1a1a1a; /* Dark background */
+  color: #ffffff; /* White text */
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer a {
+  color: #000; /* Black color for icons */
+  padding: 10px; /* Padding around icons */
+  margin: 0 5px; /* Margin between icons */
+  display: inline-block; /* Ensure padding and dimensions apply */
+}
+
+footer a:hover {
+  text-decoration: underline; /* Underline on hover */
+  color: #ff5722; /* Attractive hover color */
+}
+
+.social-icons {
+  margin-top: 10px; /* Space above the icons */
+}
+
+.social-icon {
+  width: 50px; /* Set desired width */
+  height: 50px; /* Set desired height */
+}
+
+.social-icon svg {
+  width: 100%; /* Make the SVG fill the width */
+  height: 100%; /* Make the SVG fill the height */
+  color: #000; /* Black color for icons */
+}
