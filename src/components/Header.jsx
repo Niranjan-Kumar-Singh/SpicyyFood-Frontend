@@ -9,7 +9,7 @@ import {
   FaShoppingCart,
   FaSearch,
   FaCheckCircle,
-  FaExclamationCircle
+  FaExclamationCircle,
 } from 'react-icons/fa';
 import {
   Navbar,
