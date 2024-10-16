@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Homepage from './pages/Homepage';
 import NotFound from './pages/NotFound'; // Create this component for 404 pages
+import Footer from './components/Footer'
 
 // Lazy load CategoryPage
 const CategoryPage = React.lazy(() => import('./pages/CategoryPage'));
@@ -20,6 +21,7 @@ function App() {
           <Route path="*" element={<NotFound />} /> {/* 404 Route */}
         </Routes>
       </Suspense>
+      <Footer />
     </Router>
   );
 }

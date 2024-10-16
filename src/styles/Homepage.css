@@ -2,114 +2,248 @@
 
 /* Hero Section */
 .hero-section {
-    background-color: #f8f9fa;
-    padding: 60px 0;
-    text-align: left;
+  position: relative;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hero-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.hero-section h1 {
+  position: relative;
+  z-index: 1;
+  color: #fff; /* White text for contrast */
+  font-weight: bold;
+}
+
+.hero-section p {
+  position: relative;
+  z-index: 1;
+  color: #fff; /* White text for contrast */
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+  border: 1px solid #e0e0e0; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  padding: 20px; /* Padding for inner spacing */
+  background-color: #f8f9fa; /* Light background color */
+}
+
+.why-choose-us h2 {
+  font-size: 2.5rem; /* Adjust heading size */
+  color: #333;
+  margin-bottom: 30px; /* Add margin below the heading */
+}
+
+.why-choose-us img {
+  width: 100%; /* Full width for responsive image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 15px; /* Rounded corners for the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.why-choose-us p {
+  font-size: 1.1rem; /* Adjust font size for readability */
+  color: #555; /* Soft text color */
+  margin-bottom: 20px; /* Space below paragraph */
+}
+
+.why-choose-us ul {
+  padding-left: 20px; /* Add padding for list */
+}
+
+.why-choose-us li {
+  display: flex; /* Flexbox for list items */
+  align-items: center; /* Center icons vertically */
+  font-size: 1rem; /* Font size for list items */
+  color: #444; /* Color for list items */
+}
+
+.why-choose-us i {
+  font-size: 1.2rem; /* Size of the icons */
+}
+
+/* Customer Testimonials Section */
+.testimonials-section {
+  background-color: #f8f9fa;
+  padding: 30px 20px;
+  /* Add padding on the sides */
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 40px;
+  /* Add space below the heading */
+}
+
+.testimonials-section .testimonial-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+  border: 2px solid transparent;
+  /* Default transparent border */
+  position: relative;
+  /* Allow pseudo-elements for unique styling */
+  overflow: hidden;
+  /* Hide overflow for pseudo-elements */
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  /* Add smooth transitions */
+  text-align: left;
+  margin: 0 10px;
+  /* Margin between cards and sides */
+}
+
+.testimonials-section .testimonial-card::before {
+  content: '';
+  /* Pseudo-element for unique border effect */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  /* Match card border radius */
+  border: 4px solid rgba(173, 216, 230, 0.5);
+  /* Light blue border */
+  opacity: 0;
+  /* Start with invisible border */
+  transition: opacity 0.3s ease;
+  /* Smooth transition for opacity */
+  z-index: 0;
+  /* Place behind the card content */
+}
+
+.testimonials-section .testimonial-card:hover {
+  transform: translateY(-5px);
+  /* Elevates card on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Enhance shadow on hover */
+  background-color: rgba(173, 216, 230, 0.1);
+  /* Light blue background on hover */
+  border-color: rgba(173, 216, 230, 0.5);
+  /* Light blue border on hover */
+}
+
+.testimonials-section .testimonial-card:hover::before {
+  opacity: 1;
+  /* Show unique border effect on hover */
+}
+
+.testimonials-section p {
+  font-style: italic;
+  color: #666;
+  /* Softer color for quotes */
+  margin-bottom: 20px;
+  /* Space between quote and author */
+  position: relative;
+  /* Position relative for layering */
+  z-index: 1;
+  /* Place above the border effect */
+}
+
+.testimonials-section small {
+  color: #333;
+  font-weight: bold;
+  position: relative;
+  /* Position relative for layering */
+  z-index: 1;
+  /* Place above the border effect */
+}
+
+/* Ensure all sections have consistent margins */
+section {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #fff; /* White background for contrast */
+}
+
+/* Adjust button styles if needed */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .hero-section {
+    text-align: center;
   }
-  
-  .hero-section h1 {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .hero-section p {
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
+
   .hero-section img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
+    margin-top: 20px;
   }
-  
-  .hero-section img:hover {
-    transform: scale(1.05);
+
+  .why-choose-us h2 {
+    font-size: 2rem; /* Adjust heading size for smaller screens */
   }
-  
-  @media (max-width: 767px) {
-    .hero-section {
-      text-align: center;
-    }
-  
-    .hero-section img {
-      margin-top: 20px;
-    }
+
+  .why-choose-us p {
+    font-size: 1rem; /* Adjust paragraph size for smaller screens */
   }
-  
-  /* Why Choose Us Section */
-  .why-choose-us img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    transition: transform 0.3s;
+
+  .why-choose-us li {
+    font-size: 0.9rem; /* Smaller font size for mobile */
   }
-  
-  .why-choose-us img:hover {
-    transform: scale(1.05);
+
+  .testimonials-section h2 {
+    font-size: 2rem;
+    /* Adjust heading size for smaller screens */
   }
-  
-  .why-choose-us ul li {
-    display: flex;
-    align-items: center;
-  }
-  
-  .why-choose-us ul li i {
-    font-size: 1.2rem;
-  }
-  
-  /* Customer Testimonials Section */
+
   .testimonials-section .testimonial-card {
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 20px;
+    /* Adjust padding for smaller screens */
+    margin: 0 5px;
+    /* Smaller margin for mobile devices */
   }
-  
-  .testimonials-section .testimonial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
+
   .testimonials-section p {
-    font-style: italic;
-    color: #555;
+    font-size: 0.95rem;
+    /* Smaller font size for quotes on mobile */
   }
-  
-  .testimonials-section h6 {
-    color: #333;
-    font-weight: bold;
+}
+
+@media (max-width: 576px) {
+  .hero-section h1 {
+    font-size: 2rem;
   }
-  
-  /* Ensure all sections have consistent margins */
-  section {
-    padding-top: 20px;
-    padding-bottom: 20px;
+
+  .hero-section p {
+    font-size: 1rem;
   }
-  
-  /* Adjust button styles if needed */
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+
+  .why-choose-us {
+    padding: 40px 15px; /* Less padding on extra small screens */
   }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
+
+  .why-choose-us h2,
+  .testimonials-section h2 {
+    font-size: 1.5rem;
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 575.98px) {
-    .hero-section h1 {
-      font-size: 2rem;
-    }
-  
-    .hero-section p {
-      font-size: 1rem;
-    }
-  
-    .why-choose-us h2,
-    .testimonials-section h2 {
-      font-size: 1.5rem;
-    }
+
+  .testimonials-section .testimonial-card {
+    padding: 15px;
+    /* Further adjust padding for extra small screens */
   }
-  
+}

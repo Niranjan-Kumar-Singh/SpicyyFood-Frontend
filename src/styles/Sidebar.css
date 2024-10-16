@@ -27,7 +27,7 @@
 /* Sidebar Navigation Items */
 .sidebar-nav .nav-item {
   padding: 12px 20px;
-  font-size: 1.1rem; /* Slightly larger font */
+  font-size: 1rem; /* Slightly larger font */
   font-weight: 500; /* Increased font weight */
   color: #333;
   display: flex;
@@ -79,7 +79,7 @@
 @media (max-width: 768px) {
   .sidebar-nav .nav-item {
     padding: 10px;
-    font-size: 1rem; /* Slightly smaller font for mobile */
+    font-size: 0.8rem; /* Slightly smaller font for mobile */
     font-weight: 500; /* Maintain increased font weight */
   }
 

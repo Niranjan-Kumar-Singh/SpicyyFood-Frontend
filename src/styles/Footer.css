@@ -1,17 +1,173 @@
-/* src/styles/Footer.css */
-
+/* Footer main styling */
 footer {
-    background-color: #1a1a1a; /* Dark background */
-    color: #ffffff; /* White text */
-    text-align: center;
-    padding: 20px 0;
+  background-color: #222; /* Darker shade for a more elegant feel */
+  color: #ffffff; /* White text for contrast */
+  text-align: center;
+  padding: 40px 0; /* Increased padding for spaciousness */
+}
+
+/* Footer container styling */
+.footer-container {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between columns */
+  max-width: 1200px; /* Maximum width for the container */
+  margin: 0 auto; /* Center the container */
+  padding: 0 20px; /* Padding for container */
+}
+
+/* Column styling */
+.footer-column {
+  flex: 1; /* Each column takes equal space */
+  padding: 20px; /* Padding within each column */
+}
+
+.footer-column h4 {
+  color: #ff5722; /* Brand color for section titles */
+  margin-bottom: 15px; /* Space below titles */
+}
+
+/* Footer links styling */
+.link {
+  display: block; /* Block links for better spacing */
+  color: #fff;
+  margin: 5px 0; /* Margin for vertical spacing */
+  text-decoration: none;
+  transition: color 0.5s ease;
+}
+
+.link:hover {
+  color: #ff5722;
+}
+
+/* Social icons styling */
+.social-icons {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Center align icons */
+  margin: 15px 0; /* Margin for spacing */
+}
+
+.icon {
+  font-size: 28px; /* Increased icon size for visibility */
+  margin: 0 10px; /* Spacing between icons */
+  color: #f2f2f2; /* Neutral color for icons */
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease; /* Add transform and color transition on hover */
+}
+
+/* Specific colors for each social media icon on hover */
+.facebook:hover {
+  color: #4267B2; /* Facebook Blue on hover */
+}
+
+.instagram:hover {
+  color: #C13584; /* Instagram Pink on hover */
+}
+
+.twitter:hover {
+  color: #1DA1F2; /* Twitter Blue on hover */
+}
+
+/* Hover effect for all icons */
+.icon:hover {
+  transform: scale(1.2); /* Slightly enlarge icon on hover */
+}
+
+/* Newsletter form styling */
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; /* Increased top margin for spacing */
+  flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+}
+
+/* Added margin to the right of the input to create space between input and button */
+.newsletter-input {
+  border: none;
+  border-radius: 25px 0 0 25px; /* Rounded corners */
+  padding: 10px 20px; /* Adjusted padding for comfort */
+  width: 220px; /* Default width */
+  transition: width 0.3s ease; /* Smooth transition on width change */
+}
+
+/* Subscribe button styling */
+.subscribe-btn {
+  border: none;
+  background-color: #ff5722;
+  color: white;
+  border-radius: 0 25px 25px 0; /* Rounded corners */
+  padding: 10px 20px;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.subscribe-btn:hover {
+  background-color: #e64a19;
+  transform: scale(1.05);
+}
+
+/* Bottom section styling */
+.footer-bottom {
+  margin-top: 10px; /* Space above the bottom section */
+  text-align: center;
+  color: #ffffff !important; /* Ensure the text color is white for visibility */
+  font-size: 16px; /* Adjust font size for better readability */
+}
+
+/* Ensure any muted text is visible */
+.footer .text-muted {
+  color: #ffffff !important; /* Ensure the text color is white for visibility */
+}
+
+/* Responsive styling */
+
+/* Tablets and smaller screens */
+@media (max-width: 992px) {
+  .newsletter-form {
+    flex-direction: row; /* Input and button are side-by-side */
+    justify-content: center;
   }
-  
-  footer a {
-    color: #ff5722; /* Attractive link color */
+
+  .newsletter-input {
+    width: 200px; /* Adjust width for tablet */
   }
-  
-  footer a:hover {
-    text-decoration: underline; /* Underline on hover */
+
+  .subscribe-btn {
+    padding: 10px 15px; /* Adjust button size for smaller screens */
   }
-  
+}
+
+/* Mobile and small screens */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Stack columns on small screens */
+  }
+
+  .newsletter-form {
+    flex-direction: column; /* Stack input and button vertically */
+    align-items: stretch; /* Ensure they are full width */
+  }
+
+  .newsletter-input {
+    width: 100%; /* Full width input */
+    margin-bottom: 10px; /* Add space between input and button */
+    border-radius: 25px; /* Fully rounded corners */
+  }
+
+  .subscribe-btn {
+    width: 100%; /* Full width button */
+    border-radius: 25px; /* Fully rounded button */
+  }
+}
+
+/* Very small screens (portrait phones, etc.) */
+@media (max-width: 576px) {
+  .newsletter-input {
+    padding: 8px 15px; /* Reduce padding on smaller screens */
+  }
+
+  .subscribe-btn {
+    padding: 8px 15px; /* Reduce padding on button */
+  }
+}
