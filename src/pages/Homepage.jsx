@@ -163,32 +163,35 @@ function Home() {
             <img
               src={tandooriFriedImage}
               alt="Why Choose Us"
-              className="img-fluid rounded shadow-sm"
-              loading="lazy" // Native lazy loading
+              className="img-fluid rounded shadow-sm why-choose-us-img"
+              loading="lazy"
             />
           </Col>
           <Col md={6}>
-            <p>
-              At our restaurant, we pride ourselves on delivering the finest dishes made from the freshest ingredients. Our commitment to quality and customer satisfaction sets us apart. Whether you're dining in or ordering online, we ensure a delightful culinary experience.
+            <p className="lead">
+              At our restaurant, we focus on offering a unique dining experience with attention to detail, quality, and service.
             </p>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                High-quality ingredients
+                <i className="bi bi-award-fill text-success me-2"></i>
+                Award-winning chefs with decades of experience
               </li>
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                Experienced chefs
+                <i className="bi bi-basket-fill text-success me-2"></i>
+                Locally sourced and fresh ingredients
               </li>
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                Excellent customer service
+                <i className="bi bi-emoji-smile-fill text-success me-2"></i>
+                Friendly and welcoming environment
               </li>
               <li className="mb-2">
-                <i className="bi bi-check-circle-fill text-success me-2"></i>
-                Wide variety of dishes
+                <i className="bi bi-clock-fill text-success me-2"></i>
+                Quick service and on-time delivery
               </li>
             </ul>
+            <Button variant="success" size="lg" className="mt-3">
+              Order Now
+            </Button>
           </Col>
         </Row>
       </section>
