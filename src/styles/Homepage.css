@@ -163,36 +163,147 @@ section {
   .why-choose-us p {
     font-size: 1rem; /* Adjust paragraph size for smaller screens */
   }
+  
+/* Why Choose Us Section */
+.why-choose-us {
+  background-color: #f9f9f9; /* Light background for contrast */
+  padding: 80px 20px; /* Generous padding to create space around content */
+  border-radius: 15px; /* Rounded corners for a softer look */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow to make it stand out */
+  margin: 40px 0; /* Add vertical margin for separation from other sections */
+}
 
-  .why-choose-us li {
-    font-size: 0.9rem; /* Smaller font size for mobile */
+.why-choose-us h2 {
+  font-weight: bold;
+  margin-bottom: 30px; /* Increase space below the heading */
+  color: #333; /* Darker text for better readability */
+}
+
+.why-choose-us p {
+  font-size: 1.2rem; /* Slightly larger text for emphasis */
+  margin-bottom: 20px; /* Space between the paragraph and the list */
+  color: #558;
+}
+
+.why-choose-us ul {
+  padding-left: 0; /* Remove default padding */
+  list-style-type: none; /* No bullet points */
+  margin-bottom: 20px; /* Space below the list */
+}
+
+.why-choose-us ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* Space between list items */
+}
+
+.why-choose-us ul li i {
+  font-size: 1.8rem; /* Increase icon size */
+  color: #28a745; /* Green color to match the success button */
+  margin-right: 15px; /* Space between icon and text */
+}
+
+.why-choose-us .btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  font-size: 1.1rem;
+  padding: 12px 24px; /* Larger button size for prominence */
+  margin-top: 20px;
+}
+
+.why-choose-us .btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+@media (max-width: 767px) {
+  .why-choose-us {
+    padding: 40px 15px; /* Adjust padding for smaller screens */
   }
 
+  .why-choose-us img {
+    margin-bottom: 20px; /* Space between image and text on small screens */
+  }
+}
+  
+  /* Customer Testimonials Section */
+.testimonials-section {
+  background: linear-gradient(135deg, #f9f9f9 0%, #e2e2e2 100%); /* Gradient background */
+  padding: 80px 20px; /* Generous padding for spacing */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+  margin: 40px 0; /* Vertical margin to separate from other sections */
+}
+
+.testimonials-section h2 {
+  font-weight: bold;
+  margin-bottom: 30px; /* Space below the heading */
+  color: #333; /* Darker text for better readability */
+  text-align: center; /* Center heading */
+  font-size: 2.5rem; /* Larger heading for emphasis */
+}
+
+.testimonials-section .testimonial-card {
+  background-color: #fff; /* White background for each testimonial */
+  padding: 30px; /* More padding for spacious feel */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  text-align: center; /* Center text */
+  position: relative; /* Position for pseudo-elements */
+  overflow: hidden; /* Hide overflow for pseudo-elements */
+}
+
+.testimonials-section .testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 123, 255, 0.1); /* Light blue overlay */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Smooth transition for overlay */
+}
+
+.testimonials-section .testimonial-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.testimonials-section .testimonial-card:hover::before {
+  opacity: 1; /* Show overlay on hover */
+}
+
+.testimonials-section p {
+  font-style: italic; /* Italicize the testimonial text */
+  color: #555; /* Slightly muted text color */
+  margin-bottom: 15px; /* Space below the quote */
+  font-size: 1.1rem; /* Slightly larger font size */
+}
+
+.testimonials-section small {
+  display: block; /* Make author name a block element */
+  color: #888; /* Lighter color for author name */
+  font-weight: bold; /* Bold author name */
+}
+
+/* Responsive adjustments */
+@media (max-width: 575.98px) {
   .testimonials-section h2 {
-    font-size: 2rem;
-    /* Adjust heading size for smaller screens */
+    font-size: 1.8rem; /* Smaller heading on small screens */
   }
 
   .testimonials-section .testimonial-card {
-    padding: 20px;
-    /* Adjust padding for smaller screens */
-    margin: 0 5px;
-    /* Smaller margin for mobile devices */
-  }
-
-  .testimonials-section p {
-    font-size: 0.95rem;
-    /* Smaller font size for quotes on mobile */
+    padding: 20px; /* Less padding on small screens */
   }
 }
 
-@media (max-width: 576px) {
-  .hero-section h1 {
-    font-size: 2rem;
-  }
-
-  .hero-section p {
-    font-size: 1rem;
+  
+  /* Ensure all sections have consistent margins */
+  section {
+    padding-top: 60px !important;
+    padding-bottom: 20px !important;
   }
 
   .why-choose-us {

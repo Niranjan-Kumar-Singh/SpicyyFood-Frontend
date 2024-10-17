@@ -35,7 +35,7 @@ function Footer() {
             <FaInstagram className="icon instagram" />
             <FaTwitter className="icon twitter" />
           </div>
-          <Form inline onSubmit={handleSubmit} className="newsletter-form">
+          <Form onSubmit={handleSubmit} className="newsletter-form"> {/* Removed inline prop */}
             <Form.Control
               type="email"
               placeholder="Subscribe to our newsletter"
