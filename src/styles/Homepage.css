@@ -88,58 +88,20 @@
 }
 
 .testimonials-section .testimonial-card {
-  background-color: #fff;
+  background-color: #e7f3ff; /* Light blue background */
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow */
-  border: 2px solid transparent;
-  /* Default transparent border */
-  position: relative;
-  /* Allow pseudo-elements for unique styling */
-  overflow: hidden;
-  /* Hide overflow for pseudo-elements */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle default shadow */
+  border: 2px solid transparent; /* Default transparent border */
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-  /* Add smooth transitions */
   text-align: left;
-  margin: 0 10px;
-  /* Margin between cards and sides */
-}
-
-.testimonials-section .testimonial-card::before {
-  content: '';
-  /* Pseudo-element for unique border effect */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 10px;
-  /* Match card border radius */
-  border: 4px solid rgba(173, 216, 230, 0.5);
-  /* Light blue border */
-  opacity: 0;
-  /* Start with invisible border */
-  transition: opacity 0.3s ease;
-  /* Smooth transition for opacity */
-  z-index: 0;
-  /* Place behind the card content */
+  margin: 0 10px; /* Margin between cards */
 }
 
 .testimonials-section .testimonial-card:hover {
-  transform: translateY(-5px);
-  /* Elevates card on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* Enhance shadow on hover */
-  background-color: rgba(173, 216, 230, 0.1);
-  /* Light blue background on hover */
-  border-color: rgba(173, 216, 230, 0.5);
-  /* Light blue border on hover */
-}
-
-.testimonials-section .testimonial-card:hover::before {
-  opacity: 1;
-  /* Show unique border effect on hover */
+  transform: translateY(-5px); /* Lift card on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  border-color: #007bff; /* Simple blue border on hover */
 }
 
 .testimonials-section p {
@@ -165,7 +127,7 @@
 
 /* Ensure all sections have consistent margins */
 section {
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #e0e0e0; /* Light border */
   border-radius: 10px; /* Rounded corners */
