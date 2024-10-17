@@ -32,6 +32,33 @@ import galoutiImage from '../assets/images/Kebabs/Galouti.jpeg';
 import tandooriFriedImage from '../assets/images/Chicken/Tandoori Fried.jpg';
 import rootBeerImage from '../assets/images/ColdDrink/Root Beer.jpeg';
 
+// Special Offers Component
+const SpecialOffers = () => {
+  return (
+    <section className="special-offers mb-5">
+      <h2 className="text-center mb-4">Special Offers</h2>
+      <Row>
+        <Col md={6} lg={4} className="mb-4">
+          <div className="offer-card card p-3">
+            <h3>BBQ Chicken Pizza</h3>
+            <p>Savory BBQ chicken with mozzarella and red onions.</p>
+            <p><strong>Price: ₹220</strong></p>
+            <Button variant="primary" href="#order-now">Order Now</Button>
+          </div>
+        </Col>
+        <Col md={6} lg={4} className="mb-4">
+          <div className="offer-card card p-3">
+            <h3>Tandoori Chicken</h3>
+            <p>Spiced tandoori chicken grilled to perfection.</p>
+            <p><strong>Price: ₹230</strong></p>
+            <Button variant="primary" href="#order-now">Order Now</Button>
+          </div>
+        </Col>
+      </Row>
+    </section>
+  );
+};
+
 function Home() {
   const [categories, setCategories] = useState([]);
   const [bestSelling, setBestSelling] = useState([]);
@@ -117,6 +144,26 @@ function Home() {
         </Row>
       </section>
 
+      {/* Best Selling Section */}
+      <section className="mb-5">
+        <h2 className="mb-4 text-center">Best Selling</h2>
+        {loadingBestSelling ? (
+          <div className="text-center">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        ) : (
+          <Row>
+            {bestSelling.map((item) => (
+              <Col key={item.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
+                <BestSellingCard item={item} />
+              </Col>
+            ))}
+          </Row>
+        )}
+      </section>
+
+      <SpecialOffers />
+
       {/* Categories Section */}
       <section id="categories" className="mb-5">
         <h2 className="mb-4 text-center">Categories</h2>
@@ -131,24 +178,6 @@ function Home() {
                 <Link to={`/category/${category.name.toLowerCase().replace(/\s+/g, '')}`}>
                   <CategoryCard category={category} />
                 </Link>
-              </Col>
-            ))}
-          </Row>
-        )}
-      </section>
-
-      {/* Best Selling Section */}
-      <section className="mb-5">
-        <h2 className="mb-4 text-center">Best Selling</h2>
-        {loadingBestSelling ? (
-          <div className="text-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
-        ) : (
-          <Row>
-            {bestSelling.map((item) => (
-              <Col key={item.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
-                <BestSellingCard item={item} />
               </Col>
             ))}
           </Row>

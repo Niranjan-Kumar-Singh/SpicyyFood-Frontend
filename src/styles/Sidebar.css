@@ -1,17 +1,17 @@
 /* Sidebar Header */
 .sidebar-header {
-  background: linear-gradient(45deg, #3498db, #2c3e50); /* Muted cool tones for a professional look */
+  background: linear-gradient(45deg, #3498db, #2c3e50);
   padding: 15px;
   text-align: center;
   color: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle separator line */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-title {
   display: flex;
   align-items: center;
   font-size: 1.6rem;
-  font-weight: 800; /* Increased font weight for emphasis */
+  font-weight: 800;
 }
 
 .user-icon {
@@ -27,8 +27,8 @@
 /* Sidebar Navigation Items */
 .sidebar-nav .nav-item {
   padding: 12px 20px;
-  font-size: 1rem; /* Slightly larger font */
-  font-weight: 500; /* Increased font weight */
+  font-size: 1rem;
+  font-weight: 500;
   color: #333;
   display: flex;
   align-items: center;
@@ -36,15 +36,15 @@
   border-radius: 10px;
   margin-bottom: 12px;
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-nav .nav-item:hover {
   background-color: #ecf0f1;
-  color: #2980b9; /* Accent color on hover */
-  transform: scale(1.03); /* Slight scale effect */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
-  font-weight: 600; /* Extra bold font on hover */
+  color: #2980b9;
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
 }
 
 .sidebar-nav .nav-item .me-2 {
@@ -52,8 +52,8 @@
 }
 
 .sidebar-nav .nav-item:hover .me-2 {
-  transform: translateX(-3px); /* Move the icon a little */
-  color: #2980b9; /* Matching hover color */
+  transform: translateX(-3px);
+  color: #2980b9;
 }
 
 /* Divider */
@@ -65,13 +65,13 @@
 /* Logout Link */
 .logout-link {
   color: #e74c3c;
-  font-weight: 700; /* Increased font weight for the logout link */
+  font-weight: 700;
 }
 
 .logout-link:hover {
   color: #c0392b;
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(231, 76, 60, 0.2); /* Softer hover effect */
+  box-shadow: 0 8px 16px rgba(231, 76, 60, 0.2);
   cursor: pointer;
 }
 
@@ -79,12 +79,28 @@
 @media (max-width: 768px) {
   .sidebar-nav .nav-item {
     padding: 10px;
-    font-size: 0.8rem; /* Slightly smaller font for mobile */
-    font-weight: 500; /* Maintain increased font weight */
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Hide unnecessary items for mobile view */
+  .user-icon, .logout-link {
+    display: none;
   }
 
   .sidebar-title {
     font-size: 1.4rem;
-    font-weight: 600; /* Keep the font weight consistent for the title */
+    font-weight: 600;
   }
+  
+  /* Minimize padding to save space */
+  .sidebar-body {
+    padding: 10px;
+  }
+}
+
+/* Active State for Navigation Items */
+.nav-item.active {
+  background-color: #2980b9;
+  color: #fff;
 }

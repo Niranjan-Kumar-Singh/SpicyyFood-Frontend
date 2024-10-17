@@ -1,7 +1,10 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaBell, FaUserAlt, FaListAlt, FaInfoCircle, FaEnvelope, FaHandsHelping, FaFileAlt, FaSignOutAlt } from 'react-icons/fa';
+import {
+  FaShoppingCart, FaBell, FaUserAlt, FaListAlt, FaInfoCircle, FaEnvelope,
+  FaHandsHelping, FaFileAlt, FaSignOutAlt, FaCreditCard, FaCog, FaHeart
+} from 'react-icons/fa';
 
 function SidebarContent({ handleClose }) {
   return (
@@ -21,7 +24,22 @@ function SidebarContent({ handleClose }) {
       <Nav.Link as={Link} to="/notifications" onClick={handleClose} className="nav-item">
         <FaBell className="me-2" /> My Notifications
       </Nav.Link>
+
       <div className="sidebar-divider"></div>
+
+      {/* New Sidebar Items */}
+      <Nav.Link as={Link} to="/favorites" onClick={handleClose} className="nav-item">
+        <FaHeart className="me-2" /> My Favorites
+      </Nav.Link>
+      <Nav.Link as={Link} to="/payment" onClick={handleClose} className="nav-item">
+        <FaCreditCard className="me-2" /> Payment Methods
+      </Nav.Link>
+      <Nav.Link as={Link} to="/settings" onClick={handleClose} className="nav-item">
+        <FaCog className="me-2" /> Settings
+      </Nav.Link>
+
+      <div className="sidebar-divider"></div>
+
       <Nav.Link as={Link} to="/about" onClick={handleClose} className="nav-item">
         <FaInfoCircle className="me-2" /> About
       </Nav.Link>

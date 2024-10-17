@@ -1,8 +1,13 @@
 /* src/styles/App.css */
 
 /* Adjust body padding to account for fixed navbar */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  padding-top: 70px;
   background-color: #f1f1f1; /* Background for the main content */
 }
 
@@ -85,6 +90,11 @@ p {
 
 .mb-4 {
   margin-bottom: 1.5rem;
+}
+
+.contact-page {
+  place-items: initial; /* Disable centering for the contact page */
+  width: 100%; /* Ensure the contact page takes full width */
 }
 
 /* Responsive Image in Hero Section */

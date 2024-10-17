@@ -32,6 +32,8 @@
 
 .navbar-brand:hover {
   color: #0a58ca; /* Darker shade on hover */
+  font-weight: bolder;
+  transform: scale(1.05);
 }
 
 .navbar-icons .nav-link,
@@ -108,24 +110,7 @@
 
 .search-icon-btn:hover {
   color: #0d6efd !important; /* Change icon color on hover */
-}
-
-/* Notification Toggle Styles */
-.notification-toggle {
-  position: relative;
-  display: flex;
-  align-items: center;
-  color: #6c757d;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.notification-toggle:hover{
-  color: #0d6efd;
-}
-
-.notification-toggle::after {
-  display: none !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Notification Badge */
@@ -167,6 +152,24 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+
+/* Notification Toggle Styles */
+.notification-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.notification-toggle:hover{
+  color: #0d6efd;
+}
+
+.notification-toggle::after {
+  display: none !important;
 }
 
 /* Cart Badge */
@@ -295,8 +298,10 @@
   align-items: center; /* Align username text and icon vertically */
 }
 
-.username-link span {
-  margin-left: 5px; /* Space between icon and text */
+.username-link span,
+.favorite-link span,
+.settings-link span {
+  margin-left: 2px; /* Space between icon and text */
 }
 
 /* Responsive adjustments for smaller screens */
@@ -337,7 +342,8 @@
   }
 
   /* Adjust the notification badge position */
-  .notification-badge {
+  .notification-badge,
+  .cart-badge {
     top: -5px;
     right: -5px;
     font-size: 8px; /* Smaller font size for badge */
@@ -353,15 +359,9 @@
   }
 
   .notification-menu .dropdown-item{
-    padding: 10px 10px;
+    padding: 10px;
+    font-size: 0.8rem;
     font: 0.5em sans-serif;
-  }
-
-  /* Adjust cart badge position */
-  .cart-badge {
-    top: -5px;
-    right: -5px;
-    font-size: 8px; /* Smaller font size for badge */
   }
 
   /* Adjust positioning of dropdown menu on mobile */
@@ -369,5 +369,10 @@
     position: absolute !important;
     left: -150px !important;
     right: 0 !important; /* Align dropdown with the icon */
+  }
+
+  .favorite-link,
+  .settings-link {
+    display: none !important;
   }
 }
