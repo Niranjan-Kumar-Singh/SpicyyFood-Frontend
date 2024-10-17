@@ -3,27 +3,29 @@ footer {
   background-color: #222; /* Darker shade for a more elegant feel */
   color: #ffffff; /* White text for contrast */
   text-align: center;
-  padding: 40px 0; /* Increased padding for spaciousness */
+  padding: 2rem 0; /* Increased padding for a more spacious feel */
 }
 
 /* Footer container styling */
 .footer-container {
   display: flex; /* Use flexbox for layout */
   justify-content: space-between; /* Space between columns */
-  max-width: 1200px; /* Maximum width for the container */
-  margin: 0 auto; /* Center the container */
-  padding: 0 20px; /* Padding for container */
+  flex-wrap: wrap; /* Allow columns to wrap */
+  max-width: 100%; /* Make sure it uses the full width */
+  padding: 0 10px; /* Reduce padding for maximum width */
 }
 
 /* Column styling */
 .footer-column {
   flex: 1; /* Each column takes equal space */
-  padding: 20px; /* Padding within each column */
+  padding: 10px; /* Reduced padding within each column */
+  min-width: 200px; /* Ensure a minimum width for small screens */
 }
 
 .footer-column h4 {
   color: #ff5722; /* Brand color for section titles */
-  margin-bottom: 15px; /* Space below titles */
+  margin-bottom: 10px; /* Space below titles */
+  font-size: 1.25rem; /* Adjusted font size */
 }
 
 /* Footer links styling */
@@ -32,11 +34,12 @@ footer {
   color: #fff;
   margin: 5px 0; /* Margin for vertical spacing */
   text-decoration: none;
-  transition: color 0.5s ease;
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
 
 .link:hover {
-  color: #ff5722;
+  color: #ff5722; /* Change color on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 /* Social icons styling */
@@ -47,8 +50,8 @@ footer {
 }
 
 .icon {
-  font-size: 28px; /* Increased icon size for visibility */
-  margin: 0 10px; /* Spacing between icons */
+  font-size: 32px; /* Increased icon size for visibility */
+  margin: 0 15px; /* Spacing between icons */
   color: #f2f2f2; /* Neutral color for icons */
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease; /* Add transform and color transition on hover */
@@ -81,13 +84,20 @@ footer {
   flex-wrap: wrap; /* Ensure it wraps on smaller screens */
 }
 
-/* Added margin to the right of the input to create space between input and button */
+/* Input field styling */
 .newsletter-input {
   border: none;
   border-radius: 25px 0 0 25px; /* Rounded corners */
-  padding: 10px 20px; /* Adjusted padding for comfort */
-  width: 220px; /* Default width */
+  padding: 12px 20px; /* Increased padding for comfort */
+  width: 100%; /* Use full width */
+  min-width: 200px; /* Maintain a minimum width */
   transition: width 0.3s ease; /* Smooth transition on width change */
+}
+
+/* Placeholder styling */
+.newsletter-input::placeholder {
+  font-size: 0.9rem; /* Adjust size as necessary */
+  color: rgba(255, 255, 255, 0.7); /* Lighter color for contrast */
 }
 
 /* Subscribe button styling */
@@ -109,10 +119,10 @@ footer {
 
 /* Bottom section styling */
 .footer-bottom {
-  margin-top: 10px; /* Space above the bottom section */
+  margin-top: 20px; /* Space above the bottom section */
   text-align: center;
   color: #ffffff !important; /* Ensure the text color is white for visibility */
-  font-size: 16px; /* Adjust font size for better readability */
+  font-size: 14px; /* Adjust font size for better readability */
 }
 
 /* Ensure any muted text is visible */
@@ -124,24 +134,35 @@ footer {
 
 /* Tablets and smaller screens */
 @media (max-width: 992px) {
-  .newsletter-form {
-    flex-direction: row; /* Input and button are side-by-side */
-    justify-content: center;
+  .footer-container {
+    padding: 0 20px; /* Slightly increased padding for a better look on tablets */
+  }
+
+  .footer-column {
+    padding: 8px 15px; /* More padding for spacing on tablet view */
+  }
+
+  .footer-column h4 {
+    font-size: 1.2rem; /* Slightly smaller font for titles */
+  }
+
+  .link {
+    font-size: 14px; /* Slightly smaller link font size */
   }
 
   .newsletter-input {
-    width: 200px; /* Adjust width for tablet */
+    width: 180px; /* Adjust width for tablet */
   }
 
   .subscribe-btn {
-    padding: 10px 15px; /* Adjust button size for smaller screens */
+    padding: 8px 15px; /* Adjust button size for smaller screens */
   }
 }
 
 /* Mobile and small screens */
 @media (max-width: 768px) {
   .footer-container {
-    flex-direction: column; /* Stack columns on small screens */
+    padding: 0; /* Remove padding for mobile */
   }
 
   .newsletter-form {

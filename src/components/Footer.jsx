@@ -15,7 +15,7 @@ function Footer() {
 
   return (
     <footer className="footer bg-dark text-light text-center py-4 mt-5">
-      <Container className="footer-container">
+      <Container fluid className="footer-container"> {/* Use 'fluid' for full-width */}
         <div className="footer-column">
           <h4>Address</h4>
           <p>123 Main Street</p>
@@ -35,7 +35,7 @@ function Footer() {
             <FaInstagram className="icon instagram" />
             <FaTwitter className="icon twitter" />
           </div>
-          <Form onSubmit={handleSubmit} className="newsletter-form"> {/* Removed inline prop */}
+          <Form onSubmit={handleSubmit} className="newsletter-form">
             <Form.Control
               type="email"
               placeholder="Subscribe to our newsletter"

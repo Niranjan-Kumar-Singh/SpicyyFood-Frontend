@@ -18,57 +18,79 @@
 .hero-section h1 {
   position: relative;
   z-index: 1;
-  color: #fff; /* White text for contrast */
+  color: #fff;
+  /* White text for contrast */
   font-weight: bold;
 }
 
 .hero-section p {
   position: relative;
   z-index: 1;
-  color: #fff; /* White text for contrast */
+  color: #fff;
+  /* White text for contrast */
 }
 
 /* Why Choose Us Section */
 .why-choose-us {
-  border: 1px solid #e0e0e0; /* Light border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-  padding: 20px; /* Padding for inner spacing */
-  background-color: #f8f9fa; /* Light background color */
+  border: 1px solid #e0e0e0;
+  /* Light border */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Shadow for depth */
+  padding: 20px;
+  /* Padding for inner spacing */
+  background-color: #f8f9fa;
+  /* Light background color */
 }
 
 .why-choose-us h2 {
-  font-size: 2.5rem; /* Adjust heading size */
+  font-size: 2.5rem;
+  /* Adjust heading size */
   color: #333;
-  margin-bottom: 30px; /* Add margin below the heading */
+  margin-bottom: 30px;
+  /* Add margin below the heading */
 }
 
 .why-choose-us img {
-  width: 100%; /* Full width for responsive image */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 15px; /* Rounded corners for the image */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  width: 100%;
+  /* Full width for responsive image */
+  height: auto;
+  /* Maintain aspect ratio */
+  border-radius: 15px;
+  /* Rounded corners for the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow effect */
 }
 
 .why-choose-us p {
-  font-size: 1.1rem; /* Adjust font size for readability */
-  color: #555; /* Soft text color */
-  margin-bottom: 20px; /* Space below paragraph */
+  font-size: 1.1rem;
+  /* Adjust font size for readability */
+  color: #555;
+  /* Soft text color */
+  margin-bottom: 20px;
+  /* Space below paragraph */
 }
 
 .why-choose-us ul {
-  padding-left: 20px; /* Add padding for list */
+  padding-left: 20px;
+  /* Add padding for list */
 }
 
 .why-choose-us li {
-  display: flex; /* Flexbox for list items */
-  align-items: center; /* Center icons vertically */
-  font-size: 1rem; /* Font size for list items */
-  color: #444; /* Color for list items */
+  display: flex;
+  /* Flexbox for list items */
+  align-items: center;
+  /* Center icons vertically */
+  font-size: 1rem;
+  /* Font size for list items */
+  color: #444;
+  /* Color for list items */
 }
 
 .why-choose-us i {
-  font-size: 1.2rem; /* Size of the icons */
+  font-size: 1.2rem;
+  /* Size of the icons */
 }
 
 /* Customer Testimonials Section */
@@ -88,20 +110,27 @@
 }
 
 .testimonials-section .testimonial-card {
-  background-color: #e7f3ff; /* Light blue background */
+  background-color: #e7f3ff;
+  /* Light blue background */
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle default shadow */
-  border: 2px solid transparent; /* Default transparent border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle default shadow */
+  border: 2px solid transparent;
+  /* Default transparent border */
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   text-align: left;
-  margin: 0 10px; /* Margin between cards */
+  margin: 0 10px;
+  /* Margin between cards */
 }
 
 .testimonials-section .testimonial-card:hover {
-  transform: translateY(-5px); /* Lift card on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-  border-color: #007bff; /* Simple blue border on hover */
+  transform: translateY(-5px);
+  /* Lift card on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Enhanced shadow on hover */
+  border-color: #007bff;
+  /* Simple blue border on hover */
 }
 
 .testimonials-section p {
@@ -129,10 +158,14 @@
 section {
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #e0e0e0; /* Light border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  background-color: #fff; /* White background for contrast */
+  border: 1px solid #e0e0e0;
+  /* Light border */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+  background-color: #fff;
+  /* White background for contrast */
 }
 
 /* Adjust button styles if needed */
@@ -157,149 +190,201 @@ section {
   }
 
   .why-choose-us h2 {
-    font-size: 2rem; /* Adjust heading size for smaller screens */
+    font-size: 2rem;
+    /* Adjust heading size for smaller screens */
   }
 
   .why-choose-us p {
-    font-size: 1rem; /* Adjust paragraph size for smaller screens */
+    font-size: 1rem;
+    /* Adjust paragraph size for smaller screens */
   }
-  
-/* Why Choose Us Section */
-.why-choose-us {
-  background-color: #f9f9f9; /* Light background for contrast */
-  padding: 80px 20px; /* Generous padding to create space around content */
-  border-radius: 15px; /* Rounded corners for a softer look */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow to make it stand out */
-  margin: 40px 0; /* Add vertical margin for separation from other sections */
-}
 
-.why-choose-us h2 {
-  font-weight: bold;
-  margin-bottom: 30px; /* Increase space below the heading */
-  color: #333; /* Darker text for better readability */
-}
-
-.why-choose-us p {
-  font-size: 1.2rem; /* Slightly larger text for emphasis */
-  margin-bottom: 20px; /* Space between the paragraph and the list */
-  color: #558;
-}
-
-.why-choose-us ul {
-  padding-left: 0; /* Remove default padding */
-  list-style-type: none; /* No bullet points */
-  margin-bottom: 20px; /* Space below the list */
-}
-
-.why-choose-us ul li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px; /* Space between list items */
-}
-
-.why-choose-us ul li i {
-  font-size: 1.8rem; /* Increase icon size */
-  color: #28a745; /* Green color to match the success button */
-  margin-right: 15px; /* Space between icon and text */
-}
-
-.why-choose-us .btn-success {
-  background-color: #28a745;
-  border-color: #28a745;
-  font-size: 1.1rem;
-  padding: 12px 24px; /* Larger button size for prominence */
-  margin-top: 20px;
-}
-
-.why-choose-us .btn-success:hover {
-  background-color: #218838;
-  border-color: #1e7e34;
-}
-
-@media (max-width: 767px) {
+  /* Why Choose Us Section */
   .why-choose-us {
-    padding: 40px 15px; /* Adjust padding for smaller screens */
+    background-color: #f9f9f9;
+    /* Light background for contrast */
+    padding: 80px 20px;
+    /* Generous padding to create space around content */
+    border-radius: 15px;
+    /* Rounded corners for a softer look */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow to make it stand out */
+    margin: 40px 0;
+    /* Add vertical margin for separation from other sections */
   }
 
-  .why-choose-us img {
-    margin-bottom: 20px; /* Space between image and text on small screens */
+  .why-choose-us h2 {
+    font-weight: bold;
+    margin-bottom: 30px;
+    /* Increase space below the heading */
+    color: #333;
+    /* Darker text for better readability */
   }
-}
-  
+
+  .why-choose-us p {
+    font-size: 1.2rem;
+    /* Slightly larger text for emphasis */
+    margin-bottom: 20px;
+    /* Space between the paragraph and the list */
+    color: #555;
+  }
+
+  .why-choose-us ul {
+    padding-left: 0;
+    /* Remove default padding */
+    list-style-type: none;
+    /* No bullet points */
+    margin-bottom: 20px;
+    /* Space below the list */
+  }
+
+  .why-choose-us ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    /* Space between list items */
+  }
+
+  .why-choose-us ul li i {
+    font-size: 1.8rem;
+    /* Increase icon size */
+    color: #28a745;
+    /* Green color to match the success button */
+    margin-right: 15px;
+    /* Space between icon and text */
+  }
+
+  .why-choose-us .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    /* Larger button size for prominence */
+    margin-top: 20px;
+  }
+
+  .why-choose-us .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+
+  @media (max-width: 767px) {
+    .why-choose-us {
+      padding: 40px 15px;
+      /* Adjust padding for smaller screens */
+    }
+
+    .why-choose-us img {
+      margin-bottom: 20px;
+      /* Space between image and text on small screens */
+    }
+  }
+
   /* Customer Testimonials Section */
-.testimonials-section {
-  background: linear-gradient(135deg, #f9f9f9 0%, #e2e2e2 100%); /* Gradient background */
-  padding: 80px 20px; /* Generous padding for spacing */
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
-  margin: 40px 0; /* Vertical margin to separate from other sections */
-}
+  .testimonials-section {
+    background: linear-gradient(135deg, #f9f9f9 0%, #e2e2e2 100%);
+    /* Gradient background */
+    padding: 80px 20px;
+    /* Generous padding for spacing */
+    border-radius: 15px;
+    /* Rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Enhanced shadow */
+    margin: 40px 0;
+    /* Vertical margin to separate from other sections */
+  }
 
-.testimonials-section h2 {
-  font-weight: bold;
-  margin-bottom: 30px; /* Space below the heading */
-  color: #333; /* Darker text for better readability */
-  text-align: center; /* Center heading */
-  font-size: 2.5rem; /* Larger heading for emphasis */
-}
+  .testimonials-section h2 {
+    font-weight: bold;
+    margin-bottom: 30px;
+    /* Space below the heading */
+    color: #333;
+    /* Darker text for better readability */
+    text-align: center;
+    /* Center heading */
+    font-size: 2.5rem;
+    /* Larger heading for emphasis */
+  }
 
-.testimonials-section .testimonial-card {
-  background-color: #fff; /* White background for each testimonial */
-  padding: 30px; /* More padding for spacious feel */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
-  text-align: center; /* Center text */
-  position: relative; /* Position for pseudo-elements */
-  overflow: hidden; /* Hide overflow for pseudo-elements */
-}
+  .testimonials-section .testimonial-card {
+    background-color: #fff;
+    /* White background for each testimonial */
+    padding: 30px;
+    /* More padding for spacious feel */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    /* More pronounced shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth hover effect */
+    text-align: center;
+    /* Center text */
+    position: relative;
+    /* Position for pseudo-elements */
+    overflow: hidden;
+    /* Hide overflow for pseudo-elements */
+  }
 
-.testimonials-section .testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 123, 255, 0.1); /* Light blue overlay */
-  opacity: 0; /* Initially hidden */
-  transition: opacity 0.3s ease; /* Smooth transition for overlay */
-}
+  .testimonials-section .testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 123, 255, 0.1);
+    /* Light blue overlay */
+    opacity: 0;
+    /* Initially hidden */
+    transition: opacity 0.3s ease;
+    /* Smooth transition for overlay */
+  }
 
-.testimonials-section .testimonial-card:hover {
-  transform: translateY(-5px); /* Lift effect on hover */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
-}
+  .testimonials-section .testimonial-card:hover {
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    /* Deeper shadow on hover */
+  }
 
-.testimonials-section .testimonial-card:hover::before {
-  opacity: 1; /* Show overlay on hover */
-}
+  .testimonials-section .testimonial-card:hover::before {
+    opacity: 1;
+    /* Show overlay on hover */
+  }
 
-.testimonials-section p {
-  font-style: italic; /* Italicize the testimonial text */
-  color: #555; /* Slightly muted text color */
-  margin-bottom: 15px; /* Space below the quote */
-  font-size: 1.1rem; /* Slightly larger font size */
-}
+  .testimonials-section p {
+    font-style: italic;
+    /* Italicize the testimonial text */
+    color: #555;
+    /* Slightly muted text color */
+    margin-bottom: 15px;
+    /* Space below the quote */
+    font-size: 1.1rem;
+    /* Slightly larger font size */
+  }
 
-.testimonials-section small {
-  display: block; /* Make author name a block element */
-  color: #888; /* Lighter color for author name */
-  font-weight: bold; /* Bold author name */
+  .testimonials-section small {
+    display: block;
+    /* Make author name a block element */
+    color: #888;
+    /* Lighter color for author name */
+    font-weight: bold;
+    /* Bold author name */
+  }
 }
 
 /* Responsive adjustments */
 @media (max-width: 575.98px) {
   .testimonials-section h2 {
-    font-size: 1.8rem; /* Smaller heading on small screens */
+    font-size: 1.8rem;
+    /* Smaller heading on small screens */
   }
 
   .testimonials-section .testimonial-card {
-    padding: 20px; /* Less padding on small screens */
+    padding: 20px;
+    /* Less padding on small screens */
   }
-}
 
-  
   /* Ensure all sections have consistent margins */
   section {
     padding-top: 60px !important;
@@ -307,7 +392,8 @@ section {
   }
 
   .why-choose-us {
-    padding: 40px 15px; /* Less padding on extra small screens */
+    padding: 40px 15px;
+    /* Less padding on extra small screens */
   }
 
   .why-choose-us h2,
