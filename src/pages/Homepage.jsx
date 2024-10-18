@@ -108,7 +108,7 @@ function Home() {
         { id: 104, name: 'Spicy Veggie Pizza', description: 'A fiery mix of vegetables with spicy tomato sauce.', price: 300, image: spicyVeggieImage, isSpecial: false },
         { id: 105, name: 'Macaroni', description: 'Creamy macaroni with a blend of cheeses.', price: 50, image: macaroniImage, isSpecial: false },
         { id: 106, name: 'Rotini', description: 'Twisted rotini pasta with fresh basil and tomatoes.', price: 60, image: rotiniImage, isSpecial: true },
-        { id: 107, name: 'Classic Hamburger', description: 'Juicy beef patty with lettuce, tomato, and cheese.', price: 300, image: hamburgerImage, isSpecial: false },
+        { id: 107, name: 'Classic Hamburger', description: 'Juicy patty with lettuce, tomato, and cheese.', price: 300, image: hamburgerImage, isSpecial: false },
         { id: 108, name: 'Chicken Kebab Burger', description: 'Grilled chicken kebab with spicy mayo and fresh veggies.', price: 300, image: kababBurgerImage, isSpecial: true },
         { id: 109, name: 'French Vanilla Bean', description: 'Creamy vanilla ice cream with real vanilla beans.', price: 150, image: frenchVanillaImage, isSpecial: true },
         { id: 110, name: 'Galouti Kebab', description: 'Tender minced meat kebab infused with aromatic spices.', price: 320, image: galoutiImage, isSpecial: false },

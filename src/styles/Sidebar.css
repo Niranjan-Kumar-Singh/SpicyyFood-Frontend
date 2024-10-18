@@ -26,8 +26,8 @@
 
 /* Sidebar Navigation Items */
 .sidebar-nav .nav-item {
-  padding: 12px 20px;
-  font-size: 1rem;
+  padding: 15px 20px;
+  font-size: 1.1rem;
   font-weight: 500;
   color: #333;
   display: flex;
@@ -78,8 +78,8 @@
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .sidebar-nav .nav-item {
-    padding: 10px;
-    font-size: 0.8rem;
+    padding: 12px;
+    font-size: 1rem;
     font-weight: 500;
   }
 

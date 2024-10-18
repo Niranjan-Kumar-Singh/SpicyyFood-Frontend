@@ -1,13 +1,13 @@
 /* Container and Layout */
 .contact-container {
   padding: 0 20px; /* Reduced padding to 10px */
-  background: linear-gradient(135deg, #f8f9fa, #f1f1f1); /* Subtle background gradient */
+  background: #ffffff; /* Subtle background gradient */
   width: 100%;
 }
 
 .contact-card,
 .contact-info-card {
-  background-color: #ffffff;
+  background-color: linear-gradient(135deg, #f8f9fa, #f1f1f1);
   border: none;
   border-radius: 12px;
   transition: transform 0.3s ease; /* Smooth hover effect */
@@ -37,7 +37,7 @@ h4 {
 }
 
 p.contact-detail {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #666666;
   margin-bottom: 15px;
   display: flex;
@@ -52,24 +52,29 @@ p.contact-detail {
 
 /* Form Inputs */
 .form-input {
-  border: 2px solid #ff5733; /* Orange border */
+  border: 2px solid #ff7844 !important; /* Orange border */
   border-radius: 8px;
   padding: 10px;
-  transition: border-color 0.3s;
-  width: 100%; /* Make input field responsive */
+  transition: border-color 0.3s !important;
+  width: 100% !important; /* Make input field responsive */
 }
 
 .form-input:focus {
-  border-color: #ff7844; /* Border color on focus */
-  box-shadow: none;
+  border-color: #ff3305 !important; /* Border color on focus */
+  box-shadow: none !important;
+}
+
+.form-label{
+  color: #343a40;
+  font-size: 1.1rem;
 }
 
 /* Buttons */
 .submit-btn {
-  background-color: #ff5733;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: bold;
+  background-color: #fc6e36 !important;
+  border: none !important;
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
   padding: 12px;
   border-radius: 8px;
   transition: background-color 0.2s ease, transform 0.2s ease !important; /* Adjusted transition for smoother effect */
@@ -77,14 +82,17 @@ p.contact-detail {
 }
 
 .submit-btn:hover {
-  background-color: #ff7844;
-  transform: scale(1.05); /* Slight button enlargement on hover */
+  background-color: #ff5733 !important;
 }
 
 /* Optional: Add active state for smoother interaction on click */
 .submit-btn:active {
   transform: scale(0.98); /* Slight shrink effect on click */
   transition: transform 0.2s ease; /* Faster transition on click */
+}
+
+.contact-detail{
+  font-size: 1.1rem;
 }
 
 /* Responsive Design */
@@ -128,6 +136,15 @@ p.contact-detail {
   .icon {
     font-size: 1.2rem;
   }
+
+  .form-label{
+    color: #343a40;
+    font-size: 1rem;
+  }
+
+  .contact-detail{
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 576px) { /* For small mobile devices */
@@ -154,5 +171,9 @@ p.contact-detail {
   .submit-btn {
     font-size: 0.9rem; /* Reduce button font size */
     padding: 8px; /* Adjust padding */
+  }
+
+  .contact-detail{
+    font-size: 0.9rem;
   }
 }

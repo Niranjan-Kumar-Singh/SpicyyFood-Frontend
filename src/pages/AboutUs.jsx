@@ -6,7 +6,7 @@ import '../styles/AboutUs.css';
 
 const AboutUs = () => {
   return (
-    <Container className="about-us-container my-5">
+    <Container className="about-us-container my-5 py-5">
       <Row className="mb-4">
         <Col>
           <h1 className="text-center">About Us</h1>

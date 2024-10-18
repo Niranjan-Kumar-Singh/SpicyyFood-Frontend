@@ -24,11 +24,11 @@ const Contact = () => {
   };
 
   return (
-    <Container fluid className="contact-container mt-5 pt-4">
+    <Container fluid className="contact-container mt-5 pt-5">
       <h1 className="text-center mb-3">Get in Touch</h1>
       <Row>
         <Col md={6} className="mb-4">
-          <Card className="contact-card shadow-lg p-5"> {/* Added 'shadow-lg' for a stronger shadow */}
+          <Card className="contact-card shadow-lg p-4"> {/* Added 'shadow-lg' for a stronger shadow */}
             <h2 className="text-center mb-4">Contact Us</h2>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="formName" className="mb-3">
@@ -75,7 +75,7 @@ const Contact = () => {
           </Card>
         </Col>
         <Col md={6}>
-          <Card className="contact-info-card shadow-lg p-2">
+          <Card className="contact-info-card shadow-lg pt-3 pb-4">
             <h4 className="text-center mb-4">Reach Us At</h4>
             <div className="contact-detail mb-3">
               <FaEnvelope className="icon me-2" /> <strong>Email:</strong> contact@spicyyfood.com

@@ -1,0 +1,113 @@
+.payment-page-wrapper {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.payment-methods-page {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 900px;
+}
+
+.payment-methods-page h1 {
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #fc6e36 !important;
+}
+
+/* Box to contain all payment cards */
+.payment-methods-box {
+    border: 2px solid #3498db;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #f7f9fb;
+    min-height: 300px; /* Adjust if necessary */
+}
+
+.payment-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.payment-card.debit-card {
+    background: linear-gradient(115deg, #07cc8e 0%, #418cd7 100%); /* Green-blue gradient */
+}
+
+.payment-card.credit-card {
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); /* Warm golden-orange gradient */
+}
+
+.payment-card:hover {
+    transform: scale(1.03);
+}
+
+.payment-card .card-title {
+    font-size: 1.3rem;
+    color: #2c3e50 !important;
+    font-weight: 600;
+}
+
+.payment-card .card-text {
+    font-size: 1rem;
+    color: #2c3e50 !important; /* Darker text for better contrast */
+}
+
+.payment-card .card-number {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2c3e50 !important; /* Darker text for the card number */
+    letter-spacing: 1.5px;
+}
+
+.card-expiry,
+.card-holder {
+    color: #34495e !important; /* Darker text for expiry and card holder */
+}
+
+.remove-btn {
+    margin-top: 10px;
+    background-color: #e74c3c !important;
+    border: none !important;
+}
+
+.add-payment-btn {
+    font-size: 1.2rem;
+    background-color: #3498db !important;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-payment-btn .me-2 {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .payment-methods-page {
+        padding: 15px;
+    }
+
+    .payment-card .card-title {
+        font-size: 1rem;
+    }
+
+    .payment-card .card-text {
+        font-size: 0.9rem;
+    }
+
+    .payment-card .card-number {
+        font-size: 1.2rem;
+    }
+
+    .add-payment-btn {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+}

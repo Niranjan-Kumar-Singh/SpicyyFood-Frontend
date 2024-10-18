@@ -2,19 +2,20 @@
     padding: 20px;
   }
   
-  h1, h2 {
-    color: #ff5733;
+  .about-us-container h1,
+  .about-us-container h2 {
+    color: #ff5733 !important;
   }
   
-  .lead {
+  .about-us-container .lead {
     font-size: 1.5rem;
   }
   
-  p {
+  .about-us-container p {
     color: #495057;
   }
   
-  img {
+  .about-us-container img {
     margin: 10px 0;
   }
   
