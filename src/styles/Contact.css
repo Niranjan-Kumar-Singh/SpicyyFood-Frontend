@@ -1,24 +1,158 @@
-.contact {
-    margin-top: 20px;
+/* Container and Layout */
+.contact-container {
+  padding: 0 20px; /* Reduced padding to 10px */
+  background: linear-gradient(135deg, #f8f9fa, #f1f1f1); /* Subtle background gradient */
+  width: 100%;
 }
 
-.contact h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+.contact-card,
+.contact-info-card {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
-.contact p {
-    font-size: 1rem;
+.shadow-lg {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow */
 }
 
-.mt-5 {
-    width: 100%;
-    margin-top: 5rem !important;
+/* Typography */
+h1 {
+  font-size: 2.8rem; /* Larger font size */
+  font-weight: 700;
+  color: #343a40;
+  letter-spacing: 1px; /* Slight spacing */
 }
 
-/* Assuming this is your Contact.css */
-.container-fluid {
-  padding: 0; /* Remove default padding */
-  width: 100%; /* Ensure full width */
-  margin: 0; /* Remove default margin */
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+h4 {
+  font-size: 1.6rem;
+  color: #555;
+}
+
+p.contact-detail {
+  font-size: 1.2rem;
+  color: #666666;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center; /* Align icon with text */
+}
+
+/* Icons */
+.icon {
+  font-size: 1.4rem;
+  color: #ff5733 !important;
+}
+
+/* Form Inputs */
+.form-input {
+  border: 2px solid #ff5733; /* Orange border */
+  border-radius: 8px;
+  padding: 10px;
+  transition: border-color 0.3s;
+  width: 100%; /* Make input field responsive */
+}
+
+.form-input:focus {
+  border-color: #ff7844; /* Border color on focus */
+  box-shadow: none;
+}
+
+/* Buttons */
+.submit-btn {
+  background-color: #ff5733;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease !important; /* Adjusted transition for smoother effect */
+  width: 100%; /* Make button full width on small screens */
+}
+
+.submit-btn:hover {
+  background-color: #ff7844;
+  transform: scale(1.05); /* Slight button enlargement on hover */
+}
+
+/* Optional: Add active state for smoother interaction on click */
+.submit-btn:active {
+  transform: scale(0.98); /* Slight shrink effect on click */
+  transition: transform 0.2s ease; /* Faster transition on click */
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .contact-container {
+    padding: 20px; /* Slight padding for large tablets and desktops */
+  }
+
+  h1 {
+    font-size: 2.5rem; /* Slightly smaller heading on large tablets */
+  }
+
+  h2 {
+    font-size: 1.8rem; /* Slightly smaller subheading */
+  }
+}
+
+@media (max-width: 768px) { /* For tablets and smaller screens */
+  .contact-container {
+    padding: 15px; /* Reduced padding for tablet-sized screens */
+  }
+
+  h1 {
+    font-size: 2.2rem; /* Reduce font size */
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+
+  .submit-btn {
+    font-size: 1rem; /* Reduce button font size */
+    padding: 10px; /* Adjust padding */
+    width: 100%; /* Ensure full width on smaller screens */
+  }
+
+  .icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) { /* For small mobile devices */
+  .contact-container {
+    padding: 10px; /* Minimal padding for mobile screens */
+  }
+
+  h1 {
+    font-size: 1.8rem; /* Further reduce heading size for mobile */
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  p.contact-detail {
+    font-size: 1rem; /* Adjust text size */
+  }
+
+  .submit-btn {
+    font-size: 0.9rem; /* Reduce button font size */
+    padding: 8px; /* Adjust padding */
+  }
 }

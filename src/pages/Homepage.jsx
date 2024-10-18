@@ -8,6 +8,7 @@ import BestSellingCard from '../components/BestSellingCard';
 import heroImage from '../assets/images/hero/hero-image.jpg'; // Add a hero image
 import LazyLoad from 'react-lazyload'; // Import LazyLoad
 import { Link } from 'react-router-dom'; // Import Link for routing
+import { FaPizzaSlice, FaDrumstickBite } from 'react-icons/fa';
 import '../styles/Homepage.css'; // Import the custom CSS
 
 // Category and best selling item images
@@ -36,22 +37,36 @@ import rootBeerImage from '../assets/images/ColdDrink/Root Beer.jpeg';
 const SpecialOffers = () => {
   return (
     <section className="special-offers mb-5">
-      <h2 className="text-center mb-4">Special Offers</h2>
+      <h2 className="text-center mb-5">Special Offers</h2>
       <Row>
-        <Col md={6} lg={4} className="mb-4">
-          <div className="offer-card card p-3">
-            <h3>BBQ Chicken Pizza</h3>
-            <p>Savory BBQ chicken with mozzarella and red onions.</p>
-            <p><strong>Price: ₹220</strong></p>
-            <Button variant="primary" href="#order-now">Order Now</Button>
+        <Col md={6} lg={4} className="mb-5">
+          <div className="offer-card card p-4 shadow-sm position-relative">
+            <div className="icon-container">
+              <FaPizzaSlice className="offer-icon" /> {/* Pizza icon */}
+            </div>
+            <h3 className="offer-title mt-3">BBQ Chicken Pizza</h3>
+            <p className="offer-description">Savory BBQ chicken with mozzarella and red onions.</p>
+            <p className="offer-price">
+              <strong>Price: <span className="highlighted-price">₹220</span></strong>
+            </p>
+            <Button variant="primary" className="offer-btn" href="#order-now">
+              Order Now
+            </Button>
           </div>
         </Col>
-        <Col md={6} lg={4} className="mb-4">
-          <div className="offer-card card p-3">
-            <h3>Tandoori Chicken</h3>
-            <p>Spiced tandoori chicken grilled to perfection.</p>
-            <p><strong>Price: ₹230</strong></p>
-            <Button variant="primary" href="#order-now">Order Now</Button>
+        <Col md={6} lg={4} className="mb-5">
+          <div className="offer-card card p-4 shadow-sm position-relative">
+            <div className="icon-container">
+              <FaDrumstickBite className="offer-icon" /> {/* Chicken icon */}
+            </div>
+            <h3 className="offer-title mt-3">Tandoori Chicken</h3>
+            <p className="offer-description">Spiced tandoori chicken grilled to perfection.</p>
+            <p className="offer-price">
+              <strong>Price: <span className="highlighted-price">₹230</span></strong>
+            </p>
+            <Button variant="primary" className="offer-btn" href="#order-now">
+              Order Now
+            </Button>
           </div>
         </Col>
       </Row>

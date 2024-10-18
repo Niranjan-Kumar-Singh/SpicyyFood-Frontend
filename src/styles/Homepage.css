@@ -179,6 +179,77 @@ section {
   border-color: #004085;
 }
 
+/* Special Offers */
+.special-offers h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.offer-card {
+  transition: transform 0.3s ease-in-out;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.offer-card:hover {
+  transform: scale(1.05);
+}
+
+.offer-title {
+  font-size: 1.5rem;
+  color: #ff5733;
+  font-weight: 600;
+  text-align: center;
+}
+
+.offer-description {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.offer-price {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.highlighted-price {
+  font-size: 1.5rem;
+  color: #ff7844;
+  font-weight: 700;
+}
+
+.offer-btn {
+  background: linear-gradient(45deg, #ff5733, #ff7844);
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  transition: background 0.3s ease-in-out;
+}
+
+.offer-btn:hover {
+  background: linear-gradient(45deg, #ff7844, #ff5733);
+}
+
+.icon-container {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff5733;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.offer-icon {
+  font-size: 2.5rem;
+  color: white;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 767px) {
   .hero-section {
@@ -268,7 +339,6 @@ section {
     border-color: #1e7e34;
   }
 
-  @media (max-width: 767px) {
     .why-choose-us {
       padding: 40px 15px;
       /* Adjust padding for smaller screens */
@@ -278,7 +348,6 @@ section {
       margin-bottom: 20px;
       /* Space between image and text on small screens */
     }
-  }
 
   /* Customer Testimonials Section */
   .testimonials-section {
@@ -370,6 +439,22 @@ section {
     /* Lighter color for author name */
     font-weight: bold;
     /* Bold author name */
+  }
+
+  .special-offers h2 {
+    font-size: 2rem;
+  }
+
+  .offer-title {
+    font-size: 1.3rem;
+  }
+
+  .highlighted-price {
+    font-size: 1.3rem;
+  }
+
+  .offer-btn {
+    font-size: 0.9rem;
   }
 }
 

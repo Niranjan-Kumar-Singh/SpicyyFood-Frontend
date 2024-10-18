@@ -14,7 +14,7 @@ function Footer() {
   };
 
   return (
-    <footer className="footer bg-dark text-light text-center py-4 mt-5">
+    <footer className="footer bg-dark text-light text-center py-4">
       <Container fluid className="footer-container"> {/* Use 'fluid' for full-width */}
         <div className="footer-column">
           <h4>Address</h4>
