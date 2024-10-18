@@ -28,6 +28,12 @@ footer {
   font-size: 1.25rem; /* Adjusted font size */
 }
 
+.footer-column p {
+  font-size: 0.9rem; /* Adjusted font size */
+  margin-bottom: 5px; /* Reduce spacing between paragraphs */
+  color: #f2f2f2; /* Neutral color for paragraphs */
+}
+
 /* Footer links styling */
 .link {
   display: block; /* Block links for better spacing */
@@ -39,7 +45,6 @@ footer {
 
 .link:hover {
   color: #ff5722; /* Change color on hover */
-  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 /* Social icons styling */
