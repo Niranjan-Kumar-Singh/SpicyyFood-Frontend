@@ -58,16 +58,16 @@ footer {
 }
 
 /* Specific colors for each social media icon on hover */
-.facebook:hover {
-  color: #4267B2; /* Facebook Blue on hover */
+.facebook {
+  color: #4267B2 !important; /* Facebook Blue on hover */
 }
 
-.instagram:hover {
-  color: #C13584; /* Instagram Pink on hover */
+.instagram {
+  color: #C13584 !important; /* Instagram Pink on hover */
 }
 
-.twitter:hover {
-  color: #1DA1F2; /* Twitter Blue on hover */
+.twitter {
+  color: #1DA1F2 !important; /* Twitter Blue on hover */
 }
 
 /* Hover effect for all icons */
@@ -147,7 +147,7 @@ footer {
   }
 
   .link {
-    font-size: 14px; /* Slightly smaller link font size */
+    font-size: 16px; /* Slightly smaller link font size */
   }
 
   .newsletter-input {
