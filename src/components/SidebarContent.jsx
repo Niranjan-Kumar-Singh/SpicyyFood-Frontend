@@ -2,7 +2,7 @@ import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {
-  FaShoppingCart, FaBell, FaUserAlt, FaListAlt, FaInfoCircle, FaEnvelope,
+  FaShoppingCart, FaUserAlt, FaListAlt, FaInfoCircle, FaEnvelope,
   FaHandsHelping, FaFileAlt, FaSignOutAlt, FaCreditCard, FaCog, FaHeart
 } from 'react-icons/fa';
 
@@ -20,9 +20,6 @@ function SidebarContent({ handleClose }) {
       </Nav.Link>
       <Nav.Link as={Link} to="/account" onClick={handleClose} className="nav-item">
         <FaUserAlt className="me-2" /> My Account
-      </Nav.Link>
-      <Nav.Link as={Link} to="/notifications" onClick={handleClose} className="nav-item">
-        <FaBell className="me-2" /> My Notifications
       </Nav.Link>
 
       <div className="sidebar-divider"></div>

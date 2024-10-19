@@ -68,7 +68,7 @@ const Contact = () => {
                   className="form-input"
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" className="w-100 submit-btn">
+              <Button variant="primary" type="submit" className="w-100 contact-submit-btn">
                 Send Message
               </Button>
             </Form>

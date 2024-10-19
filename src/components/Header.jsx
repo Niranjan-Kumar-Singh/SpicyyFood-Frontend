@@ -113,9 +113,9 @@ function Header() {
               </Dropdown.Menu>
             </Dropdown>
 
-            <Nav.Link as={NavLink} to="/profile" className="me-3 username-link">
+            <Nav.Link as={NavLink} to="/account" className="me-3 username-link">
               <FaUserCircle size={24} className="me-1" />
-              <span className='fw-bold'>Username</span>
+              <span className='fw-bold'>John Doe</span>
             </Nav.Link>
 
             <Nav.Link as={NavLink} to="/cart" className="position-relative me-3">

@@ -21,45 +21,51 @@
 .favorites-box {
     padding: 30px;
     border-radius: 15px;
-    background-color: #f7f9fb;
+    background-color: #f0f4f8;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .favorite-card {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background: linear-gradient(15deg, #45B649, #DCE35B);
+    color: white;
 }
 
 .favorite-card:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .favorite-card .card-title {
-    font-size: 1.4rem;
-    color: #2c3e50 !important;
-    font-weight: 600;
+    font-size: 1.5rem;
+    color: white !important;
+    font-weight: 700;
 }
 
 .favorite-card .card-text {
-    font-size: 1rem;
-    color: #7f8c8d !important;
+    font-size: 1.1rem;
+    color: #f0f4f8 !important;
 }
 
 .favorite-img {
-    height: 200px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 10px 10px 0 0;
+    border-radius: 15px 15px 0 0;
+    box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .price {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    color: #3498db !important;
+    color: #ffd700 !important; /* Gold-like price color */
+    margin-top: 10px;
 }
 
 .remove-btn,
 .add-cart-btn {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     border-radius: 10px;
 }
@@ -72,6 +78,7 @@
 .add-cart-btn {
     background-color: #2ecc71 !important;
     border: none !important;
+    color: white;
 }
 
 @media (max-width: 768px) {
@@ -85,6 +92,6 @@
     
     .remove-btn,
     .add-cart-btn {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 }

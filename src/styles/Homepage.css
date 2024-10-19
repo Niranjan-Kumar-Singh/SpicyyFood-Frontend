@@ -221,9 +221,9 @@ section {
   font-weight: 700;
 }
 
-.offer-btn {
+.offer-card .offer-btn {
   background: linear-gradient(45deg, #ff5733, #ff7844);
-  border: none;
+  border: none !important;
   font-size: 1rem;
   font-weight: bold;
   width: 100%;

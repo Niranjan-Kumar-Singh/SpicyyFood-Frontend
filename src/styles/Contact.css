@@ -70,7 +70,7 @@ p.contact-detail {
 }
 
 /* Buttons */
-.submit-btn {
+.contact-submit-btn {
   background-color: #fc6e36 !important;
   border: none !important;
   font-size: 1.2rem !important;
@@ -81,12 +81,12 @@ p.contact-detail {
   width: 100%; /* Make button full width on small screens */
 }
 
-.submit-btn:hover {
+.contact-submit-btn:hover {
   background-color: #ff5733 !important;
 }
 
 /* Optional: Add active state for smoother interaction on click */
-.submit-btn:active {
+.contact-submit-btn:active {
   transform: scale(0.98); /* Slight shrink effect on click */
   transition: transform 0.2s ease; /* Faster transition on click */
 }
@@ -168,7 +168,7 @@ p.contact-detail {
     font-size: 1rem; /* Adjust text size */
   }
 
-  .submit-btn {
+  .contact-submit-btn {
     font-size: 0.9rem; /* Reduce button font size */
     padding: 8px; /* Adjust padding */
   }
