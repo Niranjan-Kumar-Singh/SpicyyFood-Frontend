@@ -1,16 +1,13 @@
-// src/main.jsx
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import './styles/Header.css'; // Import custom Header styles
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
+import './styles/Header.css'; // Custom CSS
 
-// Redux Setup
+// Redux setup
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-// Sample Reducer (Replace with your actual reducers)
 const initialState = {
   cart: {
     items: [
@@ -20,10 +17,8 @@ const initialState = {
   }
 };
 
-// Action Types
 const ADD_ITEM = 'ADD_ITEM';
 
-// Reducer Function
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_ITEM:

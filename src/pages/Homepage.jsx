@@ -1,13 +1,12 @@
 // src/pages/Home.jsx
 
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'; // To detect URL hash changes
+import React, { useEffect, useState, useRef } from 'react';
+import { useLocation, Link } from 'react-router-dom'; // To detect URL hash changes
 import { Row, Col, Container, Spinner, Button } from 'react-bootstrap';
 import CategoryCard from '../components/CategoryCard';
 import BestSellingCard from '../components/BestSellingCard';
 import heroImage from '../assets/images/hero/hero-image.jpg'; // Add a hero image
 import LazyLoad from 'react-lazyload'; // Import LazyLoad
-import { Link } from 'react-router-dom'; // Import Link for routing
 import { FaPizzaSlice, FaDrumstickBite } from 'react-icons/fa';
 import '../styles/Homepage.css'; // Import the custom CSS
 
@@ -123,15 +122,40 @@ function Home() {
     fetchBestSelling();
   }, []);
 
-  // Scroll to "Categories" section if the URL hash is "#categories"
+  // Scroll to section if there's a hash in the URL
   useEffect(() => {
-    if (location.hash === '#categories') {
-      const categorySection = document.getElementById('categories');
-      if (categorySection) {
-        categorySection.scrollIntoView({ behavior: 'smooth' });
+    const scrollToHash = () => {
+      if (location.hash) {
+        const section = document.getElementById(location.hash.slice(1));
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
       }
+    };
+
+    scrollToHash(); // Call the function on component mount
+
+    // Restore scroll position if coming back from another page
+    const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+    if (savedScrollPosition) {
+      window.scrollTo(0, parseInt(savedScrollPosition, 10));
+      sessionStorage.removeItem('scrollPosition'); // Clear after using
     }
-  }, [location.hash]);
+
+  }, [location]);
+
+  // Save scroll position before navigating away
+  const handleLinkClick = () => {
+    sessionStorage.setItem('scrollPosition', window.scrollY);
+  };
+
+  if (loadingCategories || loadingBestSelling) {
+    return (
+      <div className="text-center">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
   return (
     <Container fluid className="main-content mt-5 pt-5">
@@ -190,7 +214,10 @@ function Home() {
           <Row>
             {categories.map((category) => (
               <Col key={category.id} xs={6} sm={4} md={3} className="mb-4">
-                <Link to={`/category/${category.name.toLowerCase().replace(/\s+/g, '')}`}>
+                <Link
+                  to={`/category/${category.name.toLowerCase().replace(/\s+/g, '')}`}
+                  onClick={() => sessionStorage.setItem('scrollPosition', window.scrollY)}
+                >
                   <CategoryCard category={category} />
                 </Link>
               </Col>
