@@ -124,38 +124,17 @@ function Home() {
 
   // Scroll to section if there's a hash in the URL
   useEffect(() => {
-    const scrollToHash = () => {
-      if (location.hash) {
-        const section = document.getElementById(location.hash.slice(1));
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }
+    if (location.hash === '#categories') {
+      const section = document.getElementById('categories');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
       }
-    };
-
-    scrollToHash(); // Call the function on component mount
-
-    // Restore scroll position if coming back from another page
-    const savedScrollPosition = sessionStorage.getItem('scrollPosition');
-    if (savedScrollPosition) {
-      window.scrollTo(0, parseInt(savedScrollPosition, 10));
-      sessionStorage.removeItem('scrollPosition'); // Clear after using
+    } else if (sessionStorage.getItem('scrollPosition')) {
+      const scrollY = sessionStorage.getItem('scrollPosition');
+      window.scrollTo(0, scrollY); // Scroll to the saved position
+      sessionStorage.removeItem('scrollPosition'); // Clear the position after using it
     }
-
   }, [location]);
-
-  // Save scroll position before navigating away
-  const handleLinkClick = () => {
-    sessionStorage.setItem('scrollPosition', window.scrollY);
-  };
-
-  if (loadingCategories || loadingBestSelling) {
-    return (
-      <div className="text-center">
-        <Spinner animation="border" variant="primary" />
-      </div>
-    );
-  }
 
   return (
     <Container fluid className="main-content mt-5 pt-5">

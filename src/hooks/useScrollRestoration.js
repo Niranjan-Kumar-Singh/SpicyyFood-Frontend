@@ -3,33 +3,36 @@ import { useLocation } from 'react-router-dom';
 
 const useScrollRestoration = () => {
   const location = useLocation();
-  const scrollPositions = useRef({});
+  const scrollPositions = useRef({}); // Store scroll positions
 
   useEffect(() => {
-    // Save scroll position before navigating away
+    // Save current scroll position before navigation
     const saveScrollPosition = () => {
       scrollPositions.current[location.pathname] = window.scrollY;
     };
 
-    // Restore scroll position when coming back to the page
+    // Restore saved scroll position after navigating
     const restoreScrollPosition = () => {
       const savedPosition = scrollPositions.current[location.pathname];
       if (savedPosition !== undefined) {
-        window.scrollTo(0, savedPosition);
+        window.scrollTo(0, savedPosition); // Scroll to the saved position
+      } else {
+        window.scrollTo(0, 0); // Default to top if no position saved
       }
     };
 
-    // Save current position before navigation
+    // Save the scroll position when navigating away
     saveScrollPosition();
 
-    // Restore position when location changes
+    // Restore scroll position when the location changes
     restoreScrollPosition();
 
-    // Optional: Save position when the component unmounts (if using navigation libraries)
-    return () => saveScrollPosition();
+    return () => {
+      saveScrollPosition(); // Save before unmount if necessary
+    };
   }, [location]);
 
-  return null;
+  return null; // No UI, just logic
 };
 
 export default useScrollRestoration;
