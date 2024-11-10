@@ -80,54 +80,62 @@ const Account = () => {
 
     try {
       const res = await axios.put('http://localhost:5000/api/users/profile', userData, config);
-      toast.success('Profile updated successfully!');
+      toast.success('Profile updated successfully!');  // Success notification
       handleUpdateUser(res.data); // Update global user state
       setUserData(res.data); // Reflect updated data
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to update profile.');
+      toast.error(error.response?.data?.message || 'Failed to update profile.');  // Error notification
     } finally {
       setLoading(false);
     }
   };
 
   // Change password
-  const handleChangePassword = async (e) => {
-    e.preventDefault();
-    const { currentPassword, newPassword } = passwordData;
+const handleChangePassword = async (e) => {
+  e.preventDefault();
+  const { currentPassword, newPassword } = passwordData;
 
-    // Ensure both fields are filled
-    if (!currentPassword || !newPassword) {
-      toast.error('Both current and new passwords are required.');
-      return;
+  // Ensure both fields are filled
+  if (!currentPassword || !newPassword) {
+    toast.error('Both current and new passwords are required.');
+    return;
+  }
+
+  const config = getTokenConfig();
+  if (!config) return;
+  setPasswordLoading(true);
+
+  try {
+    // Send current and new password to backend
+    const res = await axios.put(
+      'http://localhost:5000/api/users/profile/change-password',
+      { currentPassword, newPassword },
+      config
+    );
+    
+    // Log the response to see its structure
+    console.log(res);
+
+    // Check if the response indicates success
+    if (res.status === 200 && res.data.success) {
+      toast.success('Password updated successfully');  // Success notification
+      setPasswordData({ currentPassword: '', newPassword: '' });
+
+      // Update token after password change
+      localStorage.setItem('token', res.data.token);
+    } else {
+      toast.error(res.data.message || 'Failed to update password');  // Error notification
     }
+  } catch (error) {
+    // Log the error to check what is being returned
+    console.error(error);
 
-    const config = getTokenConfig();
-    if (!config) return;
-    setPasswordLoading(true);
-
-    try {
-      // Send current and new password to backend
-      const res = await axios.put(
-        'http://localhost:5000/api/users/change-password',
-        { currentPassword, newPassword },
-        config
-      );
-
-      if (res.data.success) {
-        toast.success('Password updated successfully');
-        setPasswordData({ currentPassword: '', newPassword: '' });
-        
-        // Update token after password change
-        localStorage.setItem('token', res.data.token);
-      } else {
-        toast.error(res.data.message || 'Failed to update password');
-      }
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Error updating password.');
-    } finally {
-      setPasswordLoading(false);
-    }
-  };
+    // Check if the error response is defined and use it for the message
+    toast.error(error.response?.data?.message || 'Error updating password.');  // Error handling
+  } finally {
+    setPasswordLoading(false);
+  }
+};
 
   return (
     <div className="account-page-wrapper">

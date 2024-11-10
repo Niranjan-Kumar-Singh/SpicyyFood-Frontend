@@ -1,10 +1,12 @@
 // src/redux/rootReducer.js
 
 import { combineReducers } from 'redux';
-import userReducer from './userReducer'; // Import the userReducer
+import cartReducer from './slices/cartSlice'; // Import cart slice reducer
+import userReducer from './slices/userSlice'; // Import user slice reducer
 
 const rootReducer = combineReducers({
-  user: userReducer, // Combine the userReducer with others (if any)
+  cart: cartReducer,
+  user: userReducer,  // Add the user reducer here
 });
 
 export default rootReducer;

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, Button, Badge } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/cartSlice';
+import { addToCart } from '../redux/slices/cartSlice';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import '../styles/BestSellingCard.css';

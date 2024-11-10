@@ -1,37 +1,35 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../../constants/authConstants';
+import { login, logout, setLoading, setError } from '../slices/userSlice'; // Import actions from userSlice
+import { toast } from 'react-toastify';
 
-// Action to login
-export const login = (email, password) => async (dispatch) => {
+// Login action
+export const loginUser = (email, password) => async (dispatch) => {
+  dispatch(setLoading(true));
+
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-    };
+    const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+    const { user, token } = data;
 
-    const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password }, config);
+    // Dispatch the login action from the user slice
+    dispatch(login({ user, token }));
 
-    // Assuming the response contains both user info and token
-    const { token, user } = data;
+    // Store user and token in localStorage
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
 
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: { user, token },  // Dispatching both user and token
-    });
-
-    localStorage.setItem('userInfo', JSON.stringify(user));  // Store user info
-    localStorage.setItem('token', token);  // Store token
-
+    toast.success('Login successful!');
   } catch (error) {
-    dispatch({
-      type: LOGIN_FAIL,
-      payload: error.response?.data?.message || 'An error occurred. Please try again later.',
-    });
+    // Dispatch error handling
+    dispatch(setError(error.message || 'Login failed.'));
+    toast.error(error.message || 'Login failed.');
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 
-// Action to logout
-export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo');
-  localStorage.removeItem('token');  // Also remove token
-  dispatch({ type: LOGOUT });
+// Logout action
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
+  dispatch(logout());  // Dispatch logout from the user slice
 };

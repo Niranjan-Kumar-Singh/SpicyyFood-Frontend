@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const API_BASE_URL = 'http://localhost:5000/api/users'; // Set the backend base URL for all user-related endpoints
+
 // Helper function to get token from localStorage and configure headers
 const getTokenConfig = () => {
   const token = localStorage.getItem('token');
@@ -18,7 +20,7 @@ const getTokenConfig = () => {
 export const fetchUserProfile = async () => {
   try {
     const config = getTokenConfig();
-    const response = await axios.get('http://localhost:5000/api/users/profile', config);
+    const response = await axios.get(`${API_BASE_URL}/profile`, config);
     return response.data;
   } catch (error) {
     console.error('Error fetching user profile:', error);
@@ -30,7 +32,7 @@ export const fetchUserProfile = async () => {
 export const updateUserProfile = async (userData) => {
   try {
     const config = getTokenConfig();
-    const response = await axios.put('http://localhost:5000/api/users/profile', userData, config);
+    const response = await axios.put(`${API_BASE_URL}/profile`, userData, config);
     return response.data;
   } catch (error) {
     console.error('Error updating user profile:', error);
@@ -43,7 +45,7 @@ export const changePassword = async (passwordData) => {
   try {
     const config = getTokenConfig();
     const response = await axios.put(
-      'http://localhost:5000/api/users/change-password',
+      `${API_BASE_URL}/profile/change-password`,
       passwordData,
       config
     );

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import * as authConstants from '../constants/authConstants'; // Assuming constants are imported correctly
+import * as authConstants from '../constants/authConstants'; // Importing constants
 
 export const UserContext = createContext();
 
@@ -24,10 +24,11 @@ export const UserProvider = ({ children }) => {
     try {
       localStorage.setItem('user', JSON.stringify(userData)); // Save user to localStorage
       localStorage.setItem('token', userData.token); // Store token separately if needed
+      console.log(authConstants.LOGIN_SUCCESS); // Action dispatch placeholder
     } catch (error) {
       console.error("Error saving user to localStorage", error);
+      console.log(authConstants.LOGIN_FAIL); // Action dispatch placeholder
     }
-    // Optionally dispatch LOGIN_SUCCESS here if you want to use constants
   };
 
   // Handle user logout and remove user data from localStorage
@@ -36,21 +37,20 @@ export const UserProvider = ({ children }) => {
     try {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
+      console.log(authConstants.LOGOUT); // Action dispatch placeholder
     } catch (error) {
       console.error("Error removing user from localStorage", error);
     }
-    // Optionally dispatch LOGOUT action here if you use action types
   };
 
   // Handle user profile updates and persist the updated user data
   const handleUpdateUser = (updatedUserData) => {
-    setUser(updatedUserData); // Update global state with new user data
+    setUser(updatedUserData);
     try {
-      localStorage.setItem('user', JSON.stringify(updatedUserData)); // Persist updated user data in localStorage
+      localStorage.setItem('user', JSON.stringify(updatedUserData));
     } catch (error) {
       console.error("Error saving updated user to localStorage", error);
     }
-    // Optionally dispatch an action for user update
   };
 
   return (
@@ -60,6 +60,7 @@ export const UserProvider = ({ children }) => {
   );
 };
 
+// Hook for easier use of UserContext
 export const useUser = () => {
   return useContext(UserContext);
 };
