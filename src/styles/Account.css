@@ -1,52 +1,110 @@
 .account-page-wrapper {
-    min-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .account-page {
-    margin: 20px auto;
-    padding: 20px;
-  }
-  
-  .account-page h1 {
-    margin-bottom: 30px;
-    font-size: 2.5rem;
-    color: #fc6e36 !important;
-  }
-  
-  .account-card {
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .account-card .form-control {
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 1rem;
-  }
-  
-  .update-btn {
-    font-size: 1.2rem;
-    background-color: #3498db !important;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-weight: bold;
-  }
-  
-  @media (max-width: 768px) {
-    .account-page {
-      padding: 15px;
-    }
-  
-    .account-card {
-      padding: 20px;
-    }
-  
-    .update-btn {
-      font-size: 1rem;
-      padding: 8px 15px;
-    }
-  }
-  
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f7f7f7, #e3e3e3);
+  padding: 20px;
+}
+
+.account-page {
+  max-width: 600px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 40px;
+  text-align: center;
+}
+
+.account-page h2 {
+  font-size: 2.5rem;
+  color: #fc6e36;
+  margin-bottom: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+.account-page h3 {
+  font-size: 1.5rem;
+  color: #555;
+  margin: 20px 0;
+}
+
+.account-card {
+  border-radius: 15px;
+  background-color: #ffffff;
+  padding: 30px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+  text-align: left;
+}
+
+.account-card .form-group {
+  margin-bottom: 20px;
+}
+
+.account-card .form-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.account-card .form-control {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.3s;
+}
+
+.account-card .form-control:focus {
+  border-color: #fc6e36;
+  outline: none;
+  box-shadow: 0 0 8px rgba(252, 110, 54, 0.2);
+}
+
+.update-btn {
+  font-size: 1.2rem;
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.update-btn:hover {
+  background-color: #2980b9;
+}
+
+.update-btn:active {
+  transform: scale(0.95);
+}
+
+.success-message, .error-message {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.error-message {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}

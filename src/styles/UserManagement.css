@@ -1,0 +1,89 @@
+/* UserManagement.css */
+
+/* Container styling */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .admin-dashboard {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Table styling */
+  .table-container {
+    margin-top: 20px;
+  }
+  
+  .table {
+    border: 1px solid #ddd;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Button styling */
+  button.btn-warning {
+    background-color: #ffcc00;
+    border: none;
+    color: #fff;
+  }
+  
+  button.btn-warning:hover {
+    background-color: #e6b800;
+  }
+  
+  button.btn-danger {
+    background-color: #d9534f;
+    border: none;
+    color: #fff;
+  }
+  
+  button.btn-danger:hover {
+    background-color: #c9302c;
+  }
+  
+  /* Modal styling */
+  .modal-header {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    justify-content: space-between;
+  }
+  
+  /* Spinner styling */
+  .spinner-border {
+    margin-right: 5px;
+  }
+  

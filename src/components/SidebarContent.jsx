@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FaShoppingCart, FaUserAlt, FaListAlt, FaInfoCircle, FaEnvelope,
   FaHandsHelping, FaFileAlt, FaSignOutAlt, FaCreditCard, FaCog, FaHeart
 } from 'react-icons/fa';
 import LogoutModal from './LogOut'; // Import the logout modal
+import { useUser } from '../context/UserContext'; // Import useUser to access handleLogout
 
-function SidebarContent({ handleClose }) {
+function SidebarContent({ handleClose, isLoggedIn, onLogout, isAdmin }) {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const { handleLogout } = useUser(); // Get handleLogout from context
+  const navigate = useNavigate();
 
   const handleLogoutClick = () => {
     setShowLogoutModal(true); // Show modal when clicking logout
@@ -19,8 +22,10 @@ function SidebarContent({ handleClose }) {
   };
 
   const handleConfirmLogout = () => {
-    setShowLogoutModal(false); // Close the modal
-    handleClose(); // Now close the sidebar after logout confirmation
+    handleLogout(); // Clear session in context
+    setShowLogoutModal(false); // Close modal
+    handleClose(); // Close sidebar
+    navigate('/'); // Redirect to homepage after logout
   };
 
   return (
@@ -38,6 +43,18 @@ function SidebarContent({ handleClose }) {
         <Nav.Link as={Link} to="/account" onClick={handleClose} className="nav-item">
           <FaUserAlt className="me-2" /> My Account
         </Nav.Link>
+
+        {isAdmin && (
+          <>
+            <div className="sidebar-divider"></div>
+            <Nav.Link as={Link} to="/manage-orders" onClick={handleClose} className="nav-item">
+              <FaShoppingCart className="me-2" /> Manage Orders
+            </Nav.Link>
+            <Nav.Link as={Link} to="/manage-users" onClick={handleClose} className="nav-item">
+              <FaUserAlt className="me-2" /> Manage Users
+            </Nav.Link>
+          </>
+        )}
 
         <div className="sidebar-divider"></div>
 
@@ -65,15 +82,23 @@ function SidebarContent({ handleClose }) {
         <Nav.Link as={Link} to="/legal" onClick={handleClose} className="nav-item">
           <FaFileAlt className="me-2" /> Legal
         </Nav.Link>
-        <Nav.Link onClick={handleLogoutClick} className="nav-item logout-link">
-          <FaSignOutAlt className="me-2" /> Logout
-        </Nav.Link>
+
+        {/* Show either Login or Logout based on isLoggedIn */}
+        {isLoggedIn ? (
+          <Nav.Link onClick={handleLogoutClick} className="nav-item logout-link">
+            <FaSignOutAlt className="me-2" /> Logout
+          </Nav.Link>
+        ) : (
+          <Nav.Link as={Link} to="/login" onClick={handleClose} className="nav-item">
+            <FaSignOutAlt className="me-2" /> Login
+          </Nav.Link>
+        )}
       </Nav>
 
       {/* Render the Logout Modal */}
       {showLogoutModal && (
-        <LogoutModal 
-          show={showLogoutModal} 
+        <LogoutModal
+          show={showLogoutModal}
           handleClose={handleCloseModal}
           handleConfirm={handleConfirmLogout} // Pass confirm logout handler
         />

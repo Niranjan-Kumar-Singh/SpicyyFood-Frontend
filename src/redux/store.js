@@ -1,10 +1,10 @@
 // src/redux/store.js
 
-import { createStore, combineReducers } from 'redux';
-import { cartReducer } from './reducers/cartReducer';
+import { configureStore } from '@reduxjs/toolkit'; // Import from Redux Toolkit
+import rootReducer from './rootReducer'; // Import the rootReducer (adjust path if necessary)
 
-const rootReducer = combineReducers({
-  cart: cartReducer, // Include the cart reducer
+const store = configureStore({
+  reducer: rootReducer, // Pass the rootReducer (which includes all the slices)
 });
 
-export const store = createStore(rootReducer);
+export default store;
