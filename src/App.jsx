@@ -1,13 +1,21 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { UserProvider } from './context/UserContext'; // Import UserProvider
+
+// Components
 import Header from './components/Header';
-import Homepage from './pages/Homepage';
-import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 import ScrollToTop from './hooks/ScrollToTop';
 import ScrollRestoration from './hooks/useScrollRestoration';
+import NotFound from './pages/NotFound';
+import LoginPage from './pages/LoginPage';
+import AdminRoutes from './admin/AdminRoutes'; // Adjust the path if needed
+import ProtectedRoute from './components/ProtectedRoute';
 
-// Lazy load multiple routes
+// Lazy load pages
+const Homepage = React.lazy(() => import('./pages/Homepage'));
 const CategoryPage = React.lazy(() => import('./pages/CategoryPage'));
 const Account = React.lazy(() => import('./pages/Account'));
 const Favorite = React.lazy(() => import('./pages/Favorites'));
@@ -35,43 +43,50 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+      return <h1 style={{ color: 'red', textAlign: 'center' }}>Something went wrong. Please try again later.</h1>;
     }
-    return this.props.children; 
+    return this.props.children;
   }
 }
 
 function App() {
   return (
-    <Router>
-      <ScrollRestoration />
-      <ScrollToTop />
-      <Header />
-      <main className="flex-grow-1" role="main">
-        <ErrorBoundary>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/category/:name" element={<CategoryPage />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/favorites" element={<Favorite />} />
-              <Route path="/help" element={<HelpCenter />} />
-              <Route path="/legal" element={<Legal />} />
-              <Route path="/notifications" element={<Notification />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
-      </main>
-      <Footer />
-    </Router>
+    <UserProvider> {/* Wrap with UserProvider to provide user context */}
+      <Router>
+        <ScrollRestoration />
+        <ScrollToTop />
+        <Header />
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+        
+        <main className="flex-grow-1" role="main">
+          <ErrorBoundary>
+            <Suspense fallback={<div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/category/:name" element={<CategoryPage />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/favorites" element={<Favorite />} />
+                <Route path="/help" element={<HelpCenter />} />
+                <Route path="/legal" element={<Legal />} />
+                <Route path="/notifications" element={<Notification />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/admin/*" element={<AdminRoutes />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
+        </main>
+        
+        <Footer />
+      </Router>
+    </UserProvider>
   );
 }
 

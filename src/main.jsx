@@ -4,37 +4,17 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
 import './styles/Header.css'; // Custom CSS
 
-// Redux setup
+// Redux setup with Redux Toolkit
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from '../src/redux/cartSlice'; // Import the cart slice
 
-const initialState = {
-  cart: {
-    items: [
-      { id: 1, name: 'Pizza', quantity: 2 },
-      { id: 2, name: 'Burger', quantity: 1 }
-    ]
-  }
-};
-
-const ADD_ITEM = 'ADD_ITEM';
-
-function rootReducer(state = initialState, action) {
-  switch (action.type) {
-    case ADD_ITEM:
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          items: [...state.cart.items, action.payload]
-        }
-      };
-    default:
-      return state;
-  }
-}
-
-const store = createStore(rootReducer);
+// Set up the Redux store
+const store = configureStore({
+  reducer: {
+    cart: cartReducer, // Add the cart slice to the store
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

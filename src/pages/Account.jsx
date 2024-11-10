@@ -1,104 +1,231 @@
-import React, { useState } from 'react';
-import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Button, Form, Spinner } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import { UserContext } from '../context/UserContext';
+import axios from 'axios';
 import '../styles/Account.css';
 
-function Account() {
-  const [accountInfo, setAccountInfo] = useState({
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    password: '',
-    phone: '9876543210',
-    address: '123, Main Street, City, Country'
+const Account = () => {
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    phone: '',
   });
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { user, handleUpdateUser } = useContext(UserContext);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setAccountInfo({ ...accountInfo, [name]: value });
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  // Get token config for authentication headers
+  const getTokenConfig = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error("Authorization token missing. Please log in again.");
+      return null;
+    }
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
   };
 
-  const handleSubmit = (e) => {
+  // Fetch user profile
+  const fetchUserProfile = async () => {
+    const config = getTokenConfig();
+    if (!config) return;
+
+    try {
+      const res = await axios.get('http://localhost:5000/api/users/profile', config);
+      setUserData(res.data);
+    } catch (error) {
+      const message =
+        error.response?.status === 401
+          ? 'Session expired. Please log in again.'
+          : 'Failed to fetch user profile.';
+      toast.error(message);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  // Handle profile input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  // Handle password input changes
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData({ ...passwordData, [name]: value });
+  };
+
+  // Update profile
+  const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    // Logic to handle form submission
-    alert('Account information updated successfully!');
+    const config = getTokenConfig();
+    if (!config) return;
+
+    setLoading(true);
+
+    try {
+      const res = await axios.put('http://localhost:5000/api/users/profile', userData, config);
+      toast.success('Profile updated successfully!');
+      handleUpdateUser(res.data); // Update global user state
+      setUserData(res.data); // Reflect updated data
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to update profile.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Change password
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    const { currentPassword, newPassword } = passwordData;
+
+    // Ensure both fields are filled
+    if (!currentPassword || !newPassword) {
+      toast.error('Both current and new passwords are required.');
+      return;
+    }
+
+    const config = getTokenConfig();
+    if (!config) return;
+    setPasswordLoading(true);
+
+    try {
+      // Send current and new password to backend
+      const res = await axios.put(
+        'http://localhost:5000/api/users/change-password',
+        { currentPassword, newPassword },
+        config
+      );
+
+      if (res.data.success) {
+        toast.success('Password updated successfully');
+        setPasswordData({ currentPassword: '', newPassword: '' });
+        
+        // Update token after password change
+        localStorage.setItem('token', res.data.token);
+      } else {
+        toast.error(res.data.message || 'Failed to update password');
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Error updating password.');
+    } finally {
+      setPasswordLoading(false);
+    }
   };
 
   return (
     <div className="account-page-wrapper">
-      <Container className="account-page mt-5 pt-5">
-        <h1 className="text-center mb-4">My Account</h1>
+      <div className="account-page">
+        <h2>Account Details</h2>
 
-        <Row className="justify-content-center">
-          <Col md={6}>
-            <Card className="account-card p-4">
-              <Card.Body>
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="name"
-                      value={accountInfo.name}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Form.Group>
+        {/* Profile Update Form */}
+        <Form onSubmit={handleUpdateProfile}>
+          <Form.Group controlId="userName" className="mb-3">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={userData.name}
+              onChange={handleChange}
+              required
+              aria-label="Name"
+            />
+          </Form.Group>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      value={accountInfo.email}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Form.Group>
+          <Form.Group controlId="userEmail" className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={userData.email}
+              onChange={handleChange}
+              required
+              aria-label="Email"
+            />
+          </Form.Group>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      value={accountInfo.password}
-                      onChange={handleInputChange}
-                      placeholder="Enter new password"
-                    />
-                  </Form.Group>
+          <Form.Group controlId="userPhone" className="mb-3">
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              type="tel"
+              name="phone"
+              value={userData.phone}
+              onChange={handleChange}
+              aria-label="Phone"
+            />
+          </Form.Group>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="phone"
-                      value={accountInfo.phone}
-                      onChange={handleInputChange}
-                    />
-                  </Form.Group>
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? (
+              <>
+                <Spinner animation="border" variant="light" size="sm" role="status" aria-hidden="true" />
+                {' '}Updating...
+              </>
+            ) : (
+              'Update Profile'
+            )}
+          </Button>
+        </Form>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={3}
-                      name="address"
-                      value={accountInfo.address}
-                      onChange={handleInputChange}
-                    />
-                  </Form.Group>
+        <hr />
 
-                  <div className="text-center">
-                    <Button type="submit" className="update-btn">
-                      Update Information
-                    </Button>
-                  </div>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+        {/* Change Password Form */}
+        <h3>Change Password</h3>
+        <Form onSubmit={handleChangePassword}>
+          <Form.Group controlId="currentPassword" className="mb-3">
+            <Form.Label>Current Password</Form.Label>
+            <Form.Control
+              type={showPassword ? 'text' : 'password'}
+              name="currentPassword"
+              value={passwordData.currentPassword}
+              onChange={handlePasswordChange}
+              required
+              aria-label="Current Password"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="newPassword" className="mb-3">
+            <Form.Label>New Password</Form.Label>
+            <Form.Control
+              type={showPassword ? 'text' : 'password'}
+              name="newPassword"
+              value={passwordData.newPassword}
+              onChange={handlePasswordChange}
+              required
+              aria-label="New Password"
+            />
+          </Form.Group>
+
+          <Button variant="primary" type="submit" disabled={passwordLoading}>
+            {passwordLoading ? (
+              <>
+                <Spinner animation="border" variant="light" size="sm" role="status" aria-hidden="true" />
+                {' '}Updating...
+              </>
+            ) : (
+              'Change Password'
+            )}
+          </Button>
+        </Form>
+      </div>
     </div>
   );
-}
+};
 
 export default Account;

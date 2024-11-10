@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import {
-  FaBars, FaBell, FaUserCircle, FaShoppingCart, FaSearch, FaCheckCircle,
-  FaExclamationCircle, FaHeart, FaCog
+  FaBars, FaBell, FaUserCircle, FaShoppingCart, FaSearch,
+  FaCheckCircle, FaExclamationCircle, FaHeart, FaCog
 } from 'react-icons/fa';
 import { Navbar, Nav, Form, FormControl, Button, Container, Dropdown, Badge } from 'react-bootstrap';
 import Sidebar from './Sidebar';
 import { useSelector } from 'react-redux';
+import { useUser } from '../context/UserContext'; // Ensure this path is correct
 import '../styles/Header.css';
 
 function Header() {
+  const { user } = useUser(); // Get user from context
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
   const [showSidebar, setShowSidebar] = useState(false);
   const [notifications, setNotifications] = useState([
     { id: 1, type: 'info', message: "Your order #123 has been delivered.", read: false },
     { id: 2, type: 'promo', message: "20% off on desserts today!", read: false },
     { id: 3, type: 'update', message: "New menu items available.", read: false },
-    { id: 4, type: 'info', message: "Your order #123 has been delivered.", read: false },
-    { id: 5, type: 'promo', message: "20% off on desserts today!", read: false },
-    { id: 6, type: 'update', message: "New menu items available.", read: false },
   ]);
 
   const cart = useSelector((state) => state.cart || { items: [] });
@@ -43,6 +43,14 @@ function Header() {
         return <FaExclamationCircle className="notification-icon text-success me-2" />;
       default:
         return <FaBell className="notification-icon me-2" />;
+    }
+  };
+
+  const handleUserClick = () => {
+    if (user) {
+      navigate('/account'); // Redirect to account page if logged in
+    } else {
+      navigate('/login'); // Redirect to login page if not logged in
     }
   };
 
@@ -113,9 +121,9 @@ function Header() {
               </Dropdown.Menu>
             </Dropdown>
 
-            <Nav.Link as={NavLink} to="/account" className="me-3 username-link">
+            <Nav.Link onClick={handleUserClick} className="me-3 username-link">
               <FaUserCircle size={24} className="me-1" />
-              <span className='fw-bold'>John Doe</span>
+              <span className='fw-bold'>{user ? user.name : 'Login'}</span> {/* Display user name or "Login" */}
             </Nav.Link>
 
             <Nav.Link as={NavLink} to="/cart" className="position-relative me-3">
@@ -127,7 +135,6 @@ function Header() {
               )}
             </Nav.Link>
 
-            {/* Additional Navbar Items */}
             <Nav.Link as={NavLink} to="/favorites" className="me-3 favorite-link">
               <FaHeart size={22} className='me-1' />
               <span className='fw-bold'>Favorites</span>
