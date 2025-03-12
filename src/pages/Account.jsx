@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Form, Spinner } from 'react-bootstrap';
+import { Button, Form, Spinner, InputGroup } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../styles/Account.css';
 
 const Account = () => {
@@ -17,12 +18,10 @@ const Account = () => {
   });
   const [loading, setLoading] = useState(false);
   const [passwordLoading, setPasswordLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const { user, handleUpdateUser } = useContext(UserContext);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const { handleUpdateUser } = useContext(UserContext);
 
-  const togglePasswordVisibility = () => setShowPassword(!showPassword);
-
-  // Get token config for authentication headers
   const getTokenConfig = () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -37,19 +36,14 @@ const Account = () => {
     };
   };
 
-  // Fetch user profile
   const fetchUserProfile = async () => {
     const config = getTokenConfig();
     if (!config) return;
-
     try {
       const res = await axios.get('http://localhost:5000/api/users/profile', config);
       setUserData(res.data);
     } catch (error) {
-      const message =
-        error.response?.status === 401
-          ? 'Session expired. Please log in again.'
-          : 'Failed to fetch user profile.';
+      const message = error.response?.status === 401 ? 'Session expired. Please log in again.' : 'Failed to fetch user profile.';
       toast.error(message);
     }
   };
@@ -58,177 +52,100 @@ const Account = () => {
     fetchUserProfile();
   }, []);
 
-  // Handle profile input changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  // Handle password input changes
   const handlePasswordChange = (e) => {
-    const { name, value } = e.target;
-    setPasswordData({ ...passwordData, [name]: value });
+    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
   };
 
-  // Update profile
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     const config = getTokenConfig();
     if (!config) return;
-
     setLoading(true);
-
     try {
       const res = await axios.put('http://localhost:5000/api/users/profile', userData, config);
-      toast.success('Profile updated successfully!');  // Success notification
-      handleUpdateUser(res.data); // Update global user state
-      setUserData(res.data); // Reflect updated data
+      toast.success('Profile updated successfully!');
+      handleUpdateUser(res.data);
+      setUserData(res.data);
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to update profile.');  // Error notification
+      toast.error(error.response?.data?.message || 'Failed to update profile.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Change password
-const handleChangePassword = async (e) => {
-  e.preventDefault();
-  const { currentPassword, newPassword } = passwordData;
-
-  // Ensure both fields are filled
-  if (!currentPassword || !newPassword) {
-    toast.error('Both current and new passwords are required.');
-    return;
-  }
-
-  const config = getTokenConfig();
-  if (!config) return;
-  setPasswordLoading(true);
-
-  try {
-    // Send current and new password to backend
-    const res = await axios.put(
-      'http://localhost:5000/api/users/profile/change-password',
-      { currentPassword, newPassword },
-      config
-    );
-    
-    // Log the response to see its structure
-    console.log(res);
-
-    // Check if the response indicates success
-    if (res.status === 200 && res.data.success) {
-      toast.success('Password updated successfully');  // Success notification
-      setPasswordData({ currentPassword: '', newPassword: '' });
-
-      // Update token after password change
-      localStorage.setItem('token', res.data.token);
-    } else {
-      toast.error(res.data.message || 'Failed to update password');  // Error notification
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    if (!passwordData.currentPassword || !passwordData.newPassword) {
+      toast.error('Both current and new passwords are required.');
+      return;
     }
-  } catch (error) {
-    // Log the error to check what is being returned
-    console.error(error);
-
-    // Check if the error response is defined and use it for the message
-    toast.error(error.response?.data?.message || 'Error updating password.');  // Error handling
-  } finally {
-    setPasswordLoading(false);
-  }
-};
+    const config = getTokenConfig();
+    if (!config) return;
+    setPasswordLoading(true);
+    try {
+      const res = await axios.put('http://localhost:5000/api/users/profile/change-password', passwordData, config);
+      if (res.status === 200 && res.data.message === "Password updated successfully") {
+        toast.success('Password updated successfully');
+        setPasswordData({ currentPassword: '', newPassword: '' });
+        localStorage.setItem('token', res.data.token);
+      } else {
+        toast.error(res.data.message || 'Failed to update password');
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Error updating password.');
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
 
   return (
     <div className="account-page-wrapper">
       <div className="account-page">
         <h2>Account Details</h2>
-
-        {/* Profile Update Form */}
         <Form onSubmit={handleUpdateProfile}>
           <Form.Group controlId="userName" className="mb-3">
             <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              value={userData.name}
-              onChange={handleChange}
-              required
-              aria-label="Name"
-            />
+            <Form.Control type="text" name="name" value={userData.name} onChange={handleChange} required />
           </Form.Group>
-
           <Form.Group controlId="userEmail" className="mb-3">
             <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={userData.email}
-              onChange={handleChange}
-              required
-              aria-label="Email"
-            />
+            <Form.Control type="email" name="email" value={userData.email} onChange={handleChange} required />
           </Form.Group>
-
           <Form.Group controlId="userPhone" className="mb-3">
             <Form.Label>Phone</Form.Label>
-            <Form.Control
-              type="tel"
-              name="phone"
-              value={userData.phone}
-              onChange={handleChange}
-              aria-label="Phone"
-            />
+            <Form.Control type="tel" name="phone" value={userData.phone} onChange={handleChange} />
           </Form.Group>
-
           <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? (
-              <>
-                <Spinner animation="border" variant="light" size="sm" role="status" aria-hidden="true" />
-                {' '}Updating...
-              </>
-            ) : (
-              'Update Profile'
-            )}
+            {loading ? <Spinner animation="border" size="sm" /> : 'Update Profile'}
           </Button>
         </Form>
-
         <hr />
-
-        {/* Change Password Form */}
         <h3>Change Password</h3>
         <Form onSubmit={handleChangePassword}>
           <Form.Group controlId="currentPassword" className="mb-3">
             <Form.Label>Current Password</Form.Label>
-            <Form.Control
-              type={showPassword ? 'text' : 'password'}
-              name="currentPassword"
-              value={passwordData.currentPassword}
-              onChange={handlePasswordChange}
-              required
-              aria-label="Current Password"
-            />
+            <InputGroup>
+              <Form.Control type={showCurrentPassword ? 'text' : 'password'} name="currentPassword" value={passwordData.currentPassword} onChange={handlePasswordChange} required />
+              <Button variant="outline-secondary" onClick={() => setShowCurrentPassword(!showCurrentPassword)}>
+                {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
+              </Button>
+            </InputGroup>
           </Form.Group>
-
           <Form.Group controlId="newPassword" className="mb-3">
             <Form.Label>New Password</Form.Label>
-            <Form.Control
-              type={showPassword ? 'text' : 'password'}
-              name="newPassword"
-              value={passwordData.newPassword}
-              onChange={handlePasswordChange}
-              required
-              aria-label="New Password"
-            />
+            <InputGroup>
+              <Form.Control type={showNewPassword ? 'text' : 'password'} name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange} required />
+              <Button variant="outline-secondary" onClick={() => setShowNewPassword(!showNewPassword)}>
+                {showNewPassword ? <FaEyeSlash /> : <FaEye />}
+              </Button>
+            </InputGroup>
           </Form.Group>
-
           <Button variant="primary" type="submit" disabled={passwordLoading}>
-            {passwordLoading ? (
-              <>
-                <Spinner animation="border" variant="light" size="sm" role="status" aria-hidden="true" />
-                {' '}Updating...
-              </>
-            ) : (
-              'Change Password'
-            )}
+            {passwordLoading ? <Spinner animation="border" size="sm" /> : 'Change Password'}
           </Button>
         </Form>
       </div>

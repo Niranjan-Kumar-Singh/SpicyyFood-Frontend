@@ -56,7 +56,19 @@ function App() {
         <ScrollRestoration />
         <ScrollToTop />
         <Header />
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"  // Try setting to "light"
+          toastClassName="custom-toast"
+        />
         
         <main className="flex-grow-1" role="main">
           <ErrorBoundary>

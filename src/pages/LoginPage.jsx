@@ -4,59 +4,52 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/LoginPage.css';
-import { useUser } from '../context/UserContext'; // Import useUser
+import { useUser } from '../context/UserContext';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { setUser } = useUser(); // Access setUser from context
+  const { setUser } = useUser();
 
-  // You could add simple email validation on form submission
-const handleLogin = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  // Basic email format validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    toast.error("Please enter a valid email.");
-    setLoading(false);
-    return;
-  }
-
-  // Ensure password is not empty
-  if (!password) {
-    toast.error("Please enter your password.");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    const response = await axios.post('http://localhost:5000/api/auth/login', {
-      email,
-      password,
-    });
-
-    const { token, name, isAdmin } = response.data;
-
-    localStorage.setItem('token', token);
-    const userData = { name, isAdmin, token };
-    setUser(userData);
-
-    if (isAdmin) {
-      navigate('/admin');
-    } else {
-      navigate('/');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email.");
+      setLoading(false);
+      return;
     }
-  } catch (error) {
-    toast.error(error.response?.data?.message || 'Invalid email or password.');
-    console.error('Login failed:', error.response ? error.response.data : error);
-  } finally {
-    setLoading(false);
-  }
-};
+
+    if (!password) {
+      toast.error("Please enter your password.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+
+      const { token, name, isAdmin } = response.data;
+      localStorage.setItem('token', token);
+      setUser({ name, isAdmin, token });
+
+      navigate(isAdmin ? '/admin' : '/');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Invalid email or password.');
+      console.error('Login failed:', error.response ? error.response.data : error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="login-container">
@@ -71,14 +64,22 @@ const handleLogin = async (e) => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group password-container">
           <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="password-input-wrapper">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <span
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </div>
         <button type="submit" className="login-button" disabled={loading}>
           {loading ? 'Logging in...' : 'Login'}
