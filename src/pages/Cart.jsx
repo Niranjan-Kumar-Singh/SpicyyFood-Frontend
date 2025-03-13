@@ -16,10 +16,12 @@ const CartPage = () => {
       const response = await axios.get("http://localhost:5000/api/cart", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
-      setCartItems(response.data.items);
+
+      setCartItems(response.data?.items || []);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching cart items:", error);
+      setLoading(false);
     }
   };
 
@@ -35,9 +37,12 @@ const CartPage = () => {
       console.error("Error increasing item quantity:", error);
     }
   };
-  
+
   const handleDecreaseQuantity = async (itemId, currentQuantity) => {
-    if (currentQuantity === 1) return;
+    if (currentQuantity === 1) {
+      handleRemoveItem(itemId);
+      return;
+    }
     try {
       await axios.put(
         `http://localhost:5000/api/cart/${itemId}`,
@@ -48,7 +53,7 @@ const CartPage = () => {
     } catch (error) {
       console.error("Error decreasing item quantity:", error);
     }
-  };  
+  };
 
   const handleRemoveItem = async (itemId) => {
     try {
@@ -62,9 +67,9 @@ const CartPage = () => {
   };
 
   const calculateTotalAmount = () => {
-    return cartItems.reduce((total, item) => {
-      return total + item.item.price * item.quantity;
-    }, 0).toFixed(2);
+    return cartItems
+      .reduce((total, item) => total + item.item.price * item.quantity, 0)
+      .toFixed(2);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -73,7 +78,7 @@ const CartPage = () => {
     <div className="cart-page-wrapper">
       <div className="cart-page">
         <h1>Shopping Cart</h1>
-        
+
         {cartItems.length === 0 ? (
           <div className="empty-cart">
             <h2>Your cart is empty</h2>

@@ -9,16 +9,9 @@ import heroImage from '../assets/images/hero/hero-image.jpg'; // Add a hero imag
 import LazyLoad from 'react-lazyload'; // Import LazyLoad
 import { FaPizzaSlice, FaDrumstickBite } from 'react-icons/fa';
 import '../styles/Homepage.css'; // Import the custom CSS
+import axios from 'axios';
 
 // Category and best selling item images
-import coffeeImage from '../assets/images/Categories/coffee.jpeg';
-import noodlesImage from '../assets/images/Categories/noodles.jpeg';
-import pizzaImage from '../assets/images/Categories/pizza.jpeg';
-import burgerImage from '../assets/images/Categories/burger.jpeg';
-import chickenImage from '../assets/images/Categories/chicken.jpeg';
-import kebabImage from '../assets/images/Categories/kebab.jpeg';
-import iceCreamImage from '../assets/images/Categories/ice_cream.jpeg';
-import coldDrinkImage from '../assets/images/Categories/cold_drink.jpeg';
 import cortadoImage from '../assets/images/coffee/Cortado.jpg';
 import espressoImage from '../assets/images/coffee/Espresso Con Panna.jpg';
 import bbqChickenImage from '../assets/images/pizza/BBQ Chicken.webp';
@@ -83,20 +76,18 @@ function Home() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      // Mock data for categories
-      const mockCategories = [
-        { id: 1, name: 'Coffee', image: coffeeImage },
-        { id: 2, name: 'Noodles', image: noodlesImage },
-        { id: 3, name: 'Pizza', image: pizzaImage },
-        { id: 4, name: 'Burger', image: burgerImage },
-        { id: 5, name: 'Chicken', image: chickenImage },
-        { id: 6, name: 'Kebab', image: kebabImage },
-        { id: 7, name: 'Ice Cream', image: iceCreamImage },
-        { id: 8, name: 'Cold Drink', image: coldDrinkImage },
-      ];
-      setCategories(mockCategories);
-      setLoadingCategories(false);
+      try {
+        const response = await axios.get('http://localhost:5000/api/categories/names');
+        console.log('Fetched Categories:', response.data); // Debugging log
+        setCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoadingCategories(false);
+      }
     };
+    
+    fetchCategories();
 
     const fetchBestSelling = async () => {
       // Mock data for best selling items
@@ -194,7 +185,7 @@ function Home() {
             {categories.map((category) => (
               <Col key={category.id} xs={6} sm={4} md={3} className="mb-4">
                 <Link
-                  to={`/category/${category.name.toLowerCase().replace(/\s+/g, '')}`}
+                  to={`/category/${category.id}`} 
                   onClick={() => sessionStorage.setItem('scrollPosition', window.scrollY)}
                 >
                   <CategoryCard category={category} />

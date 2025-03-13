@@ -1,5 +1,3 @@
-// src/components/Product.jsx
-
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
@@ -15,7 +13,7 @@ function Product({ product }) {
     <div className="product">
       <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
-      <p>${product.price}</p>
+      <p>₹{product.price.toFixed(2)}</p>
       <button onClick={handleAddToCart}>Add to Cart</button>
     </div>
   );

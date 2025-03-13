@@ -75,7 +75,7 @@ function App() {
             <Suspense fallback={<div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>}>
               <Routes>
                 <Route path="/" element={<Homepage />} />
-                <Route path="/category/:name" element={<CategoryPage />} />
+                <Route path="/category/:categoryId" element={<CategoryPage />} />
                 <Route path="/account" element={<Account />} />
                 <Route path="/favorites" element={<Favorite />} />
                 <Route path="/help" element={<HelpCenter />} />

@@ -34,7 +34,7 @@ function CategoryCard({ category }) {
 
 CategoryCard.propTypes = {
   category: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     name: PropTypes.string,
     image: PropTypes.string,
   }).isRequired,
