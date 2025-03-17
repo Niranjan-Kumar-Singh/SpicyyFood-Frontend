@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCart } from '../redux/slices/cartSlice';
 import {
   FaBars, FaBell, FaUserCircle, FaShoppingCart, FaSearch,
   FaCheckCircle, FaExclamationCircle, FaHeart, FaCog
 } from 'react-icons/fa';
 import { Navbar, Nav, Form, FormControl, Button, Container, Dropdown, Badge } from 'react-bootstrap';
 import Sidebar from './Sidebar';
-import { useSelector } from 'react-redux';
 import { useUser } from '../context/UserContext'; // Ensure this path is correct
 import '../styles/Header.css';
 
 function Header() {
   const { user } = useUser(); // Get user from context
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
   const [notifications, setNotifications] = useState([
     { id: 1, type: 'info', message: "Your order #123 has been delivered.", read: false },
@@ -20,8 +22,14 @@ function Header() {
     { id: 3, type: 'update', message: "New menu items available.", read: false },
   ]);
 
+  useEffect(() => {
+    dispatch(fetchCart()); // Fetch cart when header loads
+  }, [dispatch]);
+
   const cart = useSelector((state) => state.cart || { items: [] });
-  const cartItemCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+  const cartItemCount = Array.isArray(cart.items)
+    ? cart.items.reduce((total, item) => total + item.quantity, 0)
+    : 0;
 
   const toggleSidebar = () => setShowSidebar(!showSidebar);
 
@@ -47,11 +55,7 @@ function Header() {
   };
 
   const handleUserClick = () => {
-    if (user) {
-      navigate('/account'); // Redirect to account page if logged in
-    } else {
-      navigate('/login'); // Redirect to login page if not logged in
-    }
+    navigate(user ? '/account' : '/login');
   };
 
   return (
@@ -123,7 +127,7 @@ function Header() {
 
             <Nav.Link onClick={handleUserClick} className="me-3 username-link">
               <FaUserCircle size={24} className="me-1" />
-              <span className='fw-bold'>{user ? user.name : 'Login'}</span> {/* Display user name or "Login" */}
+              <span className='fw-bold'>{user ? user.name : 'Login'}</span>
             </Nav.Link>
 
             <Nav.Link as={NavLink} to="/cart" className="position-relative me-3">

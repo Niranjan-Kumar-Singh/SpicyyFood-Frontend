@@ -25,7 +25,7 @@ const Notification = React.lazy(() => import('./pages/Notifications'));
 const Orders = React.lazy(() => import('./pages/Orders'));
 const Payment = React.lazy(() => import('./pages/PaymentMethods'));
 const Settings = React.lazy(() => import('./pages/Settings'));
-const Cart = React.lazy(() => import('./pages/Cart'));
+const CartPage = React.lazy(() => import('./pages/CartPage')); // Updated
 const Profile = React.lazy(() => import('./pages/Profile'));
 const AboutUs = React.lazy(() => import('./pages/AboutUs'));
 const Contact = React.lazy(() => import('./pages/Contact'));
@@ -66,7 +66,7 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light"  // Try setting to "light"
+          theme="light"
           toastClassName="custom-toast"
         />
         
@@ -84,7 +84,7 @@ function App() {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/cart" element={<Cart />} />
+                <Route path="/cart" element={<CartPage />} /> {/* Updated */}
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<Contact />} />

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/cartSlice';
+import { addToCart } from '../redux/slices/cartSlice';
 
 function Product({ product }) {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product));
+    dispatch(addToCart({ itemId: product._id, quantity: 1 })); // Send correct payload
   };
 
   return (
