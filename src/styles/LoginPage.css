@@ -77,3 +77,38 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.register-link {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.register-link a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  height: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkbox-group label {
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+}

@@ -16,7 +16,7 @@ function ItemCard({ item }) {
     <Card className="item-card">
       <Card.Img
         variant="top"
-        src={item.image && item.image.startsWith('http') ? item.image : `http://localhost:5000/${item.image}`}
+        src={item.image && item.image.startsWith('http') ? item.image : `${process.env.REACT_APP_API_BASE_URL}/${item.image}`}
         alt={item.name || 'Item Image'}
         onError={(e) => { e.target.onerror = null; e.target.src = 'path/to/fallback-image.jpg'; }}
       />

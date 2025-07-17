@@ -16,13 +16,13 @@ function Category() {
 
         // Fetch category details (name, image)
         const categoryResponse = await axios.get(
-          `http://localhost:5000/api/categories/${categoryId}`
+          `${process.env.REACT_APP_API_BASE_URL}/api/categories/${categoryId}`
         );
         setCategory(categoryResponse.data);
 
         // Fetch items for this category
         const itemsResponse = await axios.get(
-          `http://localhost:5000/api/items/category/${categoryId}`
+          `${process.env.REACT_APP_API_BASE_URL}/api/items/category/${categoryId}`
         );
         setItems(itemsResponse.data);
       } catch (error) {

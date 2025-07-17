@@ -58,7 +58,7 @@ const UserManagement = () => {
       };
 
       setUpdateLoading(true);
-      await axios.put(`http://localhost:5000/api/users/${selectedUser._id}`, updatedData, config);
+      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/${selectedUser._id}`, updatedData, config);
       toast.success('User updated successfully');
 
       // Update users state after successful update
@@ -84,7 +84,7 @@ const UserManagement = () => {
     setDeleteLoading(true);
 
     try {
-      await axios.delete(`http://localhost:5000/api/users/${userId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

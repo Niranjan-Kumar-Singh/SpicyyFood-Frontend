@@ -5,6 +5,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // ✅ Add loading state
 
   // Load user data from localStorage on component mount
   useEffect(() => {
@@ -15,35 +16,34 @@ export const UserProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Failed to load user from localStorage", error);
+    } finally {
+      setLoading(false); // ✅ Done loading
     }
   }, []);
 
-  // Handle user login and store data in localStorage
   const handleLogin = (userData) => {
-    setUser(userData);
-    try {
-      localStorage.setItem('user', JSON.stringify(userData)); // Save user to localStorage
-      localStorage.setItem('token', userData.token); // Store token separately if needed
-      console.log(authConstants.LOGIN_SUCCESS); // Action dispatch placeholder
-    } catch (error) {
-      console.error("Error saving user to localStorage", error);
-      console.log(authConstants.LOGIN_FAIL); // Action dispatch placeholder
-    }
-  };
+  try {
+    setUser(userData); // ✅ Set full user object
+    localStorage.setItem('user', JSON.stringify(userData)); // ✅ Save user info
+    localStorage.setItem('token', userData.token); // Optional if you're using token elsewhere
+    console.log(authConstants.LOGIN_SUCCESS);
+  } catch (error) {
+    console.error("Error saving user to localStorage", error);
+    console.log(authConstants.LOGIN_FAIL);
+  }
+};
 
-  // Handle user logout and remove user data from localStorage
   const handleLogout = () => {
     setUser(null);
     try {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      console.log(authConstants.LOGOUT); // Action dispatch placeholder
+      console.log(authConstants.LOGOUT);
     } catch (error) {
       console.error("Error removing user from localStorage", error);
     }
   };
 
-  // Handle user profile updates and persist the updated user data
   const handleUpdateUser = (updatedUserData) => {
     setUser(updatedUserData);
     try {
@@ -54,13 +54,12 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, handleLogin, handleLogout, handleUpdateUser }}>
+    <UserContext.Provider
+      value={{ user, setUser, loading, handleLogin, handleLogout, handleUpdateUser }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
 
-// Hook for easier use of UserContext
-export const useUser = () => {
-  return useContext(UserContext);
-};
+export const useUser = () => useContext(UserContext);

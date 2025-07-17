@@ -22,7 +22,7 @@ export const fetchUserData = () => async (dispatch) => {
     }
 
     // Fetch the user profile data
-    const response = await axios.get('http://localhost:5000/api/users/me', {
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -47,7 +47,7 @@ export const updateUser = (userData) => async (dispatch) => {
     }
 
     // Send the update request with new user data
-    const response = await axios.put('http://localhost:5000/api/users/me', userData, {
+    const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/me`, userData, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

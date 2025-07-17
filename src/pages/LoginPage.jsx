@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../styles/LoginPage.css';
-import { useUser } from '../context/UserContext';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/LoginPage.css";
+import { useUser } from "../context/UserContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { setUser } = useUser();
 
-  const handleLogin = async (e) => {
+  const { handleLogin } = useUser(); // ✅ Use context login function
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -33,19 +35,21 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/login`, {
         email,
         password,
       });
 
-      const { token, name, isAdmin } = response.data;
-      localStorage.setItem('token', token);
-      setUser({ name, isAdmin, token });
+      // ✅ Store full user object (name, email, phone, isAdmin, token, etc.)
+      handleLogin(response.data);
 
-      navigate(isAdmin ? '/admin' : '/');
+      // ✅ Navigate based on role
+      navigate(response.data.isAdmin ? "/admin" : "/");
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Invalid email or password.');
-      console.error('Login failed:', error.response ? error.response.data : error);
+      toast.error(
+        error.response?.data?.message || "Invalid email or password."
+      );
+      console.error("Login failed:", error.response || error);
     } finally {
       setLoading(false);
     }
@@ -54,7 +58,7 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
+      <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -64,11 +68,12 @@ const LoginPage = () => {
             required
           />
         </div>
+
         <div className="form-group password-container">
           <label>Password:</label>
           <div className="password-input-wrapper">
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -81,11 +86,17 @@ const LoginPage = () => {
             </span>
           </div>
         </div>
+
         <button type="submit" className="login-button" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
+
       <ToastContainer />
+
+      <p className="register-link">
+        Don't have an account? <Link to="/register">Create Account</Link>
+      </p>
     </div>
   );
 };

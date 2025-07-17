@@ -6,7 +6,7 @@ export const addToCart = createAsyncThunk(
   async ({ itemId, quantity }, { dispatch, rejectWithValue }) => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/cart',
+        `${process.env.REACT_APP_API_BASE_URL}/api/cart`,
         { itemId, quantity },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -22,7 +22,7 @@ export const fetchCart = createAsyncThunk(
   'cart/fetchCart',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/cart', {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/cart`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       return response.data;

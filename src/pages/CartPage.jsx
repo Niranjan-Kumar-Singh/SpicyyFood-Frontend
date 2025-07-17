@@ -13,7 +13,7 @@ const CartPage = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/cart", {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/cart`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setCartItems(response.data?.items || []);
