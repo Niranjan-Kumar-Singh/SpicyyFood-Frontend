@@ -18,13 +18,13 @@ const CategoryPage = ({ onAddToCart }) => {
 
         // Fetch category details (name, image)
         const categoryResponse = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/categories/${categoryId}`
+          `${import.meta.env.VITE_API_BASE_URL}/api/categories/${categoryId}`
         );
         setCategory(categoryResponse.data);
 
         // Fetch items in this category
         const itemsResponse = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/items/category/${categoryId}`
+          `${import.meta.env.VITE_API_BASE_URL}/api/items/category/${categoryId}`
         );
         setItems(itemsResponse.data);
       } catch (error) {

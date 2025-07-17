@@ -40,7 +40,7 @@ const Account = () => {
     const config = getTokenConfig();
     if (!config) return;
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, config);
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/users/profile`, config);
       setUserData(res.data);
     } catch (error) {
       const message = error.response?.status === 401 ? 'Session expired. Please log in again.' : 'Failed to fetch user profile.';
@@ -66,7 +66,7 @@ const Account = () => {
     if (!config) return;
     setLoading(true);
     try {
-      const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile`, userData, config);
+      const res = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/users/profile`, userData, config);
       toast.success('Profile updated successfully!');
       handleUpdateUser(res.data);
       setUserData(res.data);
@@ -87,7 +87,7 @@ const Account = () => {
     if (!config) return;
     setPasswordLoading(true);
     try {
-      const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/profile/change-password`, passwordData, config);
+      const res = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/users/profile/change-password`, passwordData, config);
       if (res.status === 200 && res.data.message === "Password updated successfully") {
         toast.success('Password updated successfully');
         setPasswordData({ currentPassword: '', newPassword: '' });

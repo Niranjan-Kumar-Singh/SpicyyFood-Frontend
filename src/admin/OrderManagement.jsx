@@ -13,7 +13,7 @@ const OrdersManagement = () => {
   const [searchOrderID, setSearchOrderID] = useState('');
   const [filteredStatus, setFilteredStatus] = useState('');
 
-  const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api`;
+  const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api`;
 
   const fetchOrders = async () => {
     setLoading(true);

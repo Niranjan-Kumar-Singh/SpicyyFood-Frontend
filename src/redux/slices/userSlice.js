@@ -18,7 +18,7 @@ export const fetchUserData = createAsyncThunk(
         throw new Error('Authorization token is missing. Please log in again.');
       }
 
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/me`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/users/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -38,7 +38,7 @@ export const updateUserData = createAsyncThunk(
         throw new Error('Authorization token is missing. Please log in again.');
       }
 
-      const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/users/me`, userData, {
+      const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/users/me`, userData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

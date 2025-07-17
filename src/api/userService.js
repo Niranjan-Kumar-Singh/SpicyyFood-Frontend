@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/users`; // Set the backend base URL for all user-related endpoints
+const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/users`; // Set the backend base URL for all user-related endpoints
 
 // Helper function to get token from localStorage and configure headers
 const getTokenConfig = () => {

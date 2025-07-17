@@ -6,7 +6,7 @@ const CartList = ({ cartItems, refreshCart }) => {
   const handleIncreaseQuantity = async (itemId, currentQuantity) => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/api/cart/${itemId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/cart/${itemId}`,
         { quantity: currentQuantity + 1 },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -23,7 +23,7 @@ const CartList = ({ cartItems, refreshCart }) => {
     }
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/api/cart/${itemId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/cart/${itemId}`,
         { quantity: currentQuantity - 1 },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -35,7 +35,7 @@ const CartList = ({ cartItems, refreshCart }) => {
 
   const handleRemoveItem = async (itemId) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/cart/${itemId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/cart/${itemId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       refreshCart();

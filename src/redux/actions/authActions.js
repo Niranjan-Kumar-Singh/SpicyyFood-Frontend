@@ -7,7 +7,7 @@ export const loginUser = (email, password) => async (dispatch) => {
   dispatch(setLoading(true));
 
   try {
-    const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/login`, { email, password });
+    const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/login`, { email, password });
     const { user, token } = data;
 
     // Dispatch the login action from the user slice

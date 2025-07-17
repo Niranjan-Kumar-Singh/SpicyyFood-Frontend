@@ -77,7 +77,7 @@ function Home() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/categories/names`);
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/categories/names`);
         console.log('Fetched Categories:', response.data); // Debugging log
         setCategories(response.data);
       } catch (error) {
