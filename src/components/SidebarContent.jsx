@@ -5,27 +5,30 @@ import {
   FaShoppingCart, FaUserAlt, FaListAlt, FaInfoCircle, FaEnvelope,
   FaHandsHelping, FaFileAlt, FaSignOutAlt, FaCreditCard, FaCog, FaHeart
 } from 'react-icons/fa';
-import LogoutModal from './LogOut'; // Import the logout modal
-import { useUser } from '../context/UserContext'; // Import useUser to access handleLogout
+import LogoutModal from './LogOut';
+import { useUser } from '../context/UserContext';
+import { useCart } from '../context/CartContext'; // ✅ Import cart context
 
 function SidebarContent({ handleClose, isLoggedIn, onLogout, isAdmin }) {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const { handleLogout } = useUser(); // Get handleLogout from context
+  const { handleLogout } = useUser();
+  const { clearCart } = useCart(); // ✅ Get clearCart function
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    setShowLogoutModal(true); // Show modal when clicking logout
+    setShowLogoutModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowLogoutModal(false); // Close modal after cancel or logout
+    setShowLogoutModal(false);
   };
 
   const handleConfirmLogout = () => {
-    handleLogout(); // Clear session in context
-    setShowLogoutModal(false); // Close modal
-    handleClose(); // Close sidebar
-    navigate('/'); // Redirect to homepage after logout
+    handleLogout();      // Clear user session
+    clearCart();         // ✅ Clear cart items from context
+    setShowLogoutModal(false);
+    handleClose();
+    navigate('/');
   };
 
   return (
@@ -83,7 +86,6 @@ function SidebarContent({ handleClose, isLoggedIn, onLogout, isAdmin }) {
           <FaFileAlt className="me-2" /> Legal
         </Nav.Link>
 
-        {/* Show either Login or Logout based on isLoggedIn */}
         {isLoggedIn ? (
           <Nav.Link onClick={handleLogoutClick} className="nav-item logout-link">
             <FaSignOutAlt className="me-2" /> Logout
@@ -95,12 +97,11 @@ function SidebarContent({ handleClose, isLoggedIn, onLogout, isAdmin }) {
         )}
       </Nav>
 
-      {/* Render the Logout Modal */}
       {showLogoutModal && (
         <LogoutModal
           show={showLogoutModal}
           handleClose={handleCloseModal}
-          handleConfirm={handleConfirmLogout} // Pass confirm logout handler
+          handleConfirm={handleConfirmLogout}
         />
       )}
     </>

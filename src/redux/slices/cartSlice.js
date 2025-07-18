@@ -1,41 +1,54 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const addToCart = createAsyncThunk(
-  'cart/addToCart',
+  "cart/addToCart",
   async ({ itemId, quantity }, { dispatch, rejectWithValue }) => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/cart`,
         { itemId, quantity },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
       );
       dispatch(fetchCart()); // Fetch updated cart after adding an item
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Error adding item');
+      return rejectWithValue(
+        error.response?.data?.message || "Error adding item"
+      );
     }
   }
 );
 
 export const fetchCart = createAsyncThunk(
-  'cart/fetchCart',
+  "cart/fetchCart",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/cart`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/cart`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Error fetching cart');
+      return rejectWithValue(
+        error.response?.data?.message || "Error fetching cart"
+      );
     }
   }
 );
 
 const cartSlice = createSlice({
-  name: 'cart',
-  initialState: { items: [], status: 'idle', error: null },
-  reducers: {},
+  name: "cart",
+  initialState: { items: [], status: "idle", error: null },
+  reducers: {
+    resetCart: (state) => {
+      state.cartItems = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addToCart.fulfilled, (state, action) => {
@@ -50,4 +63,5 @@ const cartSlice = createSlice({
   },
 });
 
+export const { resetCart } = cartSlice.actions;
 export default cartSlice.reducer;

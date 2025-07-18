@@ -1,14 +1,20 @@
+// src/components/CartList.jsx
 import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CartList = ({ cartItems, refreshCart }) => {
+  const navigate = useNavigate();
+
   const handleIncreaseQuantity = async (itemId, currentQuantity) => {
     try {
       await axios.put(
         `${import.meta.env.VITE_API_BASE_URL}/api/cart/${itemId}`,
         { quantity: currentQuantity + 1 },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
       );
       refreshCart();
     } catch (error) {
@@ -25,7 +31,9 @@ const CartList = ({ cartItems, refreshCart }) => {
       await axios.put(
         `${import.meta.env.VITE_API_BASE_URL}/api/cart/${itemId}`,
         { quantity: currentQuantity - 1 },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
       );
       refreshCart();
     } catch (error) {
@@ -48,6 +56,10 @@ const CartList = ({ cartItems, refreshCart }) => {
     return cartItems
       .reduce((total, item) => total + item.item.price * item.quantity, 0)
       .toFixed(2);
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout");
   };
 
   return (
@@ -83,7 +95,9 @@ const CartList = ({ cartItems, refreshCart }) => {
 
       <div className="total-section">
         <h3>Total Amount: ₹{calculateTotalAmount()}</h3>
-        <button className="checkout-btn">Proceed to Checkout</button>
+        <button className="checkout-btn" onClick={handleCheckout}>
+          Proceed to Checkout
+        </button>
       </div>
     </>
   );

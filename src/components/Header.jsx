@@ -54,8 +54,10 @@ function Header() {
   ]);
 
   useEffect(() => {
-    dispatch(fetchCart()); // Fetch cart when header loads
-  }, [dispatch]);
+    if (user) {
+      dispatch(fetchCart()); // Fetch cart again when user logs in
+    }
+  }, [user, dispatch]); // depend on `user`
 
   const cart = useSelector((state) => state.cart || { items: [] });
   const cartItemCount = Array.isArray(cart.items)
