@@ -1,80 +1,137 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import '../styles/Orders.css'; // Link to the CSS file for styling
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "../styles/Orders.css";
 
-function OrdersPage() {
-  const [orders, setOrders] = useState([
-    {
-      id: 1,
-      items: ['BBQ Chicken Pizza', 'Chicken Kebab Burger'],
-      total: 550,
-      date: '2024-10-10',
-      status: 'Delivered',
-    },
-    {
-      id: 2,
-      items: ['Tandoori Chicken', 'Chicken Wrap'],
-      total: 400,
-      date: '2024-10-12',
-      status: 'In Progress',
-    },
-    {
-      id: 3,
-      items: ['Spicy Paneer Pizza'],
-      total: 250,
-      date: '2024-10-15',
-      status: 'Cancelled',
-    },
-    {
-      id: 4,
-      items: ['Cheese Burst Pizza', 'Cold Coffee'],
-      total: 300,
-      date: '2024-09-22',
-      status: 'Delivered',
-    },
-    {
-      id: 5,
-      items: ['Veg Biryani', 'Raita'],
-      total: 450,
-      date: '2024-09-15',
-      status: 'Delivered',
-    },
-  ]);
+// Capitalize utility with fallback
+const capitalize = (str) =>
+  str ? str.charAt(0).toUpperCase() + str.slice(1) : "N/A";
 
-  const reorderAlert = (id) => {
-    alert(`Reordering Order #${id}`);
+// Convert payment method to friendly display
+const formatPaymentMethod = (method) => {
+  switch (method) {
+    case "cash":
+      return "Cash on Delivery";
+    case "online":
+      return "Online Payment (Demo)";
+    default:
+      return capitalize(method);
+  }
+};
+
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchOrders = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/orders`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setOrders(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setLoading(false);
+    }
   };
 
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  if (loading) return <p className="loading-text">Loading your orders...</p>;
+
   return (
-    <div className="orders-page-wrapper mt-5 pt-5">
-      <Container className="orders-page">
-        <h1 className="text-center mb-4">Your Orders</h1>
-        <Row className="order-items">
+    <div className="orders-container">
+      <h2 className="orders-heading">My Orders</h2>
+
+      {orders.length === 0 ? (
+        <p className="no-orders">You haven’t placed any orders yet.</p>
+      ) : (
+        <div className="orders-list">
           {orders.map((order) => (
-            <Col key={order.id} lg={4} md={6} sm={12} className="mb-4">
-              <Card className="order-item-card">
-                <Card.Body>
-                  <Card.Title>Order #{order.id}</Card.Title>
-                  <Card.Text>
-                    <strong>Date:</strong> {order.date}
-                    <br />
-                    <strong>Items:</strong> <span className='order-item-list'>{order.items.join(', ')}</span>
-                    <br />
-                    <strong>Total:</strong> ₹{order.total}
-                    <br />
-                    <strong>Status:</strong> {order.status}
-                  </Card.Text>
-                  <Button variant="primary" className="reorder-btn" onClick={() => reorderAlert(order.id)}>
-                    Reorder
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
+            <div key={order._id || order.createdAt} className="order-card">
+              <div className="order-header">
+                <span className="label">Order ID:</span>
+                <span className="value">
+                  {order._id ? order._id.slice(-6).toUpperCase() : "N/A"}
+                </span>
+              </div>
+
+              <div className="order-details">
+                <p>
+                  <span className="label">Type:</span>{" "}
+                  {capitalize(order.orderType)}
+                </p>
+                <p>
+                  <span className="label">Payment:</span>{" "}
+                  {formatPaymentMethod(order.paymentMethod)}
+                </p>
+                {order.tableNumber && (
+                  <p>
+                    <span className="label">Table No.:</span>{" "}
+                    {order.tableNumber}
+                  </p>
+                )}
+                {order.pickupTime && (
+                  <p>
+                    <span className="label">Pickup Time:</span>{" "}
+                    {order.pickupTime}
+                  </p>
+                )}
+                <p>
+                  <span className="label">Total:</span>{" "}
+                  <strong>₹{order.totalPrice}</strong>
+                </p>
+                <p>
+                  <span className="label">Status:</span>{" "}
+                  <span className={`status ${order.status.toLowerCase()}`}>
+                    {capitalize(order.status)}
+                  </span>
+                </p>
+                <p>
+                  <span className="label">Date:</span>{" "}
+                  {new Date(order.createdAt).toLocaleString()}
+                </p>
+              </div>
+
+              <div className="order-items">
+                <h4>Items Ordered:</h4>
+                <div className="item-table-header">
+                  <span>Item</span>
+                  <span>Qty</span>
+                  <span>Total</span>
+                </div>
+                <div className="item-table-body">
+                  {order.orderItems.map((item, idx) => (
+                    <div key={idx} className="item-row">
+                      <span className="item-name">{item.name}</span>
+                      <span>{item.quantity}</span>
+                      <span className="item-total">
+                        ₹{item.price * item.quantity}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* ✅ Add this total row at the end */}
+                <div className="item-total-summary">
+                  <span>Total Amount</span>
+                  <span>₹{order.totalPrice}</span>
+                </div>
+              </div>
+            </div>
           ))}
-        </Row>
-      </Container>
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default OrdersPage;
+export default Orders;

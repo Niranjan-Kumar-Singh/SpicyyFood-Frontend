@@ -4,7 +4,7 @@ import "../styles/Checkout.css";
 import { useUser } from "../context/UserContext"; // ✅ Import User Context
 
 function Checkout() {
-  const { user, loading } = useUser(); // ✅ Access user data and loading state
+  const { user, loading } = useUser();
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [orderType, setOrderType] = useState("dinein");
@@ -13,6 +13,7 @@ function Checkout() {
     phone: "",
     tableNumber: "",
     pickupTime: "",
+    paymentMethod: "Cash", // ✅ Default payment method
   });
   const [errors, setErrors] = useState({});
 
@@ -77,29 +78,45 @@ function Checkout() {
       newErrors.pickupTime = "Pickup time is required.";
     }
 
+    if (!form.paymentMethod) {
+      newErrors.paymentMethod = "Please select a payment method.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!validateForm()) return;
 
-    const orderData = {
-      orderType,
-      name: form.name,
-      phone: form.phone,
-      items: cart,
-      total,
-    };
+    try {
+      const token = localStorage.getItem("token");
 
-    if (orderType === "dinein") {
-      orderData.tableNumber = form.tableNumber;
-    } else if (orderType === "takeaway") {
-      orderData.pickupTime = form.pickupTime;
+      const orderData = {
+        orderType: orderType === "dinein" ? "dine-in" : "takeaway",
+        tableNumber: orderType === "dinein" ? form.tableNumber : null,
+        pickupTime: orderType === "takeaway" ? form.pickupTime : null,
+        name: form.name,
+        phone: form.phone,
+        paymentMethod: form.paymentMethod,
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/orders/checkout`,
+        orderData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("✅ Order placed successfully!");
+      console.log("Order response:", res.data);
+    } catch (err) {
+      console.error("Error placing order:", err.response?.data || err.message);
+      alert("❌ Failed to place order");
     }
-
-    console.log("Order placed!", orderData);
-    // Here you would typically send orderData to the backend
   };
 
   if (loading) {
@@ -122,7 +139,7 @@ function Checkout() {
               <li key={`${item.item._id}-${idx}`} className="checkout-card">
                 <div className="item-info">
                   <span className="item-name">{item.item.name}</span>
-                  <span className="item-qty">Quantity: {item.quantity}</span>
+                  <span className="item-qty">Qty: {item.quantity}</span>
                 </div>
                 <div className="item-total">
                   ₹{(item.item.price * item.quantity).toFixed(2)}
@@ -132,7 +149,7 @@ function Checkout() {
           </ul>
 
           <div className="checkout-summary">
-            <p className="total-text">Total Payable Amount: ₹{total}</p>
+            <p className="total-text">Total: ₹{total}</p>
           </div>
 
           <div className="checkout-form">
@@ -141,9 +158,7 @@ function Checkout() {
             <div className="order-options">
               <button
                 type="button"
-                className={`order-option ${
-                  orderType === "dinein" ? "active" : ""
-                }`}
+                className={`order-option ${orderType === "dinein" ? "active" : ""}`}
                 onClick={() =>
                   setOrderType("dinein") ||
                   setForm((prev) => ({ ...prev, pickupTime: "" }))
@@ -153,9 +168,7 @@ function Checkout() {
               </button>
               <button
                 type="button"
-                className={`order-option ${
-                  orderType === "takeaway" ? "active" : ""
-                }`}
+                className={`order-option ${orderType === "takeaway" ? "active" : ""}`}
                 onClick={() =>
                   setOrderType("takeaway") ||
                   setForm((prev) => ({ ...prev, tableNumber: "" }))
@@ -185,7 +198,6 @@ function Checkout() {
                 className={`order-input ${errors.phone ? "error" : ""}`}
                 value={form.phone}
                 onChange={handleInputChange}
-                inputMode="numeric"
               />
               {errors.phone && <p className="form-error">{errors.phone}</p>}
             </div>
@@ -199,7 +211,6 @@ function Checkout() {
                   className={`order-input ${errors.tableNumber ? "error" : ""}`}
                   value={form.tableNumber}
                   onChange={handleInputChange}
-                  inputMode="numeric"
                 />
                 {errors.tableNumber && (
                   <p className="form-error">{errors.tableNumber}</p>
@@ -209,7 +220,7 @@ function Checkout() {
 
             {orderType === "takeaway" && (
               <div className="input-group">
-                <label className="order-label">Select Pickup Time:</label>
+                <label className="order-label">Pickup Time</label>
                 <input
                   type="time"
                   name="pickupTime"
@@ -222,6 +233,26 @@ function Checkout() {
                 )}
               </div>
             )}
+
+            {/* ✅ Payment Method Dropdown */}
+            <div className="input-group">
+              <label className="order-label">Payment Method</label>
+              <select
+                name="paymentMethod"
+                className={`order-input ${errors.paymentMethod ? "error" : ""}`}
+                value={form.paymentMethod}
+                onChange={handleInputChange}
+              >
+                <option value="">Select Method</option>
+                <option value="Cash">Cash</option>
+                <option value="Card">Card</option>
+                <option value="UPI">UPI</option>
+                <option value="Online">Online</option>
+              </select>
+              {errors.paymentMethod && (
+                <p className="form-error">{errors.paymentMethod}</p>
+              )}
+            </div>
 
             <button className="place-order-btn" onClick={handlePlaceOrder}>
               Place Order
