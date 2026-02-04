@@ -1,7 +1,7 @@
 /* Sidebar Header */
 .sidebar-header {
   background: linear-gradient(45deg, #3498db, #2c3e50);
-  padding: 15px;
+  padding: 14px 16px;
   text-align: center;
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -10,8 +10,9 @@
 .sidebar-title {
   display: flex;
   align-items: center;
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-size: 1.4rem;
+  font-weight: 700;
+  gap: 8px;
 }
 
 .user-icon {
@@ -20,31 +21,30 @@
 
 /* Sidebar Body */
 .sidebar-body {
-  padding: 20px;
+  padding: 16px;
   background-color: #f8f9fa;
 }
 
 /* Sidebar Navigation Items */
 .sidebar-nav .nav-item {
-  padding: 15px 20px;
-  font-size: 1.1rem;
+  padding: 12px 16px;
+  font-size: 1rem;
   font-weight: 500;
   color: #333;
   display: flex;
   align-items: center;
-  transition: all 0.3s ease;
-  border-radius: 10px;
-  margin-bottom: 12px;
+  gap: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px;
+  margin-bottom: 10px;
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .sidebar-nav .nav-item:hover {
-  background-color: #ecf0f1;
-  color: #2980b9;
-  transform: scale(1.03);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  font-weight: 600;
+  background-color: #eef3f7;
+  color: #2c78c4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .sidebar-nav .nav-item .me-2 {
@@ -52,55 +52,44 @@
 }
 
 .sidebar-nav .nav-item:hover .me-2 {
-  transform: translateX(-3px);
-  color: #2980b9;
+  transform: translateX(-2px);
+  color: #2c78c4;
 }
 
 /* Divider */
 .sidebar-divider {
-  border-bottom: 1px solid #ddd;
-  margin: 20px 0;
+  border-bottom: 1px solid #e1e6eb;
+  margin: 16px 0;
 }
 
 /* Logout Link */
 .logout-link {
-  color: #e74c3c;
-  font-weight: 700;
+  color: #d6453d;
+  font-weight: 600;
 }
 
 .logout-link:hover {
-  color: #c0392b;
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(231, 76, 60, 0.2);
-  cursor: pointer;
+  color: #b93a33;
+}
+
+/* Active State for Navigation Items */
+.nav-item.active {
+  background-color: #2c78c4;
+  color: #fff;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .sidebar-nav .nav-item {
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  /* Hide unnecessary items for mobile view */
-  .user-icon, .logout-link {
-    display: none;
+    padding: 10px 12px;
+    font-size: 0.95rem;
   }
 
   .sidebar-title {
-    font-size: 1.4rem;
-    font-weight: 600;
+    font-size: 1.2rem;
   }
   
-  /* Minimize padding to save space */
   .sidebar-body {
-    padding: 10px;
+    padding: 12px;
   }
-}
-
-/* Active State for Navigation Items */
-.nav-item.active {
-  background-color: #2980b9;
-  color: #fff;
 }

@@ -5,6 +5,9 @@
   overflow: hidden;
   border-radius: 15px;
   transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .best-selling-card:hover {
@@ -14,6 +17,7 @@
 
 .best-selling-card-img-wrapper {
   position: relative;
+  flex: 0 0 auto;
 }
 
 .best-selling-card-img {
@@ -53,6 +57,27 @@
   font-size: 0.9rem;
   color: #555;
   margin-top: 10px;
+  line-height: 1.4;
+  min-height: 2.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.best-selling-card .card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.best-selling-card-actions {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
 }
 
 .placeholder-img {
@@ -73,6 +98,10 @@
   font-weight: 500;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, transform 0.3s;
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  line-height: 1;
 }
 
 .price-tag:hover {
@@ -82,5 +111,26 @@
 
 /* Optional: Additional styling for the shopping cart icon */
 .customIcon {
-  margin-bottom: 5px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.best-selling-card-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1;
+  height: 38px;
+  padding: 0 16px;
+}
+
+.best-selling-card-actions .price-tag {
+  height: 38px;
+  line-height: 1;
+}
+
+.best-selling-card-actions .customIcon {
+  display: inline-block;
+  line-height: 1;
 }

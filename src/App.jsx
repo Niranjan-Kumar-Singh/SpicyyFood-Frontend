@@ -29,6 +29,7 @@ const Checkout = React.lazy(() => import('./pages/Checkout'));
 const Profile = React.lazy(() => import('./pages/Profile'));
 const AboutUs = React.lazy(() => import('./pages/AboutUs'));
 const Contact = React.lazy(() => import('./pages/Contact'));
+const SearchResults = React.lazy(() => import('./pages/SearchResults'));
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -61,36 +62,39 @@ function AppContent() {
       <Router>
         <ScrollRestoration />
         <ScrollToTop />
-        <Header />
-        <ToastContainer position="top-right" autoClose={3000} />
-        <main className="flex-grow-1" role="main">
-          <ErrorBoundary>
-            <Suspense fallback={<div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>}>
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/category/:categoryId" element={<CategoryPage />} />
-                <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-                <Route path="/favorites" element={<Favorite />} />
-                <Route path="/help" element={<HelpCenter />} />
-                <Route path="/legal" element={<Legal />} />
-                <Route path="/notifications" element={<Notification />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/payment" element={<Payment />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/about" element={<AboutUs />} />
+        <div className="app-shell">
+          <Header />
+          <ToastContainer position="top-right" autoClose={3000} />
+          <main className="app-main" role="main">
+            <ErrorBoundary>
+              <Suspense fallback={<div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>}>
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="/category/:categoryId" element={<CategoryPage />} />
+                  <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                  <Route path="/favorites" element={<Favorite />} />
+                  <Route path="/help" element={<HelpCenter />} />
+                  <Route path="/legal" element={<Legal />} />
+                  <Route path="/notifications" element={<Notification />} />
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/payment" element={<Payment />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/admin/*" element={<AdminRoutes />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </ErrorBoundary>
-        </main>
-        <Footer />
+                <Route path="/search" element={<SearchResults />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/admin/*" element={<AdminRoutes />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+          </main>
+          <Footer />
+        </div>
       </Router>
     </>
   );

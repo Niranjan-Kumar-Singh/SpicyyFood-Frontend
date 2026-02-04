@@ -77,11 +77,13 @@ const CartList = ({ cartItems, refreshCart }) => {
 
               <div className="quantity-control">
                 <button onClick={() => handleDecreaseQuantity(item.item._id, item.quantity)}>
-                  <FaMinus />
+                  <FaMinus aria-hidden="true" />
+                  <span className="quantity-fallback">−</span>
                 </button>
                 <span>{item.quantity}</span>
                 <button onClick={() => handleIncreaseQuantity(item.item._id, item.quantity)}>
-                  <FaPlus />
+                  <FaPlus aria-hidden="true" />
+                  <span className="quantity-fallback">+</span>
                 </button>
               </div>
 

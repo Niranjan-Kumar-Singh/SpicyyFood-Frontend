@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../redux/slices/cartSlice";
 import {
   FaBars,
+  FaTimes,
   FaBell,
   FaUserCircle,
   FaShoppingCart,
@@ -12,6 +13,7 @@ import {
   FaExclamationCircle,
   FaHeart,
   FaCog,
+  FaFire,
 } from "react-icons/fa";
 import {
   Navbar,
@@ -26,12 +28,20 @@ import {
 import Sidebar from "./Sidebar";
 import { useUser } from "../context/UserContext"; // Ensure this path is correct
 import "../styles/Header.css";
+import axios from "axios";
 
 function Header() {
   const { user, loading } = useUser(); // Get user from context
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showSidebar, setShowSidebar] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const searchTimerRef = useRef(null);
+  const searchBoxRef = useRef(null);
+  const searchBoxMobileRef = useRef(null);
   const [notifications, setNotifications] = useState([
     {
       id: 1,
@@ -58,6 +68,21 @@ function Header() {
       dispatch(fetchCart()); // Fetch cart again when user logs in
     }
   }, [user, dispatch]); // depend on `user`
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const inDesktop =
+        searchBoxRef.current && searchBoxRef.current.contains(e.target);
+      const inMobile =
+        searchBoxMobileRef.current &&
+        searchBoxMobileRef.current.contains(e.target);
+      if (!inDesktop && !inMobile) {
+        setShowSearchDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const cart = useSelector((state) => state.cart || { items: [] });
   const cartItemCount = Array.isArray(cart.items)
@@ -101,6 +126,60 @@ function Header() {
     navigate(user ? "/account" : "/login");
   };
 
+  const fetchSearchResults = async (query) => {
+    if (!query || query.trim().length < 2) {
+      setSearchResults([]);
+      setIsSearching(false);
+      setShowSearchDropdown(false);
+      return;
+    }
+    try {
+      setIsSearching(true);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/items`
+      );
+      const items = Array.isArray(response.data) ? response.data : [];
+      const normalizedQuery = query.toLowerCase();
+      const filtered = items.filter((item) => {
+        const name = item.name ? item.name.toLowerCase() : "";
+        const desc = item.description ? item.description.toLowerCase() : "";
+        return name.includes(normalizedQuery) || desc.includes(normalizedQuery);
+      });
+      setSearchResults(filtered.slice(0, 6));
+      setShowSearchDropdown(true);
+    } catch (error) {
+      console.error("Search error:", error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    if (searchTimerRef.current) {
+      clearTimeout(searchTimerRef.current);
+    }
+    searchTimerRef.current = setTimeout(() => {
+      fetchSearchResults(value);
+    }, 250);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const query = searchQuery.trim();
+    if (!query) return;
+    setShowSearchDropdown(false);
+    navigate(`/search?q=${encodeURIComponent(query)}`);
+  };
+
+  const handleViewAllResults = () => {
+    const query = searchQuery.trim();
+    if (!query) return;
+    setShowSearchDropdown(false);
+    navigate(`/search?q=${encodeURIComponent(query)}`);
+  };
+
   return (
     <>
       <Navbar bg="light" expand="lg" fixed="top" className="shadow-sm">
@@ -108,31 +187,102 @@ function Header() {
           <Button
             variant="light"
             onClick={toggleSidebar}
-            className="me-2"
+            className={`hamburger-btn ${showSidebar ? "is-open" : ""}`}
             aria-label="Open Menu"
           >
-            <FaBars size={20} />
+            {showSidebar ? (
+              <FaTimes size={20} className="hamburger-icon" />
+            ) : (
+              <FaBars size={20} className="hamburger-icon" />
+            )}
           </Button>
 
           <Navbar.Brand as={Link} to="/">
-            Spicyy Food
+            <span className="brand-logo">
+              <FaFire className="brand-flame" />
+              <span className="brand-text">Spicyy Food</span>
+            </span>
           </Navbar.Brand>
 
-          <Form className="d-flex mx-auto search-form d-none d-lg-flex">
+          <Form
+            className="d-flex mx-auto search-form d-none d-lg-flex"
+            onSubmit={handleSearchSubmit}
+            ref={searchBoxRef}
+          >
             <FormControl
               type="search"
               placeholder="Search for dishes..."
               className="me-2"
               aria-label="Search"
               style={{ width: "350px" }}
+              value={searchQuery}
+              onChange={handleSearchChange}
+              onFocus={() => searchResults.length && setShowSearchDropdown(true)}
             />
             <Button
               variant="light"
               className="search-icon-btn"
               aria-label="Search Button"
+              type="submit"
             >
               <FaSearch size={20} />
             </Button>
+            {showSearchDropdown && (
+              <div className="search-dropdown">
+                {isSearching ? (
+                  <div className="search-dropdown-item muted">Searching...</div>
+                ) : searchResults.length > 0 ? (
+                  <>
+                    {searchResults.map((item) => (
+                      <button
+                        key={item._id}
+                        type="button"
+                        className="search-dropdown-item"
+                      onClick={() => {
+                        setShowSearchDropdown(false);
+                        const categoryId = item.categoryId?._id;
+                        if (categoryId) {
+                          navigate(`/category/${categoryId}`);
+                        } else {
+                          navigate(`/search?q=${encodeURIComponent(item.name || "")}`);
+                        }
+                      }}
+                      >
+                        <img
+                        src={
+                          item.image && item.image.startsWith("http")
+                            ? item.image
+                            : `${import.meta.env.VITE_API_BASE_URL}/${item.image}`
+                        }
+                          alt={item.name}
+                          className="search-item-img"
+                        />
+                        <div className="search-item-info">
+                          <div className="search-item-name">{item.name}</div>
+                          <div className="search-item-desc">
+                            {item.description || "No description available."}
+                          </div>
+                        </div>
+                        <div className="search-item-price">
+                          ₹{Number(item.price || 0).toFixed(2)}
+                        </div>
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      className="search-dropdown-item view-all"
+                      onClick={handleViewAllResults}
+                    >
+                      View all results
+                    </button>
+                  </>
+                ) : (
+                  <div className="search-dropdown-item muted">
+                    No results found
+                  </div>
+                )}
+              </div>
+            )}
           </Form>
 
           <Nav className="d-flex flex-row ms-auto align-items-center navbar-icons">
@@ -230,6 +380,86 @@ function Header() {
           </Nav>
         </Container>
       </Navbar>
+      <div className="mobile-search-bar d-lg-none">
+        <Form
+          className="search-form-mobile"
+          onSubmit={handleSearchSubmit}
+          ref={searchBoxMobileRef}
+        >
+          <FormControl
+            type="search"
+            placeholder="Search for dishes..."
+            aria-label="Search"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            onFocus={() => searchResults.length && setShowSearchDropdown(true)}
+          />
+          <Button
+            variant="light"
+            className="search-icon-btn"
+            aria-label="Search Button"
+            type="submit"
+          >
+            <FaSearch size={18} />
+          </Button>
+          {showSearchDropdown && (
+            <div className="search-dropdown mobile">
+              {isSearching ? (
+                <div className="search-dropdown-item muted">Searching...</div>
+              ) : searchResults.length > 0 ? (
+                <>
+                  {searchResults.map((item) => (
+                    <button
+                      key={item._id}
+                      type="button"
+                      className="search-dropdown-item"
+                      onClick={() => {
+                        setShowSearchDropdown(false);
+                        const categoryId = item.categoryId?._id;
+                        if (categoryId) {
+                          navigate(`/category/${categoryId}`);
+                        } else {
+                          navigate(`/search?q=${encodeURIComponent(item.name || "")}`);
+                        }
+                      }}
+                    >
+                      <img
+                        src={
+                          item.image && item.image.startsWith("http")
+                            ? item.image
+                            : `${import.meta.env.VITE_API_BASE_URL}/${item.image}`
+                        }
+                        alt={item.name}
+                        className="search-item-img"
+                      />
+                      <div className="search-item-info">
+                        <div className="search-item-name">{item.name}</div>
+                        <div className="search-item-desc">
+                          {item.description || "No description available."}
+                        </div>
+                      </div>
+                      <div className="search-item-price">
+                        ₹{Number(item.price || 0).toFixed(2)}
+                      </div>
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    className="search-dropdown-item view-all"
+                    onClick={handleViewAllResults}
+                  >
+                    View all results
+                  </button>
+                </>
+              ) : (
+                <div className="search-dropdown-item muted">
+                  No results found
+                </div>
+              )}
+            </div>
+          )}
+        </Form>
+      </div>
       <Sidebar show={showSidebar} handleClose={toggleSidebar} />
     </>
   );

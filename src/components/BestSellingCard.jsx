@@ -47,7 +47,7 @@ function BestSellingCard({ item }) {
         <Card.Text className="best-selling-card-description flex-grow-1">
           {item.description}
         </Card.Text>
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="best-selling-card-actions">
           <span className="price-tag fw-bolder">₹{item.price.toFixed(2)}</span>
           <Button variant="primary" size="sm" onClick={handleAddToCart}>
             <FaShoppingCart className="me-1 customIcon" /> Add to Cart

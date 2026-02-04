@@ -38,7 +38,7 @@
     margin: 5px 0;
 }
 
-.card-body {
+.item-card .card-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Ensures even spacing between the content */
@@ -46,7 +46,7 @@
     padding: 0 10px; /* Add padding for better spacing */
 }
 
-.card-body .add-to-cart-btn {
+.item-card .card-body .add-to-cart-btn {
     margin-top: auto;
     margin-bottom: 10px; /* Added 2px margin to the bottom */
 }
