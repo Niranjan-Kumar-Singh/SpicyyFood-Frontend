@@ -174,7 +174,7 @@ function Home() {
       <SpecialOffers />
 
       {/* Categories Section */}
-      <section id="categories" className="mb-5">
+      <section id="categories" className="mb-5 anchor-offset">
         <h2 className="mb-4 text-center">Categories</h2>
         {loadingCategories ? (
           <div className="text-center">

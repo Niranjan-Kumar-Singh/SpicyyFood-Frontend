@@ -20,6 +20,41 @@
   flex: 0 0 auto;
 }
 
+.best-selling-card .favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.best-selling-card .favorite-btn.active {
+  color: #e53935;
+}
+
+.best-selling-card .favorite-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.best-selling-card .favorite-btn svg path {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
 .best-selling-card-img {
   height: 200px;
   object-fit: cover;

@@ -29,7 +29,7 @@
   border: 1px solid #dcdcdc;
   font-size: 1rem;
   background-color: #ffffff;
-  color: #fff;
+  color: #111827;
 }
 
 .password-container {
@@ -109,19 +109,35 @@
 
 .checkbox-group input[type="checkbox"] {
   width: auto;
-  height: 16px;
+  height: 14px;
   cursor: pointer;
   margin: 0;
-  accent-color: #ffffff;
 }
 
-#adminCheckbox {
-  background-color: #ffffff;
-  color: #ffffff;
+.checkbox-group #adminCheckbox {
+  appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  border: 1px solid #7a7a7a !important;
+  border-radius: 3px !important;
+  background-color: #ffffff !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  align-self: center;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.checkbox-group #adminCheckbox:checked::after {
+  content: "\2713";
+  font-size: 12px;
+  line-height: 1;
+  color: #111827;
 }
 
 .checkbox-group label {
   margin: 0;
   font-weight: normal;
   cursor: pointer;
+  line-height: 1.2;
 }

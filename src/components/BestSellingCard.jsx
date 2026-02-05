@@ -1,21 +1,59 @@
 // src/components/BestSellingCard.jsx
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Card, Button, Badge } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/slices/cartSlice';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import '../styles/BestSellingCard.css';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaHeart, FaRegHeart } from 'react-icons/fa';
 
 function BestSellingCard({ item }) {
   const dispatch = useDispatch();
+  const [favTick, setFavTick] = useState(0);
 
   const handleAddToCart = () => {
     dispatch(addToCart(item));
     // Optionally, trigger scroll or modal
     // window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const favoriteKey = item?._id || item?.id;
+
+  const isFavorite = useMemo(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('favorites') || '[]');
+      return Array.isArray(stored) && stored.some(f => (f._id || f.id) === favoriteKey);
+    } catch {
+      return false;
+    }
+  }, [favoriteKey, favTick]);
+
+  const toggleFavorite = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const list = Array.isArray(stored) ? stored : [];
+      const exists = list.some(f => (f._id || f.id) === favoriteKey);
+      const next = exists
+        ? list.filter(f => (f._id || f.id) !== favoriteKey)
+        : [
+            ...list,
+            {
+              _id: item._id,
+              id: item.id,
+              name: item.name,
+              description: item.description,
+              price: item.price,
+              image: item.image,
+              categoryId: item.categoryId,
+            },
+          ];
+      localStorage.setItem('favorites', JSON.stringify(next));
+      setFavTick((t) => t + 1);
+    } catch (error) {
+      console.error('Failed to update favorites:', error);
+    }
   };
 
   return (
@@ -39,6 +77,14 @@ function BestSellingCard({ item }) {
             Special
           </Badge>
         )}
+        <button
+          type="button"
+          className={`favorite-btn ${isFavorite ? 'active' : ''}`}
+          onClick={toggleFavorite}
+          aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        >
+          {isFavorite ? <FaHeart /> : <FaRegHeart />}
+        </button>
         <div className="best-selling-card-overlay">
           <Card.Title className="best-selling-card-title">{item.name}</Card.Title>
         </div>

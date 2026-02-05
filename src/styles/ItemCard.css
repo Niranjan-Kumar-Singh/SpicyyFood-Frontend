@@ -9,6 +9,7 @@
     transition: transform 0.2s;
     display: flex;
     flex-direction: column; /* Flexbox to align items vertically */
+    position: relative;
 }
 
 .item-card:hover {
@@ -49,6 +50,41 @@
 .item-card .card-body .add-to-cart-btn {
     margin-top: auto;
     margin-bottom: 10px; /* Added 2px margin to the bottom */
+}
+
+.item-card .favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.92);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.item-card .favorite-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+.item-card .favorite-btn svg path {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+}
+
+.item-card .favorite-btn.active {
+    color: #e53935;
 }
 
 

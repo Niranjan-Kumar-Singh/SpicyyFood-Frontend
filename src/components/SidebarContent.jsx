@@ -34,6 +34,7 @@ function SidebarContent({ handleClose, isLoggedIn, onLogout, isAdmin }) {
   return (
     <>
       <Nav className="flex-column sidebar-nav">
+        <div className="sidebar-section-label">Account</div>
         <Nav.Link as={Link} to="/#categories" onClick={handleClose} className="nav-item">
           <FaListAlt className="me-2" /> All Categories
         </Nav.Link>
@@ -60,6 +61,7 @@ function SidebarContent({ handleClose, isLoggedIn, onLogout, isAdmin }) {
         )}
 
         <div className="sidebar-divider"></div>
+        <div className="sidebar-section-label">Personal</div>
 
         <Nav.Link as={Link} to="/favorites" onClick={handleClose} className="nav-item">
           <FaHeart className="me-2" /> My Favorites
@@ -72,6 +74,7 @@ function SidebarContent({ handleClose, isLoggedIn, onLogout, isAdmin }) {
         </Nav.Link>
 
         <div className="sidebar-divider"></div>
+        <div className="sidebar-section-label">Support</div>
 
         <Nav.Link as={Link} to="/about" onClick={handleClose} className="nav-item">
           <FaInfoCircle className="me-2" /> About
